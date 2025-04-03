@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome to My Blog</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .button { padding: 8px 12px; background: #333; color: #fff; border: none; cursor: pointer; }
+    .meta { font-size: 0.85em; color: #666; }
+    ul { list-style: none; padding-left: 0; }
+    li { margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>My Blog</h1>      
+</header>
+
+<main class="post-content">
+  <h2># Recent Posts</h2>
+  <ul id="post-list"></ul>
+  <button id="load-more" class="button">더 보기</button>
+</main>
+
+<script>
+let posts = [];
+let currentIndex = 0;
+const postsPerPage = 5;
+const tagsSet = new Set();
+
+function getQueryParam(name) {
+  const url = new URL(window.location.href);
+  return url.searchParams.get(name);
+}
+
+function loadFilteredOrAllPosts() {
+  const selectedTag = getQueryParam('tag');
+  if (selectedTag) {
+    const filtered = posts.filter(post => post.tags.includes(selectedTag));
+    renderPosts(filtered);
+  } else {
+    renderPosts(posts);
+  }
+}
+
+async function loadPosts() {
+  if (posts.length === 0) {
+    const res = await fetch('/posts.json');
+    posts = await res.json();
+
+    posts.forEach(post => {
+      post.tags.forEach(tag => tagsSet.add(tag));
+    });
+  }
+  loadFilteredOrAllPosts();
+}
+
+function renderPosts(list = posts) {
+  const container = document.getElementById('post-list');
+  container.innerHTML = '';
+
+  const nextPosts = list.slice(0, postsPerPage);
+  nextPosts.forEach(post => {
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <a href="${post.url}">${post.title}</a> - <small>${new Date(post.date).toLocaleDateString()}</small>
+      <p>${post.excerpt}</p>
+      <div class="meta">
+        <span>🏷️ ${post.tags.join(', ')}</span>
+      </div>
+      <hr/>
+    `;
+    container.appendChild(li);
+  });
+
+  const moreBtn = document.getElementById('load-more');
+  moreBtn.style.display = list.length > postsPerPage ? 'block' : 'none';
+}
+
+document.getElementById('load-more').addEventListener('click', loadPosts);
+window.addEventListener('DOMContentLoaded', loadPosts);
+</script>
+
+</body>
+</html>
