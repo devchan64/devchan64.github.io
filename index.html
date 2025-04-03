@@ -11,12 +11,13 @@
     integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-
-<header>
-  <h1>My Blog</h1>      
-</header>
+  <div class="container">
 
 <main class="post-content">
+  <header>
+  <h1>My Blog</h1>      
+</header>
+  
   <h2># Recent Posts</h2>
   <ul id="post-list"></ul>
   <button id="load-more" class="button">더 보기</button>
@@ -40,7 +41,7 @@
         </div>
       </section>      
     </footer>
-
+</div>
 <script>
 let posts = [];
 let currentIndex = 0;
