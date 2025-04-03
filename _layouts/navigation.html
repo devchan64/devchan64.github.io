@@ -1,3 +1,11 @@
+<div class="tag-list">
+      {% unless page.url != "/" %}
+      <nav id="filters">
+        <ul id="tag-list"></ul>
+      </nav>
+      {% endunless %}
+</div>
+
 <nav class="main-nav">
   <ul>
     {% unless page.url == "/" %}
