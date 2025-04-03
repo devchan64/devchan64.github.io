@@ -53,6 +53,11 @@ article img {
   margin-bottom: 20px;
 }
 
+strong {
+  color:#81212F; 
+  font-weight:bold;
+}
+
 a {
   
 }
