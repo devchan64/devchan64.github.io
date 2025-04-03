@@ -222,6 +222,24 @@ pre {
   line-height: 1.5;
 }
 
+  .main-nav ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+    background: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+  }
+  .main-nav a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #333;
+  }
+  .main-nav a:hover {
+    color: #007acc;
+  }
+
 /* ✅ 공통 버튼 스타일 */
 .social-button {
   display: inline-block;
