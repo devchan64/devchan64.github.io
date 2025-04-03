@@ -1,102 +1,219 @@
-/* 기본 스타일 */
 body {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background-color: #f8f8f8;
-    color: #333;
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-  }
-  
+  font-family: "Roboto", "Noto Sans KR", sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  font-size: 11px;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+header {
+  background-color: #d5006d;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+header p.meta {
+  font-size: 1rem;
+  color: #eee;
+  margin-top: 10px;
+}
+
+article {
+  font-size: 1.1rem;
+  color: #444;
+  line-height: 1.8;
+  margin-top: 30px;
+}
+
+article img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+a {
+  color: #d5006d;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #b30057;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 40px;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+ul li {
+  margin-bottom: 20px;
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+  transition: background-color 0.3s ease;
+}
+
+ul li:hover {
+  background-color: #f1f1f1;
+}
+
+ul li a {
+  font-size: 1.5rem;
+  color: #d5006d;
+}
+
+ul li p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-top: 5px;
+}
+
+h2, h3 {
+  font-weight: 600;
+  color: #333;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #8e004f;
+}
+
+p {
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+
+hr {
+  border: none;
+  border-top: 2px dashed #eeccdd;
+  margin: 30px 0;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+button {
+  background-color: #d5006d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #b30057;
+}
+
+button:focus {
+  outline: none;
+}
+
+/* 홈 버튼 스타일 */
+.home-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #d5006d; /* 비바 마젠타 */
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.home-button:hover {
+  background-color: #b30057; /* 마우스 오버 시 어두운 비바 마젠타 */
+}
+
+
+@media (max-width: 768px) {
   .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 95%;
   }
-  
-  header {
-    background-color: #333344; /* 헤더 배경색 설정 */
-    color: white; /* 헤더 텍스트 색상 설정 */
-    padding: 20px; /* 패딩 설정 */
-    text-align: center;
-    margin-bottom: 30px; /* 아래쪽 마진 설정 */
-  }
-  
+
   header h1 {
-    font-size: 2.5rem;
-    margin: 0;
+    font-size: 2rem;
   }
-  
-  header p.meta {
+
+  footer {
+    font-size: 0.8rem;
+  }
+
+  ul li {
     font-size: 1rem;
-    color: #eee; /* 메타 정보 색상 설정 */
   }
-  
+
   article {
     font-size: 1rem;
-    color: #444;
-    line-height: 1.8;
   }
-  
-  article img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 20px;
+
+  button {
+    width: 100%;
   }
-  
-  a {
-    color: #007bff;
-    text-decoration: none;
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .container {
+    width: 90%;
   }
-  
-  a:hover {
-    text-decoration: underline;
+
+  header h1 {
+    font-size: 2.2rem;
   }
-  
+
   footer {
-    text-align: center;
     font-size: 0.9rem;
-    color: #888;
-    margin-top: 40px;
   }
-  
-  ul {
-    list-style-type: none;
-    padding-left: 0;
+}
+
+@media (min-width: 1025px) {
+  .container {
+    width: 85%;
   }
-  
-  ul li {
-    margin-bottom: 20px;
-    padding: 10px;
-    border-bottom: 1px solid #e0e0e0;
+
+  header h1 {
+    font-size: 3rem;
   }
-  
-  ul li a {
-    font-size: 1.2rem;
-    color: #007bff;
+
+  footer {
+    font-size: 1rem;
   }
-  
-  ul li p {
-    font-size: 0.9rem;
-    color: #555;
+
+  article {
+    font-size: 1.1rem;
   }
-  
-  /* 반응형 디자인 */
-  @media (max-width: 768px) {
-    .container {
-      width: 95%;
-    }
-  
-    header h1 {
-      font-size: 2rem;
-    }
-  
-    footer {
-      font-size: 0.8rem;
-    }
+
+  button {
+    width: auto;
   }
-  
+}

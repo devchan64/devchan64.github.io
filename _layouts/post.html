@@ -9,13 +9,16 @@
 <body>
   <div class="container">
     <header>
-      <h1>{{ page.title }}</h1>
-      <p class="meta">Published on: {{ page.date | date: "%B %d, %Y" }} by {{ page.author }}</p>
+      <h1>{{ site.title }}</h1>      
     </header>
 
-    <article>
-      {{ content }} <!-- 포스트 내용 -->
-    </article>
+    <main>
+      <h1>{{ page.title }}</h1>
+      {{ content }} <!-- index.md 내용이 여기에 들어갑니다 -->
+      
+      <!-- 홈으로 가는 버튼 추가 -->
+      <a href="{{ "/" | relative_url }}" class="home-button">홈으로 가기</a>
+    </main>
 
     <footer>
       <p>Thanks for reading!</p>

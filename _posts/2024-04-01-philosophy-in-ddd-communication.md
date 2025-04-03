@@ -1,8 +1,9 @@
 ---
+layout: post
 title: "철학을 도구화하지 말자 – 본질은 커뮤니케이션이다 (feat. DDD)"
-date: 2024-03-28
-tags: [DDD, 설계, 철학]
-description: "도메인 주도 설계(DDD)의 철학과 커뮤니케이션의 중요성"
+date: 2024-04-01
+categories: [philosophy, design]
+tags: [DDD, 커뮤니케이션, 설계, 언어]
 ---
 
 ### 모델링은 대화다. 구조는 그 결과일 뿐이다.
