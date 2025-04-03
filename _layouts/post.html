@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }} | Chan의 블로그</title>
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>{{ page.title }}</h1>
+      <p class="meta">Published on: {{ page.date | date: "%B %d, %Y" }} by {{ page.author }}</p>
+    </header>
+
+    <article>
+      {{ content }} <!-- 포스트 내용 -->
+    </article>
+
+    <footer>
+      <p>Thanks for reading!</p>
+    </footer>
+  </div>
+</body>
+</html>

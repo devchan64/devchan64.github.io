@@ -1,2 +1,2 @@
-# IoT Tech Generalist Chan
+# IoT Tech Generalist DEVCHAN
 

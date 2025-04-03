@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }} | {{ site.title }}</title> <!-- 페이지 제목과 사이트 제목을 결합 -->
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}"> <!-- CSS 링크 -->
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>{{ site.title }}</h1> <!-- 사이트 제목 -->
+    </header>
+
+    <main>
+      <h1>{{ page.title }}</h1> <!-- 페이지 제목 -->
+      {{ content }} <!-- 페이지의 본문 내용이 여기에 들어갑니다 -->
+    </main>
+
+    <footer>
+      <p>Thanks for reading!</p>
+    </footer>
+  </div>
+</body>
+</html>

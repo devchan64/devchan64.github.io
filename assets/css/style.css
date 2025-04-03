@@ -1,0 +1,102 @@
+/* 기본 스타일 */
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+  }
+  
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  header {
+    background-color: #333344; /* 헤더 배경색 설정 */
+    color: white; /* 헤더 텍스트 색상 설정 */
+    padding: 20px; /* 패딩 설정 */
+    text-align: center;
+    margin-bottom: 30px; /* 아래쪽 마진 설정 */
+  }
+  
+  header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+  }
+  
+  header p.meta {
+    font-size: 1rem;
+    color: #eee; /* 메타 정보 색상 설정 */
+  }
+  
+  article {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.8;
+  }
+  
+  article img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  footer {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #888;
+    margin-top: 40px;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  ul li {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  ul li a {
+    font-size: 1.2rem;
+    color: #007bff;
+  }
+  
+  ul li p {
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  /* 반응형 디자인 */
+  @media (max-width: 768px) {
+    .container {
+      width: 95%;
+    }
+  
+    header h1 {
+      font-size: 2rem;
+    }
+  
+    footer {
+      font-size: 0.8rem;
+    }
+  }
+  
