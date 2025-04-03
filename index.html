@@ -1,4 +1,4 @@
-he<!DOCTYPE html>
+=he<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
@@ -45,6 +45,7 @@ he<!DOCTYPE html>
 let posts = [];
 let currentIndex = 0;
 const postsPerPage = 5;
+
 const tagsSet = new Set();
 
 function getQueryParam(name) {
@@ -54,6 +55,7 @@ function getQueryParam(name) {
 
 function loadFilteredOrAllPosts() {
   const selectedTag = getQueryParam('tag');
+
   if (selectedTag) {
     const filtered = posts.filter(post => post.tags.includes(selectedTag));
     renderPosts(filtered);
@@ -70,8 +72,21 @@ async function loadPosts() {
     posts.forEach(post => {
       post.tags.forEach(tag => tagsSet.add(tag));
     });
+
+    renderFilters();
   }
+
   loadFilteredOrAllPosts();
+}
+
+function renderFilters() {
+  const tagList = document.getElementById('tag-list');
+
+  tagsSet.forEach(tag => {
+    const li = document.createElement('li');
+    li.innerHTML = `<a href="?tag=${encodeURIComponent(tag)}">${tag}</a>`;
+    tagList.appendChild(li);
+  });
 }
 
 function renderPosts(list = posts) {
@@ -94,6 +109,13 @@ function renderPosts(list = posts) {
 
   const moreBtn = document.getElementById('load-more');
   moreBtn.style.display = list.length > postsPerPage ? 'block' : 'none';
+}
+
+function filterBy(type, value) {
+  const filtered = posts.filter(post => {
+    return post.tags.includes(value); // 카테고리 제거됨
+  });
+  renderPosts(filtered);
 }
 
 document.getElementById('load-more').addEventListener('click', loadPosts);
