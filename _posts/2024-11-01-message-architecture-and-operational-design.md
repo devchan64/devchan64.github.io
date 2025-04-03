@@ -2,7 +2,7 @@
 layout: post
 title: "메시지 기반 아키텍처와 운영 중심 설계"
 date: 2024-11-01
-tags: [프로젝트, 아키텍처, DevOps]
+tags: [프로젝트, DevOps]
 ---
 
 ## 1. 문제 상황과 선택의 갈림길
