@@ -4,12 +4,16 @@ title: "Welcome to My Blog"
 date: 2024-04-01
 ---
 
-# Recent Posts
+<header>
+  <h1>{{ site.title }}</h1>      
+</header>
+<main class="post-content">
+  <h2># Recent Posts</h2>
 
-<ul id="post-list"></ul>
+  <ul id="post-list"></ul>
 
-<button id="load-more">더 보기</button>
-
+  <button id="load-more">더 보기</button>
+</main>
 <script>
 let posts = [];
 let currentIndex = 0;
@@ -29,6 +33,7 @@ async function loadPosts() {
     li.innerHTML = `
       <a href="${post.url}">${post.title}</a> - <small>${new Date(post.date).toLocaleDateString()}</small>
       <p>${post.excerpt}</p>
+      <hr/>
     `;
     container.appendChild(li);
   });

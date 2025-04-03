@@ -6,3 +6,5 @@ gem 'jekyll-sitemap'
 gem 'jekyll-paginate-v2'
 gem "github-pages"
 
+
+gem "kramdown-parser-gfm", "~> 1.1"
