@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Noto+Sans+KR&family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <div class="container">
+
+    <main class="post-content">
+      <header>
+        <h1>{{ site.title }}</h1>
+      </header>
+      
+      <h2># Recent Posts</h2>
+      <ul id="post-list"></ul>
+      <button id="load-more" class="button">더 보기</button>
+    </main>
+
+    <div class="tag-list">
+      <nav id="filters">
+        <ul id="tag-list"></ul>
+      </nav>
+    </div>
+
+    <footer>
+      <p>Tech Generalist and IoT System Architect with expertise in product execution and cross-domain system integration.</p>
+      <section class="about">
+        <div class="social-icons">
+          <a href="https://github.com/devchan64" target="_blank" class="social-button github-button">
+            <i class="fab fa-github"></i> View my GitHub
+          </a>
+          <a href="https://linkedin.com/in/your-profile" target="_blank" class="social-button linkedin-button">
+            <i class="fab fa-linkedin"></i> Connect on LinkedIn
+          </a>
+        </div>
+      </section>      
+    </footer>
+
+  </div>
+
+  <script>
+    let posts = [];
+    let currentIndex = 0;
+    const postsPerPage = 5;
+    const tagsSet = new Set();
+
+    function getQueryParam(name) {
+      const url = new URL(window.location.href);
+      return url.searchParams.get(name);
+    }
+
+    function loadFilteredOrAllPosts() {
+      const selectedTag = getQueryParam('tag');
+      if (selectedTag) {
+        const filtered = posts.filter(post => post.tags.includes(selectedTag));
+        renderPosts(filtered);
+      } else {
+        renderPosts(posts);
+      }
+    }
+
+    async function loadPosts() {
+      if (posts.length === 0) {
+        const res = await fetch('/posts.json');
+        posts = await res.json();
+
+        posts.forEach(post => {
+          post.tags.forEach(tag => tagsSet.add(tag));
+        });
+
+        renderFilters();
+      }
+
+      loadFilteredOrAllPosts();
+    }
+
+    function renderFilters() {
+      const tagList = document.getElementById('tag-list');
+
+      tagsSet.forEach(tag => {
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="?tag=${encodeURIComponent(tag)}">${tag}</a>`;
+        tagList.appendChild(li);
+      });
+    }
+
+    function renderPosts(list = posts) {
+      const container = document.getElementById('post-list');
+      container.innerHTML = '';
+
+      const nextPosts = list.slice(0, postsPerPage);
+      nextPosts.forEach(post => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <a href="${post.url}">${post.title}</a> - <small>${new Date(post.date).toLocaleDateString()}</small>
+          <p>${post.excerpt}</p>
+          <div class="meta">
+            <span>🏷️ ${post.tags.join(', ')}</span>
+          </div>
+          <hr/>
+        `;
+        container.appendChild(li);
+      });
+
+      const moreBtn = document.getElementById('load-more');
+      moreBtn.style.display = list.length > postsPerPage ? 'block' : 'none';
+    }
+
+    function filterBy(type, value) {
+      const filtered = posts.filter(post => post.tags.includes(value));
+      renderPosts(filtered);
+    }
+
+    document.getElementById('load-more').addEventListener('click', loadPosts);
+    window.addEventListener('DOMContentLoaded', loadPosts);
+  </script>
+</body>
+</html>
