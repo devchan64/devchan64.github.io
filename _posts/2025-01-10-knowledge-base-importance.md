@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "지식베이스의 필요성"
-date: 2024-03-28
-categories: [knowledge, culture]
+date: 2025-01-10
+categories: [개발문화]
 tags: [지식베이스, 개발 문화, 정보 공유, 온보딩]
 ---
 

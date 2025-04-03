@@ -2,7 +2,7 @@
 layout: post
 title: "해결하고 싶은 문제들"
 date: 2024-04-01
-categories: [career, philosophy]
+categories: [기술철학]
 tags: [소통, 아키텍처, 개발]
 ---
 

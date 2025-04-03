@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "철학을 도구화하지 말자 – 본질은 커뮤니케이션이다 (feat. DDD)"
-date: 2024-04-01
-categories: [philosophy, design]
+date: 2025-04-01
+categories: [기술철학]
 tags: [DDD, 커뮤니케이션, 설계, 언어]
 ---
 
