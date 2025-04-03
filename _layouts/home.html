@@ -55,16 +55,6 @@
       return url.searchParams.get(name);
     }
 
-    function loadFilteredOrAllPosts() {
-      const selectedTag = getQueryParam('tag');
-      if (selectedTag) {
-        const filtered = posts.filter(post => post.tags.includes(selectedTag));
-        renderPosts(filtered);
-      } else {
-        renderPosts(posts);
-      }
-    }
-
     async function loadPosts() {
       if (posts.length === 0) {
         const res = await fetch('/posts.json');
@@ -90,34 +80,55 @@
       });
     }
 
-    function renderPosts(list = posts) {
-      const container = document.getElementById('post-list');
-      container.innerHTML = '';
+    function renderPosts(list = posts, append = false) {
+  const container = document.getElementById('post-list');
 
-      const nextPosts = list.slice(0, postsPerPage);
-      nextPosts.forEach(post => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-          <a href="${post.url}">${post.title}</a> - <small>${new Date(post.date).toLocaleDateString()}</small>
-          <p>${post.excerpt}</p>
-          <div class="meta">
-            <span>🏷️ ${post.tags.join(', ')}</span>
-          </div>
-          <hr/>
-        `;
-        container.appendChild(li);
-      });
+  if (!append) {
+    container.innerHTML = '';
+    currentIndex = 0;
+  }
 
-      const moreBtn = document.getElementById('load-more');
-      moreBtn.style.display = list.length > postsPerPage ? 'block' : 'none';
-    }
+  const nextPosts = list.slice(currentIndex, currentIndex + postsPerPage);
+  nextPosts.forEach(post => {
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <a href="${post.url}">${post.title}</a> - <small>${new Date(post.date).toLocaleDateString()}</small>
+      <p>${post.excerpt}</p>
+      <div class="meta">
+        <span>🏷️ ${post.tags.join(', ')}</span>
+      </div>
+      <hr/>
+    `;
+    container.appendChild(li);
+  });
+
+  currentIndex += nextPosts.length;
+
+  const moreBtn = document.getElementById('load-more');
+  moreBtn.style.display = (currentIndex < list.length) ? 'block' : 'none';
+}
+
+function loadFilteredOrAllPosts(append = false) {
+  const selectedTag = getQueryParam('tag');
+  if (selectedTag) {
+    const filtered = posts.filter(post => post.tags.includes(selectedTag));
+    renderPosts(filtered, append);
+  } else {
+    renderPosts(posts, append);
+  }
+}
+
+
+
 
     function filterBy(type, value) {
       const filtered = posts.filter(post => post.tags.includes(value));
       renderPosts(filtered);
     }
 
-    document.getElementById('load-more').addEventListener('click', loadPosts);
+    document.getElementById('load-more').addEventListener('click', () => {
+  loadFilteredOrAllPosts(true);
+});
     window.addEventListener('DOMContentLoaded', loadPosts);
   </script>
 </body>
