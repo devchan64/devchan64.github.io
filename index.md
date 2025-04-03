@@ -4,12 +4,13 @@ title: "Welcome to My Blog"
 date: 2024-04-01
 ---
 
-# 포스트
-[우리의 애자일, 정말 ‘애자일’한가요?](_posts/2024-04-01-agile-philosophy.md)
-[철학을 도구화하지 말자 – 본질은 커뮤니케이션이다 (feat. DDD)](_post/2025-04-03-philosophy-communication-ddd.md)
+# Recent Posts
 
-
-## 기술 스택
-- GitHub Pages
-- Markdown
-- Jekyll
+<ul>
+  {% for post in site.posts limit:5 %}
+    <li>
+      <a href="{{ post.url }}">{{ post.title }}</a> - <small>{{ post.date | date: "%B %d, %Y" }}</small>
+      <p>{{ post.excerpt | strip_html }}</p> <!-- excerpt를 단순히 출력, 줄 수는 CSS로 제한 -->
+    </li>
+  {% endfor %}
+</ul>

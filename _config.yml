@@ -1,3 +1,10 @@
-title: "Chan의 개발 블로그"
-description: "GitHub Pages와 Markdown을 활용한 개발 블로그"
-theme: jekyll-theme-cayman
+title: "IoT Tech Generalist DEVCHAN"
+description: "GitHub Page를 활용한 개발 블로그"
+theme: minima
+
+url: "https://devchan64.github.io"
+baseurl: ""
+markdown: kramdown
+
+paginate: 5
+paginate_path: "/blog/page:num/"
