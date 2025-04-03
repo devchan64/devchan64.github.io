@@ -8,6 +8,8 @@ date: 2024-04-01
 
 이곳은 **GitHub Pages**를 사용하여 만든 블로그입니다. Markdown 형식으로 작성한 글이 자동으로 HTML로 변환되어 보여집니다.
 
+[우리의 애자일, 정말 ‘애자일’한가요?](_posts/2024-04-01-agile-philosophy.md)
+
 ## 기술 스택
 
 - GitHub Pages
