@@ -50,14 +50,35 @@ article img {
 }
 
 a {
-  color: #d5006d;
-  text-decoration: none;
-  transition: color 0.3s ease;
+  
 }
 
 a:hover {
-  text-decoration: underline;
-  color: #b30057;
+  text-decoration: underline;  
+}
+
+header a:visited{
+  color: inherit;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  margin: 2em 0;
+  font-size: 0.95em;
+}
+
+.pagination a {
+  padding: 0.5em 1em;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #007acc;
+  transition: background-color 0.2s ease;
+}
+
+.pagination a:hover {
+  background-color: #e0e0e0;
 }
 
 footer {

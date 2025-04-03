@@ -3,19 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ page.title }} | {{ site.title }}</title> <!-- 페이지 제목과 사이트 제목을 결합 -->
+  <title>{{ page.title }} | Chan의 블로그</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Noto+Sans+KR&family=Fira+Code&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}"> <!-- CSS 링크 -->
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
 <body>
   <div class="container">
     <header>
-      <h1>{{ site.title }}</h1> <!-- 사이트 제목 -->
+      <h1><a href="{{ "/" | relative_url }}">{{ site.title }}</a></h1>      
     </header>
 
     <main>
-      <h1>{{ page.title }}</h1> <!-- 페이지 제목 -->
-      {{ content }} <!-- 페이지의 본문 내용이 여기에 들어갑니다 -->
+      <h1>{{ page.title }}</h1>
+      {{ content }}
+
+      <!-- 페이지네이션 추가 -->
+      <nav class="pagination">
+        {% if page.previous %}
+          <a class="prev" href="{{ page.previous.url | relative_url }}">&laquo; {{ page.previous.title }}</a>
+        {% endif %}
+        {% if page.next %}
+          <a class="next" href="{{ page.next.url | relative_url }}">{{ page.next.title }} &raquo;</a>
+        {% endif %}
+      </nav>
+
+      <!-- 홈으로 가는 버튼 -->
+      {% unless page.url == "/" %}
+        <a href="{{ "/" | relative_url }}" class="home-button">홈으로 가기</a>
+      {% endunless %}
     </main>
 
     <footer>
