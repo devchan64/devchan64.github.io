@@ -19,31 +19,60 @@ let posts = [];
 let currentIndex = 0;
 const postsPerPage = 5;
 
+const tagsSet = new Set();
+
 async function loadPosts() {
   if (posts.length === 0) {
     const res = await fetch('/posts.json');
     posts = await res.json();
+
+    posts.forEach(post => {
+      post.tags.forEach(tag => tagsSet.add(tag));
+    });
+
+    renderFilters();
   }
 
-  const nextPosts = posts.slice(currentIndex, currentIndex + postsPerPage);
-  const container = document.getElementById('post-list');
+  renderPosts();
+}
 
+function renderFilters() {
+  const tagList = document.getElementById('tag-list');
+
+  tagsSet.forEach(tag => {
+    const li = document.createElement('li');
+    li.innerHTML = `<a href="#" onclick="filterBy('tag', '${tag}')">${tag}</a>`;
+    tagList.appendChild(li);
+  });
+}
+
+function renderPosts(list = posts) {
+  const container = document.getElementById('post-list');
+  container.innerHTML = '';
+
+  const nextPosts = list.slice(0, postsPerPage);
   nextPosts.forEach(post => {
     const li = document.createElement('li');
     li.innerHTML = `
       <a href="${post.url}">${post.title}</a> - <small>${new Date(post.date).toLocaleDateString()}</small>
       <p>${post.excerpt}</p>
+      <div class="meta">
+        <span>🏷️ ${post.tags.join(', ')}</span>
+      </div>
       <hr/>
     `;
     container.appendChild(li);
   });
 
-  currentIndex += postsPerPage;
+  const moreBtn = document.getElementById('load-more');
+  moreBtn.style.display = list.length > postsPerPage ? 'block' : 'none';
+}
 
-  // 더 이상 불러올 게 없으면 버튼 제거
-  if (currentIndex >= posts.length) {
-    document.getElementById('load-more').style.display = 'none';
-  }
+function filterBy(type, value) {
+  const filtered = posts.filter(post => {
+    return post.tags.includes(value); // 카테고리 제거됨
+  });
+  renderPosts(filtered);
 }
 
 document.getElementById('load-more').addEventListener('click', loadPosts);

@@ -9,7 +9,8 @@ permalink: /posts.json
     "title": "{{ post.title | escape }}",
     "url": "{{ post.url }}",
     "date": "{{ post.date | date_to_xmlschema }}",
-    "excerpt": "{{ post.content | strip_html | normalize_whitespace | truncate: 200 | escape }}"
+    "excerpt": "{{ post.content | strip_html | normalize_whitespace | truncate: 200 | escape }}",
+    "tags": {{ post.tags | jsonify }}
   }{% unless forloop.last %},{% endunless %}
 {% endfor %}
 ]

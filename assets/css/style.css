@@ -200,6 +200,35 @@ button:focus {
   background-color: #b30057; /* 마우스 오버 시 어두운 비바 마젠타 */
 }
 
+#filters {
+  margin-bottom: 2em;
+}
+
+#filters h3 {
+  margin-bottom: 0.3em;
+}
+
+#filters ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1em;
+}
+
+#filters li {
+  display: inline-block;
+  margin-right: 0.5em;
+}
+
+#filters a {
+  text-decoration: none;
+  color: #007acc;
+  font-size: 0.9em;
+}
+
+#filters a:hover {
+  text-decoration: underline;
+}
+
 
 @media (max-width: 768px) {
   .container {
