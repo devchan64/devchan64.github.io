@@ -1,0 +1,30 @@
+/* 공통 소셜 버튼 스타일 */
+.social-button {
+    display: inline-block;
+    padding: 0.6em 1.2em;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    margin-right: 0.5em;
+  }
+  
+  /* LinkedIn 버튼 스타일 */
+  .linkedin-button {
+    background-color: #0A66C2;
+  }
+  
+  .linkedin-button:hover {
+    background-color: #004182;
+  }
+  
+  /* GitHub 버튼 스타일 */
+  .github-button {
+    background-color: #333333;
+  }
+  
+  .github-button:hover {
+    background-color: #24292e;
+  }
+  

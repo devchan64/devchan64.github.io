@@ -1,0 +1,44 @@
+body.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+main{
+    padding: 10px;
+}
+
+header{
+    background-color: #F5C3CD;    
+    padding: 20px;
+    text-align: center;
+}
+
+header.layout-header{
+    color: white;
+    background-color: #BB2649;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+}
+
+header p.meta {
+    color: #eee;
+    margin-top: 10px;
+}
+
+.post-content {
+    padding: 1rem;
+}
+
+footer {
+    text-align: center;
+    color: #888;
+    margin-top: 40px;
+}

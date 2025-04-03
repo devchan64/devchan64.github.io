@@ -90,7 +90,11 @@ header a:visited{
   background-color: #e0e0e0;
 }
 
-.tag-list{
+.tags{
+  padding: 1em;
+}
+
+nav #tag-list{
   margin-top: 1em;
   border-top: #BB2649 solid 2px;
   padding: 0 2em;
@@ -225,7 +229,8 @@ pre {
 .main-nav {
   background-color: #BB2649; /* Viva Magenta */
   padding: 10px 20px;
-  border-bottom: 2px solid #a91f3f;
+  border-top: 2px solid #a91f3f;
+  border-radius: 5px;
 }
 
 .main-nav ul {

@@ -7,20 +7,29 @@
   <title>{{ page.title }}</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Noto+Sans+KR&family=Fira+Code&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 
-<body>
-  <div class="container">
-    <main>
+<body class="container">
+    <header class="layout-header">
+      <h1>{{ site.title }}</h1>
+      {% unless page.url == "/" %}
+      <a href="/" class="button">홈으로 가기</a>
+      {% endunless %}
+    </header>    
+    <main>      
 
       {{ content }}
 
+      {% unless page.url == "/" %}
+      <a href="/" class="button">홈으로 가기</a>
+      {% endunless %}
+
       {% if page.tags %}
       <div class="tags">
-        <strong>🏷️ Tags:</strong>
+        <strong>Tags:</strong>
         {% for tag in page.tags %}
         <a class="tag" href="/?tag={{ tag | uri_escape }}">{{ tag }}</a>
         {% endfor %}
@@ -53,7 +62,6 @@
         </div>
       </section>      
     </footer>
-  </div>
 </body>
 
 </html>

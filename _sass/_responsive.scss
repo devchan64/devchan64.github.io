@@ -1,0 +1,26 @@
+@media (max-width: 768px) {
+    .container {
+      width: 95%;
+    }
+  
+    button {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 1024px) and (min-width: 769px) {
+    .container {
+      width: 90%;
+    }
+  }
+  
+  @media (min-width: 1025px) {
+    .container {
+      width: 85%;
+    }
+  
+    button {
+      width: auto;
+    }
+  }
+  

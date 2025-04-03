@@ -1,0 +1,29 @@
+blockquote {
+}
+
+h2, h3 {
+  font-weight: 600;
+  color: #333;
+}
+
+h2 {
+  border-bottom: 2px solid #8e004f;
+}
+
+code,
+pre {
+  font-family: "Fira Code", "Source Code Pro", "Courier New", "SFMono-Regular", Consolas, Menlo, monospace;
+  font-size: 0.95em;
+  background-color: #f8f9fa;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+}
+
+pre {
+  overflow-x: auto;
+  max-width: 100%;
+  padding: 1em;
+  background-color: #f6f8fa;
+  border-radius: 6px;
+  line-height: 1.5;
+}

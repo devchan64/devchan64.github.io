@@ -1,0 +1,61 @@
+body {
+  font-family: "Roboto", "Noto Sans KR", sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+strong {
+  color: #81212F;
+  font-weight: bold;
+}
+
+a {
+  // 링크 스타일 기본은 비워짐
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+header a:visited {
+  color: inherit;
+}
+
+hr {
+  border: none;
+  border-top: 2px dashed #eeccdd;
+  margin: 30px 0;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1em auto;
+}
+
+ul {
+  padding-left: 1.5em;
+}
+ul li {
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+}
+ul li a {
+  color: #BB2649;
+}
+ul li p {
+  color: #555;
+  margin-top: 5px;
+}
+
+p {
+  margin-bottom: 15px;
+}
