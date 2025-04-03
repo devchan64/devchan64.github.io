@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: guestbook
 title: 방명록
 ---
 
