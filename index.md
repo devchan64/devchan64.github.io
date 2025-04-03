@@ -21,6 +21,22 @@ const postsPerPage = 5;
 
 const tagsSet = new Set();
 
+function getQueryParam(name) {
+  const url = new URL(window.location.href);
+  return url.searchParams.get(name);
+}
+
+function loadFilteredOrAllPosts() {
+  const selectedTag = getQueryParam('tag');
+
+  if (selectedTag) {
+    const filtered = posts.filter(post => post.tags.includes(selectedTag));
+    renderPosts(filtered);
+  } else {
+    renderPosts(posts);
+  }
+}
+
 async function loadPosts() {
   if (posts.length === 0) {
     const res = await fetch('/posts.json');
@@ -33,7 +49,7 @@ async function loadPosts() {
     renderFilters();
   }
 
-  renderPosts();
+  loadFilteredOrAllPosts();
 }
 
 function renderFilters() {
@@ -41,7 +57,7 @@ function renderFilters() {
 
   tagsSet.forEach(tag => {
     const li = document.createElement('li');
-    li.innerHTML = `<a href="#" onclick="filterBy('tag', '${tag}')">${tag}</a>`;
+    li.innerHTML = `<a href="?tag=${encodeURIComponent(tag)}">${tag}</a>`;
     tagList.appendChild(li);
   });
 }

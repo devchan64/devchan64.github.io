@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ page.title }} | Chan의 블로그</title>
+  <title>{{ page.title }}</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Noto+Sans+KR&family=Fira+Code&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
@@ -21,7 +21,7 @@
         <div class="tags">
           <strong>🏷️ Tags:</strong>
           {% for tag in page.tags %}
-            <span class="tag">{{ tag }}</span>
+            <a class="tag" href="/?tag={{ tag | uri_escape }}">{{ tag }}</a>
           {% endfor %}
         </div>
       {% endif %}
@@ -51,7 +51,7 @@
     </main>
 
     <footer>
-      <p>Thanks for reading!</p>
+      <p>{{site.description}}</p>
     </footer>
   </div>
 </body>
