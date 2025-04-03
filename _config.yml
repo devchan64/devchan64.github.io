@@ -18,3 +18,5 @@ defaults:
       path: "_posts/*"
     values:
       layout: "default"
+
+linkedin: "http://www.linkedin.com/in/changbo-sim-bb8397270"

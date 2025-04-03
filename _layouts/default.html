@@ -1,58 +1,73 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.title }}</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Noto+Sans+KR&family=Fira+Code&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Noto+Sans+KR&family=Fira+Code&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
   <div class="container">
     <main>
       <!-- 홈으로 가는 버튼 -->
       {% unless page.url == "/" %}
-        <a href="{{ "/" | relative_url }}" class="home-button">홈으로 가기</a>
+      <a href="{{ " /" | relative_url }}" class="button">홈으로 가기</a>
       {% endunless %}
 
       {{ content }}
 
       {% if page.tags %}
-        <div class="tags">
-          <strong>🏷️ Tags:</strong>
-          {% for tag in page.tags %}
-            <a class="tag" href="/?tag={{ tag | uri_escape }}">{{ tag }}</a>
-          {% endfor %}
-        </div>
+      <div class="tags">
+        <strong>🏷️ Tags:</strong>
+        {% for tag in page.tags %}
+        <a class="tag" href="/?tag={{ tag | uri_escape }}">{{ tag }}</a>
+        {% endfor %}
+      </div>
       {% endif %}
-      
-      {% unless page.url != "/" %}
-      <nav id="filters">
-        <h3>🏷️ 태그</h3>
-        <ul id="tag-list"></ul>
-      </nav>
-      {% endunless %}
-      
+
       <!-- 페이지네이션 추가 -->
       <nav class="pagination">
         {% if page.previous %}
-          <a class="prev" href="{{ page.previous.url | relative_url }}">&laquo; {{ page.previous.title }}</a>
+        <a class="prev" href="{{ page.previous.url | relative_url }}">&laquo; {{ page.previous.title }}</a>
         {% endif %}
         {% if page.next %}
-          <a class="next" href="{{ page.next.url | relative_url }}">{{ page.next.title }} &raquo;</a>
+        <a class="next" href="{{ page.next.url | relative_url }}">{{ page.next.title }} &raquo;</a>
         {% endif %}
       </nav>
-      
-      <!-- 홈으로 가는 버튼 -->
+
       {% unless page.url == "/" %}
-        <a href="{{ "/" | relative_url }}" class="home-button">홈으로 가기</a>
-      {% endunless %}            
-      
+      <a href="{{ " /" | relative_url }}" class="button">홈으로 가기</a>
+      {% endunless %}
+
     </main>
 
+    <div class="tag-list">
+      {% unless page.url != "/" %}
+      <nav id="filters">
+        <ul id="tag-list"></ul>
+      </nav>
+      {% endunless %}
+    </div>
     <footer>
       <p>{{site.description}}</p>
+      <section class="about">
+        <div class="social-icons">
+          <a href="https://github.com/devchan64" target="_blank" class="social-button github-button">
+            <i class="fab fa-github"></i> View my GitHub
+          </a>          
+          <a href="https://www.linkedin.com/in/devchan64" target="_blank" class="social-button linkedin-button">
+            <i class="fab fa-linkedin"></i> Connect on LinkedIn
+          </a>
+        </div>
+      </section>      
     </footer>
   </div>
 </body>
+
 </html>

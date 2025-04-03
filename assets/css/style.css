@@ -85,6 +85,12 @@ header a:visited{
   background-color: #e0e0e0;
 }
 
+.tag-list{
+  margin-top: 1em;
+  border-top: #BB2649 solid 2px;
+  padding: 0 2em;
+}
+
 footer {
   text-align: center;
   color: #888;
@@ -211,11 +217,36 @@ pre {
   line-height: 1.5;
 }
 
-tbody {
-  border-color: inherit;
+/* ✅ 공통 버튼 스타일 */
+.social-button {
+  display: inline-block;
+  padding: 0.6em 1.2em;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  margin-right: 0.5em;
 }
 
-button {
+/* ✅ 브랜드별 색상 */
+.linkedin-button {
+  background-color: #0A66C2;
+}
+
+.linkedin-button:hover {
+  background-color: #004182;
+}
+
+.github-button {
+  background-color: #333333;
+}
+
+.github-button:hover {
+  background-color: #24292e;
+}
+
+button, a.button {
   background-color: #BB2649;
   color: white;
   border: none;
@@ -225,29 +256,12 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+button:hover, a.button:hover {
   background-color: #b30057;
 }
 
-button:focus {
+button:focus, a.button:focus {
   outline: none;
-}
-
-/* 홈 버튼 스타일 */
-.home-button {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #BB2649; /* 비바 마젠타 */
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  text-align: center;
-  transition: background-color 0.3s ease;
-}
-
-.home-button:hover {
-  background-color: #b30057; /* 마우스 오버 시 어두운 비바 마젠타 */
 }
 
 #filters {

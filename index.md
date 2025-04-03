@@ -12,7 +12,7 @@ date: 2024-04-01
 
   <ul id="post-list"></ul>
 
-  <button id="load-more">더 보기</button>
+  <button id="load-more" class="button" >더 보기</button>
 </main>
 <script>
 let posts = [];
