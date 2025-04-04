@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const result = await d2.compile(d2Code, { layout: "elk" });
 
         // layout 옵션을 올바르게 적용
-        const svg = await d2.render(result.diagram);        
+        const svg = await d2.render(result.diagram);
 
         // 다이어그램을 `pre > code.language-d2` 바로 아래에 삽입
         const d2Diagram = document.createElement('div');
@@ -72,6 +72,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const d2Code = block.textContent;
         await renderDiagram(d2Code, block);
     });
+
+    document.querySelectorAll("code.language-tree").forEach(async (block) => {
+        const treeText = block.textContent;
+        const output = treeTextToDOM(treeText);
+        console.log(output);
+        block.parentElement.appendChild(output);
+        block.remove();
+    });
 });
 
 // 이미지 클릭 시 확대 뷰 보여주기
@@ -91,11 +99,6 @@ function addSvgClickEventListener() {
     });
 }
 
-// 최초 페이지 로드 시 이미지 클릭 이벤트 리스너 추가
-document.addEventListener("DOMContentLoaded", () => {
-    addSvgClickEventListener();  // 기존 이미지에 대해 클릭 이벤트 추가
-});
-
 // 다이어그램이나 콘텐츠가 동적으로 추가된 경우, 이미지 클릭 이벤트 리스너 추가
 document.addEventListener('rendered', () => {
     addSvgClickEventListener();  // 동적으로 추가된 이미지에 대한 클릭 이벤트 추가
@@ -106,3 +109,37 @@ function triggerRenderEvent() {
     const event = new Event('rendered');
     document.dispatchEvent(event);
 }
+
+function treeTextToDOM(treeText) {
+        const lines = treeText
+          .split("\n")
+          .filter((line) => line.trim() !== "")
+          .map((line) => {
+            const match = line.match(/^([│\s]*)([├└]── )?(.*)$/)
+            const depth = (match[1].match(/│|    /g) || []).length
+            const name = match[3].trim()
+            return { depth, name }
+          })
+      
+        const root = document.createElement("div")
+        const stack = [{ depth: -1, element: root }]
+      
+        for (const { depth, name } of lines) {
+          const isFile = /\.[a-z0-9]+$/i.test(name)
+      
+          const div = document.createElement("div")
+          div.className = "tree-item"
+          div.textContent = `${isFile ? "📄" : "📁"} ${name}`
+      
+          while (stack.length && stack[stack.length - 1].depth >= depth) {
+            stack.pop()
+          }
+      
+          const parent = stack[stack.length - 1].element
+          parent.appendChild(div)
+          stack.push({ depth, element: div })
+        }
+      
+        return root;
+      }
+      

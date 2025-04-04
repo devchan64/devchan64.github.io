@@ -123,3 +123,27 @@ svg.diagram.enlarged {
   // height: auto;  /* 세로 크기를 2배로 설정 */
   // width: 100%;   /* 가로 크기는 그대로 */
 }
+
+/* 기본 트리 아이템 스타일 */
+.tree-item {
+  font-family: "Courier New", monospace;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  position: relative;
+  padding-left: 1.5rem;
+  margin-left: 0.0rem;
+  color: #333;
+}
+
+/* depth 기반 들여쓰기 */
+.tree-item::before {
+  content: "";
+  position: absolute;
+  top: 0.3rem;
+  left: 0.3rem;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-left: 2px solid #ccc;
+  border-bottom: 2px solid #ccc;
+  border-radius: 0 0 0 2px;
+}
