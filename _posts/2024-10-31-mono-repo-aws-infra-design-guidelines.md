@@ -67,140 +67,144 @@ tags: [프로젝트, 설계철학]
 > 아래는 위 설계 철학에 따라 구성된 AWS 인프라의 시각적 구조이다.
 > 
 
-```PlantUML
-@startuml
-!define RECTANGLE_COLOR #F5F5F5
-!define RECTANGLE_BORDER_COLOR #C0C0C0
-!define RECTANGLE_TEXT_COLOR #333333
+```d2
+direction: down
 
-skinparam defaultFontColor RECTANGLE_TEXT_COLOR
-skinparam defaultBackgroundColor RECTANGLE_COLOR
-skinparam rectangleBorderColor RECTANGLE_BORDER_COLOR
-skinparam layoutOrientation topToBottom
+Infra: {
+  label: "AWS Infrastructure"
 
-skinparam nodesep 50
-skinparam ranksep 30
-skinparam ArrowSpacing 1.5
-skinparam Padding 10
-skinparam Margin 15
+  INET: "Internet"
 
-rectangle "AWS Infrastructure" as Infra {  
-
-  together{
-    rectangle "Internet" as INET
-
-    package "Traffic Management" as TrafficPackage {
-      rectangle "Route 53" as Route53
-    }
-
-    package "CDN" as CDNPackage {
-      rectangle "CloudFront" as CloudFront
-    }
-
-    package "ApiGateway" as ApiGateway {
-      rectangle "API Gateway" as APIGateway
-    }
+  Traffic: {
+    label: "Traffic Management"
+    Route53: "Route 53"
   }
-  
-  package "Network Layer" as NetworkLayer {
-    package "VPC Network" as NetworkPackage {
-      together{
-        rectangle "Internet Gateway" as IGW
-        rectangle "Route Table" as RouteTable
-        rectangle "Security Group" as SecurityGroup      
 
-        IGW --> RouteTable
-        RouteTable --> SecurityGroup        
+  CDN: {
+    label: "CDN"
+    CloudFront: "CloudFront"
+  }
+
+  API: {
+    label: "API Gateway"
+    APIGateway: "API Gateway"
+  }
+
+  NetworkLayer: {
+    label: "Network Layer"
+
+    VPC: {
+      label: "VPC Network"
+
+      IGW: "Internet Gateway"
+      RouteTable: "Route Table"
+      SecurityGroup: "Security Group"
+
+      IGW -> RouteTable
+      RouteTable -> SecurityGroup
+
+      Subnets: {
+        label: "Subnets"
+        Subnet1: "Subnet 1"
+        Subnet2: "Subnet 2"
+        Subnet3: "Subnet 3"
       }
 
-      package "Subnets" as SubnetPackage {
-        rectangle "Subnet 1" as PublicSubnet1
-        rectangle "Subnet 2" as PublicSubnet2
-        rectangle "Subnet 3" as PublicSubnet3
-      }
+      LoadBalancers: {
+        label: "Load Balancers"
 
-      SecurityGroup --> SubnetPackage
+        LB1: {
+          label: "Load Balancer 1"
+          Listener1: "ELB Listener 1"
+          TargetGroup1: "Target Group 1"
+          Listener1 -> TargetGroup1
+        }
 
-      package "Load Balancers" as LoadBalancers {
-        package "Load Balancer 1" as LoadBalancer1 {
-          rectangle "ELB Listener 1" as Listener1
-          rectangle "Target Group 1" as TargetGroup1
-          Listener1 --> TargetGroup1
+        LB2: {
+          label: "Load Balancer 2"
+          Listener2: "ELB Listener 2"
+          TargetGroup2: "Target Group 2"
+          Listener2 -> TargetGroup2
         }
-        package "Load Balancer 2" as LoadBalancer2 {
-          rectangle "ELB Listener 2" as Listener2
-          rectangle "Target Group 2" as TargetGroup2
-          Listener2 --> TargetGroup2
-        }
-        package "Load Balancer 3" as LoadBalancer3 {
-          rectangle "ELB Listener 3" as Listener3
-          rectangle "Target Group 3" as TargetGroup3
-          Listener3 --> TargetGroup3
+
+        LB3: {
+          label: "Load Balancer 3"
+          Listener3: "ELB Listener 3"
+          TargetGroup3: "Target Group 3"
+          Listener3 -> TargetGroup3
         }
       }
+
+      SecurityGroup -> Subnets
+      LoadBalancers.LB1.TargetGroup1 -> Subnets.Subnet1
+      LoadBalancers.LB2.TargetGroup2 -> Subnets.Subnet2
+      LoadBalancers.LB3.TargetGroup3 -> Subnets.Subnet3
     }
   }
 
-  package "Application" as AppPackage {
-    package "ECS Cluster" as ECSCluster {
-      package "ECS Service 1" as ECSService1 {
-        rectangle "ECS Task 1" as Task1
-        rectangle "Frontend" as FESrv
-        Task1 --> FESrv
+  Application: {
+    label: "Application Layer"
+
+    ECS: {
+      label: "ECS Cluster"
+
+      SRV1: {
+        label: "ECS Service 1"
+        Task1: "ECS Task 1"
+        Frontend: "Frontend"
+        Task1 -> Frontend
       }
-      package "ECS Service 2" as ECSService2 {
-        rectangle "ECS Task 2" as Task2
-        rectangle "API Service" as APISrv
-        Task2 --> APISrv
+
+      SRV2: {
+        label: "ECS Service 2"
+        Task2: "ECS Task 2"
+        API: "API Service"
+        Task2 -> API
       }
-      package "ECS Service 3" as ECSService3 {
-        rectangle "ECS Task 3" as Task3
-        rectangle "Data Service" as DataSrv
-        Task3 --> DataSrv
+
+      SRV3: {
+        label: "ECS Service 3"
+        Task3: "ECS Task 3"
+        Data: "Data Service"
+        Task3 -> Data
       }
     }
   }
 
-  together{
-    package "Authentication" as AuthPackage {
-      rectangle "Cognito User Pool" as CognitoUserPool
-      rectangle "Cognito Identity Pool" as CognitoIdentityPool
+  # Subnet -> ECS Task 연결
+  NetworkLayer.VPC.Subnets.Subnet1 -> Application.ECS.SRV1.Task1
+  NetworkLayer.VPC.Subnets.Subnet2 -> Application.ECS.SRV2.Task2
+  NetworkLayer.VPC.Subnets.Subnet3 -> Application.ECS.SRV3.Task3
+
+  DATA: {
+    label: "Data Platform"
+
+    IoT: {
+      IoTCore: "IoT Core"
+      IoTRules: "IoT Rules"
+      IoTCore -> IoTRules
     }
 
-    package "DataPlatform" as DataPlatformPackage {
-      package "Storage" as StoragePackage {
-        rectangle "S3 Bucket" as S3
-        rectangle "DynamoDB" as Database
-      }
+    CW: "Cloud Watch"
+    IoT.IoTRules -> CW
 
-      package "IoT" as IoTPackage {
-        rectangle "IoT Core" as IoTCore
-        rectangle "IoT Rules" as IoTRules
-        IoTCore --> IoTRules
-      }
-
-      rectangle "Cloud Watch" as CW
-
-      CloudFront --> APIGateway
+    Storage: {
+      S3: "S3 Bucket"
+      DynamoDB
     }
   }
+
+  AUTH: {
+    label: "Authentication"
+    CognitoUserPool: "Cognito User Pool"
+    CognitoIdentityPool: "Cognito Identity Pool"
+  }
+
+  # 주요 연동 관계
+  Application -> DATA
+  Application -> AUTH
+
+  INET -> Traffic.Route53 -> CDN.CloudFront -> API.APIGateway -> NetworkLayer.VPC.LoadBalancers
+  INET -> NetworkLayer.VPC.IGW
 }
-
-Route53 --> CloudFront
-INET --> IGW
-INET --> Route53
-TargetGroup1 -down-> PublicSubnet1
-TargetGroup2 -down-> PublicSubnet2
-TargetGroup3 -down-> PublicSubnet3
-PublicSubnet1 --> Task1
-PublicSubnet2 --> Task2
-PublicSubnet3 --> Task3
-APIGateway --> LoadBalancers
-AppPackage --> DataPlatformPackage
-AppPackage --> AuthPackage
-IoTRules --> CW
-
-@enduml
 ```
-
-![image.png](/assets/images/2024-10-41-mono-repo-aws-infra-design-guidelines.png)
