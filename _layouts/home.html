@@ -47,7 +47,7 @@
 
         renderFilters();
       }
-
+      
       loadFilteredOrAllPosts();
     }
 
@@ -90,21 +90,14 @@
     }
 
     function loadFilteredOrAllPosts(append = false) {
-      const selectedTag = getQueryParam('tag');
+      const selectedTag = getQueryParam('tag');      
       if (selectedTag) {
         const filtered = posts.filter(post => post.tags.includes(selectedTag));
+        console.log("filtered", filtered);
         renderPosts(filtered, append);
       } else {
         renderPosts(posts, append);
       }
-    }
-
-
-
-
-    function filterBy(type, value) {
-      const filtered = posts.filter(post => post.tags.includes(value));
-      renderPosts(filtered);
     }
 
     document.getElementById('load-more').addEventListener('click', () => {
