@@ -1,16 +1,21 @@
 import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
 import { D2 } from 'https://esm.sh/@terrastruct/d2';
 
+// Mermaid 초기화
 mermaid.initialize({ startOnLoad: true });
 
-document.addEventListener("DOMContentLoaded", () => {
-    const d2 = new D2();
+// DOMContentLoaded 시 전체 다이어그램 렌더링 처리
+// 주요 흐름: Tree → Mermaid → D2 (렌더 순서 기준 아님, 기술/구문 분류 기준임)
 
-    // 공통 원본 코드 보기 추가 함수
+document.addEventListener("DOMContentLoaded", () => {
+    const d2 = new D2(); // D2 인스턴스 생성
+
+    // 🔧 공통: 다이어그램 원본 보기 toggle 생성 함수
     function addSourceCodeButton(block, originalCode) {
         const details = document.createElement("details");
         const summary = document.createElement("summary");
         summary.innerText = "원본 보기";
+
         const pre = document.createElement("pre");
         const code = document.createElement("code");
         code.textContent = originalCode;
@@ -18,59 +23,52 @@ document.addEventListener("DOMContentLoaded", () => {
         details.appendChild(summary);
         details.appendChild(pre);
         pre.appendChild(code);
+
         block.parentElement.insertBefore(details, block);
     }
 
-    // Mermaid 다이어그램 렌더링
+    // ✅ Mermaid 렌더링 처리
     document.querySelectorAll("pre > code.language-mermaid").forEach(async (block) => {
         const originalCode = block.textContent;
 
-        // Mermaid SVG로 교체
-        // await mermaid.init(undefined, block);
-        console.log("block", block);
+        // ⚠️ Mermaid는 className="mermaid" 인 엘리먼트만 렌더링 대상으로 인식함
         const mePre = document.createElement('pre');
-        mePre.className="mermaid";
-        mePre.innerHTML=originalCode;
-        block.parentElement.insertBefore(mePre,block);        
+        mePre.className = "mermaid"; // 반드시 class="mermaid" 이어야 렌더링됨
+        mePre.innerHTML = originalCode;
+        block.parentElement.insertBefore(mePre, block);
 
         addSourceCodeButton(mePre, originalCode);
         block.remove();
 
-        triggerRenderEvent();
     });
 
-    // D2 다이어그램 렌더링
+    // ✅ D2 렌더링 처리
     async function renderDiagram(d2Code, block) {
         const result = await d2.compile(d2Code, { layout: "elk" });
-
-        // layout 옵션을 올바르게 적용
         const svg = await d2.render(result.diagram);
 
-        // 다이어그램을 `pre > code.language-d2` 바로 아래에 삽입
         const d2Diagram = document.createElement('div');
-        d2Diagram.className = 'svg-container';  // 확대된 SVG를 담을 컨테이너
+        d2Diagram.className = 'svg-container'; // 📌 SVG용 외부 컨테이너
         d2Diagram.innerHTML = svg;
 
         const parentNode = block.parentElement;
         parentNode.parentNode.insertBefore(d2Diagram, parentNode);
         parentNode.remove();
 
-        const svgElement = d2Diagram.querySelector('svg');  // svg 요소 찾기
-        if (svgElement) {
-            svgElement.classList.add("diagram");  // className을 'diagram'으로 변경
-        }
+        const svgElement = d2Diagram.querySelector('svg');
+        if (svgElement) svgElement.classList.add("diagram"); // 확대용 class 추가
 
-        addSourceCodeButton(d2Diagram, d2Code); // 공통 함수로 원본 보기 추가
-
-        triggerRenderEvent();
+        addSourceCodeButton(d2Diagram, d2Code); // 원본 보기 추가
+        handleRenderedElement(d2Diagram);
     }
 
-    // 최초 다이어그램 렌더링 (D2 및 Mermaid 모두)
+    // ✅ D2 코드 탐색 후 렌더
     document.querySelectorAll("pre > code.language-d2").forEach(async (block) => {
         const d2Code = block.textContent;
         await renderDiagram(d2Code, block);
     });
 
+    // ✅ Tree 구조 렌더링 처리
     document.querySelectorAll("code.language-tree").forEach(async (block) => {
         const treeText = block.textContent;
         const output = renderTreeTextToDOM(treeText);
@@ -79,62 +77,51 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// 이미지 클릭 시 확대 뷰 보여주기
-function addSvgClickEventListener() {
-    document.querySelectorAll('div.svg-container').forEach(container => {
-        console.log("rendered");
+// ✅ 렌더링된 요소 처리: 확대기능 부여
+function handleRenderedElement(target) {
+    if (!target || target.processedRender) return;
+    target.processedRender = true;
 
-        // 클릭 시 클래스 토글
-        if (container.setEvent != true) {
-            container.addEventListener('click', function () {
-                // SVG 확대/축소 및 부모 컨테이너 크기 변경            
-                container.classList.toggle('enlarged-svg-container');
-                container.querySelector("svg.diagram").classList.toggle('enlarged');
-            });
-        };
-        container.setEvent = true;
-    });
+    if (target.matches('div.svg-container')) {
+        target.addEventListener('click', () => {
+            target.classList.toggle('enlarged-svg-container');
+            const svg = target.querySelector("svg.diagram");
+            if (svg) svg.classList.toggle('enlarged');
+        });
+        target.setEvent = true;
+    }
+
+    target.dispatchEvent(new Event('rendered', { bubbles: true }));
 }
 
-// 다이어그램이나 콘텐츠가 동적으로 추가된 경우, 이미지 클릭 이벤트 리스너 추가
-document.addEventListener('rendered', () => {
-    // addSvgClickEventListener();  // 동적으로 추가된 이미지에 대한 클릭 이벤트 추가
-});
-
-// 예시: 다이어그램이나 콘텐츠 렌더링 후 'rendered' 이벤트를 트리거
-function triggerRenderEvent() {
-    const event = new Event('rendered');
-    document.dispatchEvent(event);
-}
-
+// ✅ tree 텍스트 기반 트리 구조 DOM 생성
 function renderTreeTextToDOM(treeText) {
     const lines = treeText
         .split("\n")
         .filter((line) => line.trim() !== "")
         .map((line) => {
-            const match = line.match(/^([│\s]*)([├└]── )?(.*)$/)
-            const depth = (match[1].match(/│|    /g) || []).length
-            const name = match[3].trim()
-            return { depth, name }
-        })
+            const match = line.match(/^([│\s]*)([├└]── )?(.*)$/);
+            const depth = (match[1].match(/│|    /g) || []).length;
+            const name = match[3].trim();
+            return { depth, name };
+        });
 
-    const root = document.createElement("div")
-    const stack = [{ depth: -1, element: root }]
+    const root = document.createElement("div");
+    const stack = [{ depth: -1, element: root }];
 
     for (const { depth, name } of lines) {
-        const isFile = /\.[a-z0-9]+$/i.test(name)
-
-        const div = document.createElement("div")
-        div.className = "tree-item"
-        div.textContent = `${isFile ? "📄" : "📁"} ${name}`
+        const isFile = /\.[a-z0-9]+$/i.test(name);
+        const div = document.createElement("div");
+        div.className = "tree-item";
+        div.textContent = `${isFile ? "📄" : "📁"} ${name}`;
 
         while (stack.length && stack[stack.length - 1].depth >= depth) {
-            stack.pop()
+            stack.pop();
         }
 
-        const parent = stack[stack.length - 1].element
-        parent.appendChild(div)
-        stack.push({ depth, element: div })
+        const parent = stack[stack.length - 1].element;
+        parent.appendChild(div);
+        stack.push({ depth, element: div });
     }
 
     return root;
