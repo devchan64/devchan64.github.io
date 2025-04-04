@@ -11,10 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const d2 = new D2(); // D2 인스턴스 생성
 
     // 🔧 공통: 다이어그램 원본 보기 toggle 생성 함수
-    function addSourceCodeButton(block, originalCode) {
+    function addSourceCodeButton(block, originalCode, text) {
         const details = document.createElement("details");
         const summary = document.createElement("summary");
-        summary.innerText = "원본 보기";
+        summary.innerText = text;
 
         const pre = document.createElement("pre");
         const code = document.createElement("code");
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         mePre.innerHTML = originalCode;
         block.parentElement.insertBefore(mePre, block);
 
-        addSourceCodeButton(mePre, originalCode);
+        addSourceCodeButton(mePre, originalCode, "원본보기(mermaid)");
         block.remove();
 
     });
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const svgElement = d2Diagram.querySelector('svg');
         if (svgElement) svgElement.classList.add("diagram"); // 확대용 class 추가
 
-        addSourceCodeButton(d2Diagram, d2Code); // 원본 보기 추가
+        addSourceCodeButton(d2Diagram, d2Code, "원본보기(d2)"); // 원본 보기 추가
         handleRenderedElement(d2Diagram);
     }
 
