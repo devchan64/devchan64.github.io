@@ -699,6 +699,7 @@ date: "2025-04-03"
 tags: ["DX", "운영", "브랜드"]
 author: "팀 브랜딩"
 description: "우리가 운영하는 브랜드 DX 전략과 시스템 구조에 대한 설명입니다."
+---
 
 ## 개요
 
@@ -808,7 +809,6 @@ flowchart TD
 
     style H fill:#f8f9fa,stroke:#ccc
     style I fill:#f1f5f9,stroke:#ccc
-
 ```
 
 ## 9.9 기술 구성 종합 해석

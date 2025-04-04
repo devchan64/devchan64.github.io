@@ -67,10 +67,7 @@ End-to-End 기반의 서비스 구조에서는 장치, 앱, 인증 시스템, �
 
 아래 도식은 전체 시스템의 계층 구성과 메시지 흐름을 시각적으로 표현한 것입니다. 사용자 요청 및 외부 이벤트가 어떻게 유입되고 처리되는지를 구조적 관점에서 설명합니다.
 
-![d2.png](/assets/images/2024-11-01-message-architecture-and-operational-design-d2.png)
-
 ```d2
-layout: elk
 direction: right
 
 device.hw -- service_platform.auth -- service_platform.core

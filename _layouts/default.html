@@ -12,43 +12,46 @@
   <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 
+<script type="module" src="/assets/js/diagram.js"></script>
+
 <body class="container">
-    <header class="layout-header">
-      <h1>{{ site.title }}</h1>
-      {% unless page.url == "/" %}
-      <a href="/" class="button">홈으로 가기</a>
-      {% endunless %}
-    </header>    
-    <main>      
+  <header class="layout-header">
+    <h1>{{ site.title }}</h1>
+    {% unless page.url == "/" %}
+    <a href="/" class="button">홈으로 가기</a>
+    {% endunless %}
+  </header>
+  <main>
 
-      {{ content }}
+    {{ content }}
 
-      {% unless page.url == "/" %}
-      <a href="/" class="button">홈으로 가기</a>
-      {% endunless %}
+    {% unless page.url == "/" %}
+    <a href="/" class="button">홈으로 가기</a>
+    {% endunless %}
 
-      {% if page.tags %}
-      <div class="tags">
-        <strong>Tags:</strong>
-        {% for tag in page.tags %}
-        <a class="tag" href="/?tag={{ tag | uri_escape }}">{{ tag }}</a>
-        {% endfor %}
-      </div>
+    {% if page.tags %}
+    <div class="tags">
+      <strong>Tags:</strong>
+      {% for tag in page.tags %}
+      <a class="tag" href="/?tag={{ tag | uri_escape }}">{{ tag }}</a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- 페이지네이션 추가 -->
+    <nav class="pagination">
+      {% if page.previous %}
+      <a class="prev" href="{{ page.previous.url | relative_url }}">&laquo; {{ page.previous.title }}</a>
       {% endif %}
+      {% if page.next %}
+      <a class="next" href="{{ page.next.url | relative_url }}">{{ page.next.title }} &raquo;</a>
+      {% endif %}
+    </nav>
 
-      <!-- 페이지네이션 추가 -->
-      <nav class="pagination">
-        {% if page.previous %}
-        <a class="prev" href="{{ page.previous.url | relative_url }}">&laquo; {{ page.previous.title }}</a>
-        {% endif %}
-        {% if page.next %}
-        <a class="next" href="{{ page.next.url | relative_url }}">{{ page.next.title }} &raquo;</a>
-        {% endif %}
-      </nav>
-
-    </main>
-    {% include navigation.html %}
-    {% include footer.html %}
+  </main>
+  {% include navigation.html %}
+  {% include footer.html %}
+  
 </body>
 
 </html>
