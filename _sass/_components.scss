@@ -45,7 +45,7 @@ table {
   color: #333;
   outline: 1px solid #A03A53;
   border-radius: 6px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 
 thead {
@@ -79,12 +79,12 @@ table caption {
   margin-top: 0.5em;
 }
 
-blockquote{
+blockquote {
   border-left: #b30057 3px solid;
   padding-left: 0.5rem;
   margin-block-start: 0.5em;
   margin-block-end: 0.5em;
-  margin-left : 1rem;
+  margin-left: 1rem;
 }
 
 a.tag {
@@ -96,26 +96,34 @@ a.tag {
 }
 
 /* SVG를 담을 컨테이너 스타일 */
-svg.diagram{
+svg.diagram {
   // pointer-events: none;
 }
 
 /* 확대된 상태의 스타일 */
 svg.diagram.enlarged {
-  width: 200%;  /* SVG를 2배로 확대 */
-  height: 200%; /* SVG를 2배로 확대 */
-  cursor: zoom-out;  /* 클릭하면 축소되는 느낌을 주기 위한 커서 스타일 */
+  width: 200%;
+  /* SVG를 2배로 확대 */
+  height: 200%;
+  /* SVG를 2배로 확대 */
+  cursor: zoom-out;
+  /* 클릭하면 축소되는 느낌을 주기 위한 커서 스타일 */
   display: block;
 }
 
 /* SVG를 담을 컨테이너 */
 .svg-container {
-  position: relative;  /* 부모 요소 기준으로 자식 요소 위치 설정 */
-  overflow-x: auto;  /* 가로 방향으로 스크롤 가능 */
+  position: relative;
+  /* 부모 요소 기준으로 자식 요소 위치 설정 */
+  overflow-x: auto;
+  /* 가로 방향으로 스크롤 가능 */
   // overflow-y: hidden; /* 세로 스크롤은 숨김 */
-  width: 100%;  /* 가로 크기는 그대로 유지 */
-  height: auto; /* 세로 크기는 내용에 맞춰 자동 설정 */
-  display: block;  /* 부모의 display 속성에 맞추어 block 설정 */
+  width: 100%;
+  /* 가로 크기는 그대로 유지 */
+  height: auto;
+  /* 세로 크기는 내용에 맞춰 자동 설정 */
+  display: block;
+  /* 부모의 display 속성에 맞추어 block 설정 */
 }
 
 /* 확대된 SVG를 담은 컨테이너 스타일 */
@@ -146,4 +154,26 @@ svg.diagram.enlarged {
   border-left: 2px solid #ccc;
   border-bottom: 2px solid #ccc;
   border-radius: 0 0 0 2px;
+}
+
+/* _sass/_highlight_overrides.scss 또는 <style> 태그 */
+
+.highlight .k {
+  color: #888;
+}
+
+.highlight .nl,
+.highlight .na {
+  color: #2E7D32;
+  font-weight: bold;
+}
+
+.highlight .kc {
+  color: #FF9800;
+  font-weight: bold;
+}
+
+.highlighter-rouge {
+  color: #BB2649;
+  font-weight: bold;
 }

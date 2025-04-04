@@ -57,22 +57,26 @@ tags: [프로젝트]
 
 ### ▸ Before-After 흐름도 (네트워크 장애 시 처리 구조)
 
-```
-plaintext
-복사편집
-[Before]
-Disconnection 발생
- → 재연결 시도
- → 영상 미복구 / 사용자 CS 발생
- → 수동 처리
+```mermaid
+flowchart TD
+  subgraph Before["❌ Before"]
+    B1["Disconnection 발생"]
+    B2["재연결 시도"]
+    B3["영상 미복구 / 사용자 CS 발생"]
+    B4["수동 처리"]
 
-[After]
-Disconnection 발생
- → 재연결 시도
- → 감지 이벤트 발생
- → 시스템 자동복구
- → 사용자 무인식 상태로 정상 전환
+    B1 --> B2 --> B3 --> B4
+  end
 
+  subgraph After["✅ After"]
+    A1["Disconnection 발생"]
+    A2["재연결 시도"]
+    A3["감지 이벤트 발생"]
+    A4["시스템 자동복구"]
+    A5["사용자 무인식 상태로 정상 전환"]
+
+    A1 --> A2 --> A3 --> A4 --> A5
+  end
 ```
 
 ### ▸ 장애 발생 건수 차트

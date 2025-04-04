@@ -75,8 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelectorAll("code.language-tree").forEach(async (block) => {
         const treeText = block.textContent;
-        const output = treeTextToDOM(treeText);
-        console.log(output);
+        const output = renderTreeTextToDOM(treeText);
         block.parentElement.appendChild(output);
         block.remove();
     });
@@ -110,7 +109,7 @@ function triggerRenderEvent() {
     document.dispatchEvent(event);
 }
 
-function treeTextToDOM(treeText) {
+function renderTreeTextToDOM(treeText) {
     const lines = treeText
         .split("\n")
         .filter((line) => line.trim() !== "")
