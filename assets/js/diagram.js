@@ -1,6 +1,8 @@
 import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
 import { D2 } from 'https://esm.sh/@terrastruct/d2';
 
+mermaid.initialize({ startOnLoad: true });
+
 document.addEventListener("DOMContentLoaded", () => {
     const d2 = new D2();
 
@@ -24,19 +26,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const originalCode = block.textContent;
 
         // Mermaid SVG로 교체
-        await mermaid.init(undefined, block);
+        // await mermaid.init(undefined, block);
+        console.log("block", block);
+        const mePre = document.createElement('pre');
+        mePre.className="mermaid";
+        mePre.innerHTML=originalCode;
+        block.parentElement.insertBefore(mePre,block);        
 
-        const svgElement = block.querySelector('svg');  // svg 요소 찾기
-        svgElement.classList.add("diagram");  // className을 'diagram'으로 변경
-        const meDiagram = document.createElement('div');
-        // meDiagram.className = 'svg-container';  // 확대된 SVG를 담을 컨테이너
-        meDiagram.appendChild(svgElement);
-
-        const parentNode = block.parentElement;
-        parentNode.parentNode.insertBefore(meDiagram, parentNode);
-        parentNode.remove();
-
-        addSourceCodeButton(meDiagram, originalCode); // 공통 함수로 원본 보기 추가
+        addSourceCodeButton(mePre, originalCode);
+        block.remove();
 
         triggerRenderEvent();
     });
@@ -100,7 +98,7 @@ function addSvgClickEventListener() {
 
 // 다이어그램이나 콘텐츠가 동적으로 추가된 경우, 이미지 클릭 이벤트 리스너 추가
 document.addEventListener('rendered', () => {
-    addSvgClickEventListener();  // 동적으로 추가된 이미지에 대한 클릭 이벤트 추가
+    // addSvgClickEventListener();  // 동적으로 추가된 이미지에 대한 클릭 이벤트 추가
 });
 
 // 예시: 다이어그램이나 콘텐츠 렌더링 후 'rendered' 이벤트를 트리거
