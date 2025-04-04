@@ -111,35 +111,34 @@ function triggerRenderEvent() {
 }
 
 function treeTextToDOM(treeText) {
-        const lines = treeText
-          .split("\n")
-          .filter((line) => line.trim() !== "")
-          .map((line) => {
+    const lines = treeText
+        .split("\n")
+        .filter((line) => line.trim() !== "")
+        .map((line) => {
             const match = line.match(/^([│\s]*)([├└]── )?(.*)$/)
             const depth = (match[1].match(/│|    /g) || []).length
             const name = match[3].trim()
             return { depth, name }
-          })
-      
-        const root = document.createElement("div")
-        const stack = [{ depth: -1, element: root }]
-      
-        for (const { depth, name } of lines) {
-          const isFile = /\.[a-z0-9]+$/i.test(name)
-      
-          const div = document.createElement("div")
-          div.className = "tree-item"
-          div.textContent = `${isFile ? "📄" : "📁"} ${name}`
-      
-          while (stack.length && stack[stack.length - 1].depth >= depth) {
+        })
+
+    const root = document.createElement("div")
+    const stack = [{ depth: -1, element: root }]
+
+    for (const { depth, name } of lines) {
+        const isFile = /\.[a-z0-9]+$/i.test(name)
+
+        const div = document.createElement("div")
+        div.className = "tree-item"
+        div.textContent = `${isFile ? "📄" : "📁"} ${name}`
+
+        while (stack.length && stack[stack.length - 1].depth >= depth) {
             stack.pop()
-          }
-      
-          const parent = stack[stack.length - 1].element
-          parent.appendChild(div)
-          stack.push({ depth, element: div })
         }
-      
-        return root;
-      }
-      
+
+        const parent = stack[stack.length - 1].element
+        parent.appendChild(div)
+        stack.push({ depth, element: div })
+    }
+
+    return root;
+}
