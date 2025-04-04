@@ -59,3 +59,12 @@ ul li p {
 p {
   margin-bottom: 15px;
 }
+
+a {
+  color: #BB2649; /* 또는 원하는 색상 지정 */
+  text-decoration: none;
+}
+
+a:visited {
+  color: #BB2649; /* 또는 위와 동일한 색상 */
+}
