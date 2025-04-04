@@ -156,8 +156,6 @@ svg.diagram.enlarged {
   border-radius: 0 0 0 2px;
 }
 
-/* _sass/_highlight_overrides.scss 또는 <style> 태그 */
-
 .highlight .k {
   color: #888;
 }
@@ -174,6 +172,6 @@ svg.diagram.enlarged {
 }
 
 .highlighter-rouge {
-  color: #BB2649;
+  // color: #BB2649;
   font-weight: bold;
 }
