@@ -151,6 +151,34 @@ tags: [조직문화, 프로젝트]
 
 브랜드 페이지 운영은 다음과 같은 단계적 흐름으로 구성된다:
 
+```mermaid
+flowchart TD
+  subgraph 디자인
+    Figma[Figma<br/>브랜드 가이드 & UI 컴포넌트 정의]
+  end
+
+  subgraph 개발
+    Tailwind[개발자<br/>TailwindCSS + Astro로 UI 구현]
+  end
+
+  subgraph 콘텐츠_작성
+    Notion[Notion<br/>콘텐츠 작성]
+  end
+
+  subgraph 자동화
+    Watcher[자동 감시 시스템<br/>Markdown 변환 및 Git 커밋]
+    PR[자동 PR 생성 및 Preview 배포]
+  end
+
+  subgraph 리뷰_및_배포
+    Review[PR 검토 및 승인]
+    Merge[main 브랜치 병합 및 정식 배포]
+  end
+
+  Figma --> Tailwind --> Merge
+  Notion --> Watcher --> PR --> Review --> Merge
+```
+
 1. 디자이너는 Figma를 통해 브랜드 가이드 및 UI 컴포넌트를 정의한다.
 2. 개발자는 TailwindCSS를 활용하여 해당 디자인을 Astro 기반의 UI 컴포넌트로 구현한다.
 3. 콘텐츠 운영자는 Notion에서 콘텐츠를 작성하고, 이를 자동화된 감시 시스템이 감지해 Markdown으로 변환한다.
