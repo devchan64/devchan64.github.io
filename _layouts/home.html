@@ -18,7 +18,7 @@
   </header>
   <main class="post-content">    
     <h2># Recent Posts</h2>
-    <ul id="post-list"></ul>
+    <ul id="post-list" class="post-list-grid"></ul>
     <button id="load-more" class="button">더 보기</button>
   </main>
 
@@ -42,7 +42,7 @@
   <script>
     let posts = [];
     let currentIndex = 0;
-    const postsPerPage = 5;
+    const postsPerPage = 4;
     const tagsSet = new Set();
 
     function getQueryParam(name) {

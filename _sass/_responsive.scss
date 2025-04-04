@@ -1,26 +1,34 @@
+/* 모바일 */
 @media (max-width: 768px) {
     .container {
-      width: 95%;
+        width: 95%;
     }
-  
+
     button {
-      width: 100%;
+        width: 100%;
     }
-  }
-  
-  @media (max-width: 1024px) and (min-width: 769px) {
+
+    #post-list {
+        display: block;
+    }
+
+    #post-list li {
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
     .container {
-      width: 90%;
+        width: 90%;
     }
-  }
-  
-  @media (min-width: 1025px) {
+}
+
+@media (min-width: 1025px) {
     .container {
-      width: 85%;
+        width: 85%;
     }
-  
+
     button {
-      width: auto;
+        width: auto;
     }
-  }
-  
+}
