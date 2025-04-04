@@ -42,6 +42,8 @@
     <nav class="pagination">
       {% if page.previous %}
       <a class="prev" href="{{ page.previous.url | relative_url }}">&laquo; {{ page.previous.title }}</a>
+      {% else %}
+      <div></div>
       {% endif %}
       {% if page.next %}
       <a class="next" href="{{ page.next.url | relative_url }}">{{ page.next.title }} &raquo;</a>
