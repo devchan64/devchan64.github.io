@@ -4,7 +4,7 @@ import subprocess
 from pathlib import Path
 import re
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key = os.getenv("OPENAPIKEY")
 
 def split_front_matter(text):
     match = re.match(r'^(---\n.*?\n---\n)(.*)', text, re.DOTALL)

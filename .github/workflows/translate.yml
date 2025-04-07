@@ -23,7 +23,7 @@ jobs:
 
       - name: Translate modified posts
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAIAPIKEY }}
+          OPENAPIKEY: ${{ secrets.OPENAPIKEY }}
         run: python translate.py
 
       - name: Commit translated posts
