@@ -127,7 +127,6 @@ def main():
             f.write(new_front + translated_body)
 
         print(f"[OK] Translated: {output_path}")
-        break  # 🔄 한 번만 테스트 시 break 유지
 
 if __name__ == "__main__":
     main()

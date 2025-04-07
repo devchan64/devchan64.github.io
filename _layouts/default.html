@@ -40,15 +40,18 @@
 
     <!-- 페이지네이션 추가 -->
     <nav class="pagination">
-      {% if page.previous %}
-      <a class="prev" href="{{ page.previous.url | relative_url }}">&laquo; {{ page.previous.title }}</a>
+      {% assign is_english = page.url contains '/en/' %}
+    
+      {% if page.previous and (page.previous.url contains '/en/') == is_english %}
+        <a class="prev" href="{{ page.previous.url | relative_url }}">&laquo; {{ page.previous.title }}</a>
       {% else %}
-      <div></div>
+        <div></div>
       {% endif %}
-      {% if page.next %}
-      <a class="next" href="{{ page.next.url | relative_url }}">{{ page.next.title }} &raquo;</a>
+    
+      {% if page.next and (page.next.url contains '/en/') == is_english %}
+        <a class="next" href="{{ page.next.url | relative_url }}">{{ page.next.title }} &raquo;</a>
       {% endif %}
-    </nav>
+    </nav>    
 
   </main>
   {% include navigation.html %}
