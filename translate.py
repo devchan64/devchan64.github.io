@@ -67,13 +67,10 @@ def translate_title(text: str) -> str:
 def generate_permalink(post: Path) -> str:
     # 파일명 기반: 2024-04-01-something.md → date, slug 추출
     filename = post.stem  # '2024-04-01-title'
-    date_part, *slug_parts = filename.split('-')
-    if len(slug_parts) < 2:
+    year, month, day, *slug_parts = filename.split('-')
+    if len(slug_parts) < 1:
         raise ValueError(f"Invalid post filename format: {post.name}")
-
-    year, month, day = filename[:10].split('-')
     slug = '-'.join(slug_parts)
-
     permalink = f"/en/{year}/{month}/{day}/{slug}.html"
     return permalink
 
@@ -117,7 +114,7 @@ def main():
         # 🔁 본문 번역
         translated_body = translate_body(body)
 
-        notice = "> `gpt-4-turbo` has translated this article into English.\n\n"
+        notice = "> `gpt-4-turbo` has translated this article into English.\n\n--\n\n"
         translated_body = notice + translated_body
 
         new_front = reconstruct_front_matter(front_dict)
@@ -126,7 +123,7 @@ def main():
         with open(output_path, "w", encoding="utf-8") as f:
             f.write(new_front + translated_body)
 
-        print(f"[OK] Translated: {output_path}")
+        print(f"[OK] Translated: {output_path}")        
 
 if __name__ == "__main__":
     main()
