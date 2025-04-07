@@ -6,6 +6,9 @@ on:
       - '_posts/*.md'
   workflow_dispatch:  # 수동 실행도 가능
 
+permissions:
+  contents: write
+
 jobs:
   translate:
     runs-on: ubuntu-latest
