@@ -1,3 +1,3 @@
 # IoT Tech Generalist DEVCHAN
 
-- Markdown, Jekyll, sass
+- Markdown, Jekyll, sass(scss), supabase
