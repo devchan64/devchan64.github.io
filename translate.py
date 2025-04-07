@@ -1,10 +1,9 @@
 import os
-import openai
-import subprocess
+from openai import OpenAI
 from pathlib import Path
 import re
 
-openai.api_key = os.getenv("OPENAPIKEY")
+client = OpenAI(api_key=os.getenv("OPENAPIKEY"))
 
 def split_front_matter(text):
     match = re.match(r'^(---\n.*?\n---\n)(.*)', text, re.DOTALL)
@@ -17,11 +16,13 @@ def translate_text(text):
         "Do not translate code or filenames.\n\n"
         f"{text}"
     )
-    response = openai.ChatCompletion.create(
+
+    response = client.chat.completions.create(
         model="gpt-4-turbo",
         messages=[{"role": "user", "content": prompt}],
         temperature=0.7
     )
+
     return response.choices[0].message.content.strip()
 
 def get_untranslated_md_files():
@@ -55,6 +56,7 @@ def main():
             f.write(front + translated_body)
 
         print(f"[OK] Translated: {output_path}")
+        break
 
 
 if __name__ == "__main__":
