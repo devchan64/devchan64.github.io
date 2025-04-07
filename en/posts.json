@@ -1,0 +1,17 @@
+---
+layout: null
+permalink: /en/posts.json
+---
+
+[
+{% assign en_posts = site.posts | where_exp: "post", "post.path contains '_posts/en/'" %}
+{% for post in en_posts %}
+  {
+    "title": "{{ post.title | escape }}",
+    "url": "{{ post.url }}",
+    "date": "{{ post.date | date_to_xmlschema }}",
+    "excerpt": "{{ post.content | strip_html | normalize_whitespace | truncate: 200 | escape }}",
+    "tags": {{ post.tags | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+{% endfor %}
+]

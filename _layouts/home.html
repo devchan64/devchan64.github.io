@@ -16,7 +16,7 @@
   <header class="layout-header">
     <h1>{{ site.title }}</h1>
   </header>
-  <main class="post-content">    
+  <main class="post-content">
     <h2># Recent Posts</h2>
     <ul id="post-list" class="post-list-grid"></ul>
     <button id="load-more" class="button">더 보기</button>
@@ -31,6 +31,9 @@
     const postsPerPage = 4;
     const tagsSet = new Set();
 
+    const isEnglish = window.location.pathname.startsWith("/en");
+    const fullUrl = (url) => isEnglish ? `/en${url}` : url;
+
     function getQueryParam(name) {
       const url = new URL(window.location.href);
       return url.searchParams.get(name);
@@ -38,8 +41,14 @@
 
     async function loadPosts() {
       if (posts.length === 0) {
-        const res = await fetch('/posts.json');
+        const isEnglish = window.location.pathname.startsWith("/en");
+        // console.log("isEnglish", isEnglish);
+        const postsJsonPath = isEnglish ? "/en/posts.json" : "/posts.json";
+
+        const res = await fetch(postsJsonPath);
         posts = await res.json();
+
+        // console.log("posts", posts);
 
         posts.forEach(post => {
           post.tags.forEach(tag => tagsSet.add(tag));
@@ -47,19 +56,24 @@
 
         renderFilters();
       }
-      
+
       loadFilteredOrAllPosts();
     }
 
     function renderFilters() {
+      const isEnglish = window.location.pathname.startsWith("/en");
       const tagList = document.getElementById('tag-list');
+      // tagList.innerHTML = ''; // 기존 태그 초기화
+
+      console.log("[tagSet]", tagsSet);
 
       tagsSet.forEach(tag => {
         const li = document.createElement('li');
-        li.innerHTML = `<a href="?tag=${encodeURIComponent(tag)}">${tag}</a>`;
-        tagList.appendChild(li);
+          li.innerHTML = `<a href="?tag=${encodeURIComponent(tag)}">${tag}</a>`;
+          tagList.appendChild(li);
       });
     }
+
 
     function renderPosts(list = posts, append = false) {
       const container = document.getElementById('post-list');
@@ -70,10 +84,12 @@
       }
 
       const nextPosts = list.slice(currentIndex, currentIndex + postsPerPage);
+
       nextPosts.forEach(post => {
+        console.log(post.title);
         const li = document.createElement('li');
         li.innerHTML = `
-      <a href="${post.url}">${post.title}</a> - <small>${new Date(post.date).toLocaleDateString()}</small>
+      <a href="${fullUrl(post.url)}">${post.title}</a> - <small>${new Date(post.date).toLocaleDateString()}</small>
       <p>${post.excerpt}</p>
       <div class="meta">
         <span>🏷️ ${post.tags.join(', ')}</span>
@@ -89,7 +105,7 @@
     }
 
     function loadFilteredOrAllPosts(append = false) {
-      const selectedTag = getQueryParam('tag');      
+      const selectedTag = getQueryParam('tag');
       if (selectedTag) {
         const filtered = posts.filter(post => post.tags.includes(selectedTag));
         console.log("filtered", filtered);

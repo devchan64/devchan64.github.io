@@ -3,6 +3,7 @@ layout: post
 title: "해결하고 싶은 문제들"
 date: 2024-04-01
 tags: [설계철학]
+permalink: /en/2024/04/01/solving-communication-issues.html
 ---
 ## "Why Does This Issue Keep Repeating?"
 
