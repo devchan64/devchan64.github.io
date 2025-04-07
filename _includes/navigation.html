@@ -1,20 +1,26 @@
-{% if page.url == "/" or page.url == "/en/" %}
+{% if is_home %}
 <nav id="filters">
   <ul id="tag-list"></ul>
 </nav>
 {% endif %}
+
 <nav class="main-nav">
   <ul>
-    <li><a href="/">홈</a></li>
-    <li><a href="/guestbook/">방명록</a></li>
-    {% if page.url contains '/en/' %}
-      {% assign is_english = true %}
-    {% else %}
-      {% assign is_english = false %}
-    {% endif %}
-    <li><a href="{% if is_english == true %}{{ page.url | replace:'/en','' }}{% else %}/en{{ page.url }}{% endif %}">
-        {% if is_english == true %}🇰🇷 한국어{% else %}🇺🇸 English{% endif %}
+    <li>
+      <a href="{% if is_english %}/en/{% else %}/{% endif %}">
+        Home
       </a>
     </li>
+
+    <li>
+      <a href="{% if is_english %}/en/guestbook/{% else %}/guestbook/{% endif %}">
+        guestbook
+      </a>
+    </li>
+
+    <li><a href="{% if is_english == true %}{{ page.url | replace:'/en','' }}{% else %}/en{{ page.url }}{% endif %}">
+      {% if is_english == true %}🇰🇷 한국어{% else %}🇺🇸 English{% endif %}
+    </a>
+  </li>
   </ul>
 </nav>

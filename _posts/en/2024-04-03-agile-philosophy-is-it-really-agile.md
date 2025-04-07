@@ -1,7 +1,7 @@
 ---
 date: 2024-04-03
 layout: post
-permalink: /en/2024/04/03/04-03-agile-philosophy-is-it-really-agile.html
+permalink: /en/2024/04/03/agile-philosophy-is-it-really-agile.html
 tags:
 - Agile
 - Leadership

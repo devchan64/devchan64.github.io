@@ -1,7 +1,7 @@
 ---
 date: 2025-03-10
 layout: post
-permalink: /en/2025/03/10/03-10-why_we_should_delete_code.html
+permalink: /en/2025/03/10/why_we_should_delete_code.html
 tags:
 - Design Philosophy
 - Organizational Culture

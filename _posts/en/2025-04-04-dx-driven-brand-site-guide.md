@@ -1,10 +1,10 @@
 ---
 date: 2025-04-04
 layout: post
-permalink: /en/2025/04/04/04-04-dx-driven-brand-site-guide.html
+permalink: /en/2025/04/04/dx-driven-brand-site-guide.html
 tags:
 - Organizational Culture
-- The translation of the Korean word "프로젝트" to English is "Project."
+- Project
 title: '"Separating Design and Content, Operating with DX"'
 ---
 > `gpt-4-turbo` has translated this article into English.

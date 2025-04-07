@@ -1,7 +1,7 @@
 ---
 date: 2024-10-15
 layout: post
-permalink: /en/2024/10/15/10-15-multi-tenant-workspace-data-management.html
+permalink: /en/2024/10/15/multi-tenant-workspace-data-management.html
 tags:
 - Project
 title: Multi-Tenant Based Data/Workspace Management Service

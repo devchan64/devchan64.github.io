@@ -1,0 +1,10 @@
+{% if page.url contains '/en/' %}
+{% assign is_english = true %}
+{% else %}
+{% assign is_english = false %}
+{% endif %}
+{% if page.url == "/" or page.url == "/en/" %}
+{% assign is_home = true %}
+{% else %}
+{% assign is_home = false %}
+{% endif %}

@@ -1,7 +1,7 @@
 ---
 date: 2025-04-01
 layout: post
-permalink: /en/2025/04/01/04-01-philosophy-in-ddd-communication.html
+permalink: /en/2025/04/01/philosophy-in-ddd-communication.html
 tags:
 - Design Philosophy
 - Language Alignment

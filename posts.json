@@ -5,12 +5,14 @@ permalink: /posts.json
 
 [
 {% for post in site.posts %}
-  {
-    "title": "{{ post.title | escape }}",
-    "url": "{{ post.url }}",
-    "date": "{{ post.date | date_to_xmlschema }}",
-    "excerpt": "{{ post.content | strip_html | normalize_whitespace | truncate: 200 | escape }}",
-    "tags": {{ post.tags | jsonify }}
-  }{% unless forloop.last %},{% endunless %}
+  {% unless post.path contains '_posts/en/' %}
+    {
+      "title": "{{ post.title | escape }}",
+      "url": "{{ post.url }}",
+      "date": "{{ post.date | date_to_xmlschema }}",
+      "excerpt": "{{ post.content | strip_html | normalize_whitespace | truncate: 200 | escape }}",
+      "tags": {{ post.tags | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+  {% endunless %}
 {% endfor %}
 ]

@@ -1,7 +1,7 @@
 ---
 date: 2025-03-20
 layout: post
-permalink: /en/2025/03/20/03-20-voiding_technical_debt_with_deletable_code.html
+permalink: /en/2025/03/20/voiding_technical_debt_with_deletable_code.html
 tags:
 - Project
 - Technical Debt

@@ -1,62 +1,95 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="{% if page.url contains '/en/' %}en{% else %}ko{% endif %}">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page.title }}</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Noto+Sans+KR&family=Fira+Code&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Noto+Sans+KR&family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 
 <script type="module" src="/assets/js/diagram.js"></script>
 
+{% include common.html %}
+
 <body class="container">
+
   <header class="layout-header">
     <h1>{{ site.title }}</h1>
-    {% unless page.url == "/" %}
-    <a href="/" class="button">홈으로 가기</a>
+    {% unless page.url == "/" or page.url == "/en/" %}
+      <a href="{% if is_english %}/en/{% else %}/{% endif %}" class="button">
+        {% if is_english %}Go Home{% else %}홈으로 가기{% endif %}
+      </a>
     {% endunless %}
   </header>
+
   <main>
 
     {{ content }}
 
-    {% unless page.url == "/" %}
-    <a href="/" class="button">홈으로 가기</a>
+    {% unless page.url == "/" or page.url == "/en/" %}
+      <a href="{% if is_english %}/en/{% else %}/{% endif %}" class="button">
+        {% if is_english %}Go Home{% else %}홈으로 가기{% endif %}
+      </a>
     {% endunless %}
 
     {% if page.tags %}
     <div class="tags">
-      <strong>Tags:</strong>
+      <strong>{% if is_english %}Tags:{% else %}태그:{% endif %}</strong>
       {% for tag in page.tags %}
-      <a class="tag" href="/?tag={{ tag | uri_escape }}">{{ tag }}</a>
+        <a class="tag" href="{% if is_english %}/en/?tag={{ tag | uri_escape }}{% else %}/?tag={{ tag | uri_escape }}{% endif %}">{{ tag }}</a>
       {% endfor %}
     </div>
     {% endif %}
 
-    <!-- 페이지네이션 추가 -->
-    <nav class="pagination">
-      {% assign is_english = page.url contains '/en/' %}
+    <!-- Pagination -->
+     
+    {% if is_english %}
+      {% assign lang_posts = site.posts | where_exp: "post", "post.path contains '_posts/en/'" %}
+    {% else %}
+      {% assign lang_posts = "" | split: "" %}
+      {% for post in site.posts %}
+        {% unless post.url contains '/en/' %}
+          {% assign lang_posts = lang_posts | push: post %}
+        {% endunless %}
+      {% endfor %}
+    {% endif %}
+
+    {% assign current_index = nil %}
+    {% for p in lang_posts %}
+      {% if p.url == page.url %}
+        {% assign current_index = forloop.index0 %}
+      {% endif %}
+    {% endfor %}
     
-      {% if page.previous and (page.previous.url contains '/en/') == is_english %}
-        <a class="prev" href="{{ page.previous.url | relative_url }}">&laquo; {{ page.previous.title }}</a>
+    {% if current_index != nil %}
+      {% assign prev_index = current_index | minus: 1 %}
+      {% assign next_index = current_index | plus: 1 %}
+      {% assign previous_post = lang_posts[prev_index] %}
+      {% assign next_post = lang_posts[next_index] %}
+    {% endif %}
+
+    {{current_index}}
+    {{prev_index}}
+    {{next_index}}
+  
+    <nav class="pagination">
+      {% if previous_post %}
+        <a class="prev" href="{{ next_post.url | relative_url }}">&laquo; {{ previous_post.title }}</a>
       {% else %}
         <div></div>
       {% endif %}
-    
-      {% if page.next and (page.next.url contains '/en/') == is_english %}
-        <a class="next" href="{{ page.next.url | relative_url }}">{{ page.next.title }} &raquo;</a>
+      {% if next_post %}
+        <a class="next" href="{{ next_post.url | relative_url  }}">{{ next_post.title }} &raquo;</a>
       {% endif %}
-    </nav>    
+    </nav>
 
   </main>
+
   {% include navigation.html %}
   {% include footer.html %}
-  
 </body>
-
 </html>

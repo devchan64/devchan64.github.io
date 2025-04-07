@@ -11,7 +11,7 @@
     integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="/assets/css/main.css">
 </head>
-
+{% include common.html %}
 <body class="container">
   <header class="layout-header">
     <h1>{{ site.title }}</h1>
@@ -29,10 +29,17 @@
     let posts = [];
     let currentIndex = 0;
     const postsPerPage = 4;
+    let currentPage = 1;
     const tagsSet = new Set();
+    
 
     const isEnglish = window.location.pathname.startsWith("/en");
     const fullUrl = (url) => isEnglish ? `/en${url}` : url;
+
+    function getPaginatedPosts(list) {
+      const start = (currentPage - 1) * postsPerPage;
+      return list.slice(start, start + postsPerPage);
+    }
 
     function getQueryParam(name) {
       const url = new URL(window.location.href);

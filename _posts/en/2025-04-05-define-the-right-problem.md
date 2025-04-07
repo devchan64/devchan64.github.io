@@ -1,7 +1,7 @@
 ---
 date: 2025-04-05
 layout: post
-permalink: /en/2025/04/05/04-05-define-the-right-problem.html
+permalink: /en/2025/04/05/define-the-right-problem.html
 tags:
 - Design Philosophy
 title: Defining the Problem – Distinguish Between Real and Fake Issues

@@ -1,7 +1,7 @@
 ---
 date: 2024-10-31
 layout: post
-permalink: /en/2024/10/31/10-31-mono-repo-aws-infra-design-guidelines.html
+permalink: /en/2024/10/31/mono-repo-aws-infra-design-guidelines.html
 tags:
 - Project
 - Design Philosophy

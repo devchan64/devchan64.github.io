@@ -1,9 +1,9 @@
 ---
 date: 2024-11-01
 layout: post
-permalink: /en/2024/11/01/11-01-message-architecture-and-operational-design.html
+permalink: /en/2024/11/01/message-architecture-and-operational-design.html
 tags:
-- The translation of the Korean word "프로젝트" to English is "Project."
+- Project
 - DevOps
 title: '"Message-Based Architecture and Operations-Centric Design"'
 ---

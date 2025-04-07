@@ -1,7 +1,7 @@
 ---
 date: 2025-01-10
 layout: post
-permalink: /en/2025/01/10/01-10-knowledge-base-importance.html
+permalink: /en/2025/01/10/knowledge-base-importance.html
 tags:
 - Knowledge Base
 - Organizational Culture

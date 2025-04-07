@@ -1,7 +1,7 @@
 ---
 date: 2025-04-02
 layout: post
-permalink: /en/2025/04/02/04-02-getting-started-with-digital-transformation-in-our-team.html
+permalink: /en/2025/04/02/getting-started-with-digital-transformation-in-our-team.html
 tags:
 - DevOps
 - Organizational Culture

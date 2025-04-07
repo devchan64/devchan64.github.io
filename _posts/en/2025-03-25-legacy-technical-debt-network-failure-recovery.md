@@ -1,9 +1,9 @@
 ---
 date: 2025-03-26
 layout: post
-permalink: /en/2025/03/25/03-25-legacy-technical-debt-network-failure-recovery.html
+permalink: /en/2025/03/25/legacy-technical-debt-network-failure-recovery.html
 tags:
-- The translation of the Korean word "프로젝트" to English is "Project."
+- Project
 title: '"Strategic Solutions to Network Failures by Addressing Legacy Technical Debt"'
 ---
 > `gpt-4-turbo` has translated this article into English.

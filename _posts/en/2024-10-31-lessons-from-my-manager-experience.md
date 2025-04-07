@@ -1,7 +1,7 @@
 ---
 date: 2024-10-31
 layout: post
-permalink: /en/2024/10/31/10-31-lessons-from-my-manager-experience.html
+permalink: /en/2024/10/31/lessons-from-my-manager-experience.html
 tags:
 - Leadership
 - Organizational Culture

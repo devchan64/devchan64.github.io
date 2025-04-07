@@ -64,7 +64,7 @@ def translate_title(text: str) -> str:
     return response.choices[0].message.content.strip()
 
 
-def generate_permalink(post: Path, front_dict: dict) -> str:
+def generate_permalink(post: Path) -> str:
     # 파일명 기반: 2024-04-01-something.md → date, slug 추출
     filename = post.stem  # '2024-04-01-title'
     date_part, *slug_parts = filename.split('-')
@@ -111,7 +111,7 @@ def main():
             front_dict["tags"] = translate_tags(front_dict["tags"])
 
         # permalink 자동 삽입
-        front_dict["permalink"] = generate_permalink(path, front_dict)
+        front_dict["permalink"] = generate_permalink(path)
 
 
         # 🔁 본문 번역

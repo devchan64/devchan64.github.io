@@ -1,9 +1,9 @@
 ---
 date: 2024-10-15
 layout: post
-permalink: /en/2024/10/15/10-15-data-driven-devops-concept.html
+permalink: /en/2024/10/15/data-driven-devops-concept.html
 tags:
-- The translation of the Korean word "프로젝트" to English is "Project."
+- Project
 - Organizational Culture
 title: Data-Driven DevOps Concepts
 ---

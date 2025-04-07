@@ -1,7 +1,7 @@
 ---
 date: 2025-04-02
 layout: post
-permalink: /en/2025/04/02/04-02-data-driven-solutions-in-siloed-organizations.html
+permalink: /en/2025/04/02/data-driven-solutions-in-siloed-organizations.html
 tags:
 - Project
 - DevOps

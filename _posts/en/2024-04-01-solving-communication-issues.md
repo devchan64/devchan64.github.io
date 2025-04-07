@@ -1,7 +1,7 @@
 ---
 date: 2024-04-01
 layout: post
-permalink: /en/2024/04/01/04-01-solving-communication-issues.html
+permalink: /en/2024/04/01/solving-communication-issues.html
 tags:
 - Design Philosophy
 title: Problems We Want to Solve

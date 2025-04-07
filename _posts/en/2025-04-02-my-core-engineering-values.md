@@ -1,7 +1,7 @@
 ---
 date: 2025-04-02
 layout: post
-permalink: /en/2025/04/02/04-02-my-core-engineering-values.html
+permalink: /en/2025/04/02/my-core-engineering-values.html
 tags:
 - Design Philosophy
 - Leadership
