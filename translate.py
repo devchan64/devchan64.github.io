@@ -24,25 +24,26 @@ def translate_text(text):
     )
     return response.choices[0].message.content.strip()
 
-def get_modified_md_files():
-    result = subprocess.run(
-        ["git", "diff", "--name-only", "HEAD^", "HEAD"],
-        capture_output=True, text=True
-    )
-    return [line for line in result.stdout.splitlines() if line.startswith("_posts/") and line.endswith(".md")]
+def get_untranslated_md_files():
+    src_dir = Path("_posts")
+    en_dir = src_dir / "en"
+    en_dir.mkdir(exist_ok=True)
+
+    untranslated_files = []
+
+    for md_file in src_dir.glob("*.md"):
+        translated_file = en_dir / md_file.name
+        if not translated_file.exists():
+            untranslated_files.append(md_file)
+
+    return untranslated_files
+
 
 def main():
-    files = get_modified_md_files()
-    for filepath in files:
-        path = Path(filepath)
+    files = get_untranslated_md_files()  # ✅ 변경됨
+    for path in files:
         output_path = path.parent / "en" / path.name
 
-        # 이미 번역된 파일이 존재하면 건너뜀
-        if output_path.exists():
-            print(f"[SKIP] Already translated: {output_path}")
-            continue
-
-        # 번역 수행
         with open(path, "r", encoding="utf-8") as f:
             content = f.read()
 
