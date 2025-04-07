@@ -19,21 +19,50 @@ def split_front_matter(text):
 def reconstruct_front_matter(front_dict):
     return "---\n" + yaml.dump(front_dict, allow_unicode=True) + "---\n"
 
-def translate_text(text):
+def translate_tags(tags: list) -> list:
+    translated = []
+    for tag in tags:
+        prompt = (
+            "Translate the following single-word tag or phrase to English, "
+            "suitable for use in a technical blog.\n\n"
+            f"{tag}"
+        )
+        response = client.chat.completions.create(
+            model="gpt-4-turbo",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.3,
+        )
+        translated.append(response.choices[0].message.content.strip())
+    return translated
+
+def translate_body(text: str) -> str:
     prompt = (
-        "Translate the following text from Korean to fluent English.\n"
+        "Translate the following Markdown document from Korean to fluent English.\n"
         "Preserve all Markdown formatting such as headings, bold, lists, and code blocks.\n"
         "Do not translate code or filenames.\n\n"
         f"{text}"
     )
-
     response = client.chat.completions.create(
         model="gpt-4-turbo",
         messages=[{"role": "user", "content": prompt}],
-        temperature=0.7
+        temperature=0.7,
     )
-
     return response.choices[0].message.content.strip()
+
+
+def translate_title(text: str) -> str:
+    prompt = (
+        "Translate the following phrase from Korean to fluent English.\n"
+        "It is a blog post title, so keep it concise and clear.\n\n"
+        f"{text}"
+    )
+    response = client.chat.completions.create(
+        model="gpt-4-turbo",
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0.4,
+    )
+    return response.choices[0].message.content.strip()
+
 
 def generate_permalink(post: Path, front_dict: dict) -> str:
     # 파일명 기반: 2024-04-01-something.md → date, slug 추출
@@ -75,19 +104,18 @@ def main():
 
         # 🔁 title 번역
         if "title" in front_dict:
-            front_dict["title"] = translate_text(front_dict["title"])
+            front_dict["title"] = translate_title(front_dict["title"])
 
-        # 🔁 tags 번역 (리스트)
+        # 태그 번역
         if "tags" in front_dict and isinstance(front_dict["tags"], list):
-            translated_tags = [translate_text(tag) for tag in front_dict["tags"]]
-            front_dict["tags"] = translated_tags
+            front_dict["tags"] = translate_tags(front_dict["tags"])
 
         # permalink 자동 삽입
         front_dict["permalink"] = generate_permalink(path, front_dict)
 
 
         # 🔁 본문 번역
-        translated_body = translate_text(body)
+        translated_body = translate_body(body)
 
         notice = "> `gpt-4-turbo` has translated this article into English.\n\n"
         translated_body = notice + translated_body

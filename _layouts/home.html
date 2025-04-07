@@ -65,7 +65,7 @@
       const tagList = document.getElementById('tag-list');
       // tagList.innerHTML = ''; // 기존 태그 초기화
 
-      console.log("[tagSet]", tagsSet);
+      // console.log("[tagSet]", tagsSet);
 
       tagsSet.forEach(tag => {
         const li = document.createElement('li');
@@ -86,10 +86,10 @@
       const nextPosts = list.slice(currentIndex, currentIndex + postsPerPage);
 
       nextPosts.forEach(post => {
-        console.log(post.title);
+        // console.log(post.title);
         const li = document.createElement('li');
         li.innerHTML = `
-      <a href="${fullUrl(post.url)}">${post.title}</a> - <small>${new Date(post.date).toLocaleDateString()}</small>
+      <a href="${post.url}">${post.title}</a> - <small>${new Date(post.date).toLocaleDateString()}</small>
       <p>${post.excerpt}</p>
       <div class="meta">
         <span>🏷️ ${post.tags.join(', ')}</span>
@@ -108,7 +108,7 @@
       const selectedTag = getQueryParam('tag');
       if (selectedTag) {
         const filtered = posts.filter(post => post.tags.includes(selectedTag));
-        console.log("filtered", filtered);
+        // console.log("filtered", filtered);
         renderPosts(filtered, append);
       } else {
         renderPosts(posts, append);
