@@ -15,13 +15,20 @@
 </head>
 <body class="container">
   
-  {% include header.html %}
+  {% include header.html %}  
 
   <main class="post-content">
     <h2># Recent Posts</h2>
     <ul id="post-list" class="post-list-grid"></ul>
     <button id="load-more" class="button">더 보기</button>
   </main>
+
+  <details>
+    <summary>📂 프로젝트 소개 펼치기 / 접기</summary>
+    <div class="info">
+      {{ content }}
+    </div>
+  </details>
 
   {% include navigation.html %}
   {% include footer.html %}
