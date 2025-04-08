@@ -1,6 +1,6 @@
 (() => {
   const API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4d3BuY3hmYXV6c3BucXd3YnhqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQwNDE2MjQsImV4cCI6MjA1OTYxNzYyNH0.1Pdrk8G9UjzTBdE5w__5led6LjeXIdN_8g5mDLIQnIg";
-  const API_URL = "https://dxwpncxfauzspnqwwbxj.supabase.co/rest/v1/views";
+  const API_URL = "https://dxwpncxfauzspnqwwbxj.supabase.co/functions/v1/safe-increment-view";
   const MAX_ITEMS = 10;
   const DAYS = 30;
 
@@ -38,16 +38,12 @@
   };  
 
   const fetchViewCounts = async () => {
-    const from = new Date();
-    from.setDate(from.getDate() - DAYS);
-    const fromStr = from.toISOString().slice(0, 10);
-
-    const res = await fetch(
-      `${API_URL}?select=slug,count&viewed_at=gte.${fromStr}&order=count.desc&limit=${MAX_ITEMS}`,
-      {
-        headers: { apikey: API_KEY },
+    const res = await fetch(`${API_URL}?days=${DAYS}&limit=${MAX_ITEMS}`,{
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${API_KEY}`
       }
-    );
+    });
     return res.json();
   };
 

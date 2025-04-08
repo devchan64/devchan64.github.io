@@ -10,21 +10,6 @@ create table if not exists public.views (
 -- RLS 활성화 (행 수준 보안)
 alter table public.views enable row level security;
 
--- 조회 권한: 익명 사용자에게 조회 허용 (read-only)
-create policy "Allow anon to read views"
-  on public.views
-  for select
-  to anon
-  using (true);
-
--- 전체 권한: 서비스 역할에게 전체 접근 허용 (insert/update/delete)
-create policy "Allow service role full access"
-  on public.views
-  for all
-  to service_role
-  using (true)
-  with check (true);
-
 -- UPSERT를 위한 제약 조건 (슬러그 단일성 보장)
 alter table public.views add constraint views_slug_unique unique (slug);
 
