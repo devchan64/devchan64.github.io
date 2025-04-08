@@ -10,8 +10,7 @@
   const normalizeSlug = (slug) => slug.replace(/^\/en(?=\/)/, "");
   const trimLabel = (text, max = 50) =>
     text.length > max ? text.slice(0, max) + "…" : text;
-  const inferTitle = (slug) =>
-    slug.split("/").pop().replace(/[-_]/g, " ").replace(/\.html$/, "");
+  const inferTitle = (slug) => slug;
 
   const getColors = (count) => {
     const base = [
@@ -33,8 +32,7 @@
     const slugToTitle = {};
   
     posts.forEach((post) => {
-      const slug = isEnglish ? `/en${post.url}` : post.url;
-      slugToTitle[slug] = post.title;
+      slugToTitle[post.url] = post.title;
     });
   
     return slugToTitle;

@@ -69,62 +69,64 @@ serve(async (req) => {
   }
 
   // POST: slug 수신 후 count 증가
-  try {
-    const { slug: rawSlug } = await req.json();
-    if (!rawSlug || typeof rawSlug !== "string") {
-      return new Response(JSON.stringify({ error: "Invalid slug" }), {
+  if (req.method === "POST") {
+    try {
+      const { slug: rawSlug } = await req.json();
+      if (!rawSlug || typeof rawSlug !== "string") {
+        return new Response(JSON.stringify({ error: "Invalid slug" }), {
+          status: 400,
+          headers: corsHeaders
+        });
+      }
+
+      const slug = rawSlug.replace(/^\/en(?=\/)/, "");
+      const today = new Date().toISOString().slice(0, 10);
+
+      // 1. 현재 카운트 확인
+      const { data: existing, error: readError } = await supabase
+        .from("views")
+        .select("count")
+        .eq("slug", slug)
+        .eq("viewed_at", today)
+        .maybeSingle();
+
+      if (readError) {
+        console.error("Read error", readError);
+        return new Response(JSON.stringify({ error: readError }), {
+          status: 500,
+          headers: corsHeaders
+        });
+      }
+
+      // 2. count 갱신 또는 신규 insert
+      const { error: writeError } = await supabase
+        .from("views")
+        .upsert({
+          slug,
+          viewed_at: today,
+          count: existing ? existing.count + 1 : 1,
+          updated_at: new Date().toISOString()
+        }, {
+          onConflict: ['slug', 'viewed_at']
+        });
+
+      if (writeError) {
+        console.error("Write error", writeError);
+        return new Response(JSON.stringify({ error: writeError }), {
+          status: 500,
+          headers: corsHeaders
+        });
+      }
+
+      return new Response(JSON.stringify({ ok: true }), {
+        headers: { "Content-Type": "application/json", ...corsHeaders }
+      });
+    } catch (e) {
+      console.error("Unhandled error", e);
+      return new Response(JSON.stringify({ error: "Invalid request" }), {
         status: 400,
         headers: corsHeaders
       });
     }
-
-    const slug = rawSlug.replace(/^\/en(?=\/)/, "");
-    const today = new Date().toISOString().slice(0, 10);
-
-    // 1. 현재 카운트 확인
-    const { data: existing, error: readError } = await supabase
-      .from("views")
-      .select("count")
-      .eq("slug", slug)
-      .eq("viewed_at", today)
-      .maybeSingle();
-
-    if (readError) {
-      console.error("Read error", readError);
-      return new Response(JSON.stringify({ error: readError }), {
-        status: 500,
-        headers: corsHeaders
-      });
-    }
-
-    // 2. count 갱신 또는 신규 insert
-    const { error: writeError } = await supabase
-      .from("views")
-      .upsert({
-        slug,
-        viewed_at: today,
-        count: existing ? existing.count + 1 : 1,
-        updated_at: new Date().toISOString()
-      }, {
-        onConflict: ['slug', 'viewed_at']
-      });
-
-    if (writeError) {
-      console.error("Write error", writeError);
-      return new Response(JSON.stringify({ error: writeError }), {
-        status: 500,
-        headers: corsHeaders
-      });
-    }
-
-    return new Response(JSON.stringify({ ok: true }), {
-      headers: { "Content-Type": "application/json", ...corsHeaders }
-    });
-  } catch (e) {
-    console.error("Unhandled error", e);
-    return new Response(JSON.stringify({ error: "Invalid request" }), {
-      status: 400,
-      headers: corsHeaders
-    });
   }
 });
