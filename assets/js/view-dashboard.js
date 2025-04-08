@@ -7,7 +7,6 @@
   const chartCanvas = document.getElementById("views-chart");
   const container = document.getElementById("popular-posts");
 
-  const normalizeSlug = (slug) => slug.replace(/^\/en(?=\/)/, "");
   const trimLabel = (text, max = 50) =>
     text.length > max ? text.slice(0, max) + "…" : text;
   const inferTitle = (slug) => slug;
@@ -61,14 +60,20 @@
         fetchViewCounts(),
       ]);
 
-      if (!views.length) {
+      // 슬러그 필터링: post/로 시작하는 것만
+      const dateSlugRegex = /^\/\d{4}\/\d{2}\/\d{2}\//;
+      const filteredViews = views.filter(item =>
+        dateSlugRegex.test(item.slug)
+      );
+      
+      if (!filteredViews.length) {
         container.innerHTML = "<p class='error'>No view records found.</p>";
         return;
       }
 
       const labels = [];
       const counts = [];
-      const listItems = views.map((item) => {
+      const listItems = filteredViews.map((item) => {
         const url = item.slug;
         const title = slugToTitle[url] ?? inferTitle(url);
         const label = trimLabel(title);

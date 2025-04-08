@@ -27,3 +27,26 @@ create policy "Allow service role full access"
 
 -- (Required for upsert)
 alter table public.views add constraint views_slug_unique unique (slug);
+
+create table views_limiter_users (
+  user_id uuid,
+  key text,               -- 예: slug 이름 or endpoint 구분자
+  ts text,                -- 시간 단위로 제한: 예) '2025-04-08' or '2025-04-08T14:00'
+  count integer not null,
+  updated_at timestamptz default now(),
+  primary key (user_id, key, ts)
+);
+
+-- 기본적으로 차단
+alter table views_limiter_users enable row level security;
+
+create table views_limiter_ips (
+  ip text,
+  date text,              -- YYYY-MM-DD
+  method text,            -- 'GET', 'POST', 'OPTIONS' 등
+  count integer not null default 1,
+  updated_at timestamptz default now(),
+  primary key (ip, date, method)
+);
+
+alter table views_limiter_ips enable row level security;

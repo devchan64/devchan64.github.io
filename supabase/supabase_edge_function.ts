@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
+// CORS 허용 도메인
 const ALLOWED_ORIGINS = [
   "https://devchan64.github.io",
   // "http://localhost:4000"
@@ -12,30 +13,100 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type"
 };
 
+// 공통 Rate Limit 함수 (IP + method 기준)
+async function limitRequest(
+  supabase: ReturnType<typeof createClient>,
+  ip: string,
+  method: string,
+  max: number
+): Promise<boolean> {
+  const today = new Date().toISOString().slice(0, 10);
+
+  const { data, error } = await supabase
+    .from("views_limiter_ips")
+    .select("count")
+    .eq("ip", ip)
+    .eq("date", today)
+    .eq("method", method)
+    .maybeSingle();
+
+  if (error) {
+    console.error(`Rate limit read error [${method}]`, error);
+    return true; // fail-safe
+  }
+
+  const count = data?.count ?? 0;
+  if (count >= max) return true;
+
+  const { error: writeError } = await supabase
+    .from("views_limiter_ips")
+    .upsert({
+      ip,
+      date: today,
+      method,
+      count: count + 1,
+      updated_at: new Date().toISOString()
+    }, {
+      onConflict: ['ip', 'date', 'method']
+    });
+
+  if (writeError) {
+    console.error(`Rate limit write error [${method}]`, writeError);
+    return true;
+  }
+
+  return false;
+}
+
+function createSupabaseClient() {
+  return createClient(
+    Deno.env.get("SUPABASE_URL") ?? "",
+    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+  );
+}
+
+// 서버 시작
 serve(async (req) => {
+
+  const method = req.method;
+  const today = new Date().toISOString().slice(0, 10);
+  const ip = req.headers.get("x-forwarded-for") ?? "unknown";
+  const supabase = createSupabaseClient();
+
+  // 공통 Rate Limit 적용 (GET/POST)
+  const methodLimits = {
+    GET: 300,
+    POST: 100,
+    OPTIONS: 500,
+  };
+  if (method in methodLimits) {        
+    const limited = await limitRequest(supabase, ip, method, methodLimits[method]);
+    if (limited) {
+      return new Response(`Too Many Requests (${method})`, {
+        status: 429,
+        headers: corsHeaders
+      });
+    }
+  }
+
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
   }
 
+  // Referer / Origin 체크
   const referer = req.headers.get("referer") || "";
   const origin = req.headers.get("origin") || "";
   const isAllowed = ALLOWED_ORIGINS.some(o =>
     referer.startsWith(o) || origin.startsWith(o)
   );
-
   if (!isAllowed) {
     console.error("Blocked by referer/origin", { referer, origin });
     return new Response("Forbidden", { status: 403, headers: corsHeaders });
   }
 
-  const supabase = createClient(
-    Deno.env.get("SUPABASE_URL") ?? "",
-    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
-  );
-
   const url = new URL(req.url);
 
-  if (req.method === "GET") {
+  if (method === "GET") {
     const rawDays = url.searchParams.get("days");
     const days = rawDays === null ? 30 : parseInt(rawDays, 10);
 
@@ -68,8 +139,15 @@ serve(async (req) => {
     });
   }
 
-  // POST: slug 수신 후 count 증가
-  if (req.method === "POST") {
+  if (method === "POST") {
+    const jwt = req.headers.get("authorization")?.replace("Bearer ", "");
+    if (!jwt) {
+      return new Response("Unauthorized", { status: 401, headers: corsHeaders });
+    }
+
+    const payload = JSON.parse(atob(jwt.split(".")[1]));
+    const userId = payload.sub;
+
     try {
       const { slug: rawSlug } = await req.json();
       if (!rawSlug || typeof rawSlug !== "string") {
@@ -80,9 +158,39 @@ serve(async (req) => {
       }
 
       const slug = rawSlug.replace(/^\/en(?=\/)/, "");
-      const today = new Date().toISOString().slice(0, 10);
 
-      // 1. 현재 카운트 확인
+      // 사용자 슬러그 기준 리밋 (10회/일)
+      const { data: userLimit, error: userLimitErr } = await supabase
+        .from("views_limiter_users")
+        .select("count")
+        .eq("user_id", userId)
+        .eq("key", slug)
+        .eq("ts", today)
+        .maybeSingle();
+
+      if (userLimitErr) throw userLimitErr;
+
+      const userCount = userLimit?.count ?? 0;
+      if (userCount >= 10) {
+        return new Response("Too Many Requests (user)", {
+          status: 429,
+          headers: corsHeaders
+        });
+      }
+
+      await supabase
+        .from("views_limiter_users")
+        .upsert({
+          user_id: userId,
+          key: slug,
+          ts: today,
+          count: userCount + 1,
+          updated_at: new Date().toISOString()
+        }, {
+          onConflict: ['user_id', 'key', 'ts']
+        });
+
+      // slug별 조회수 증가
       const { data: existing, error: readError } = await supabase
         .from("views")
         .select("count")
@@ -90,16 +198,9 @@ serve(async (req) => {
         .eq("viewed_at", today)
         .maybeSingle();
 
-      if (readError) {
-        console.error("Read error", readError);
-        return new Response(JSON.stringify({ error: readError }), {
-          status: 500,
-          headers: corsHeaders
-        });
-      }
+      if (readError) throw readError;
 
-      // 2. count 갱신 또는 신규 insert
-      const { error: writeError } = await supabase
+      await supabase
         .from("views")
         .upsert({
           slug,
@@ -110,23 +211,18 @@ serve(async (req) => {
           onConflict: ['slug', 'viewed_at']
         });
 
-      if (writeError) {
-        console.error("Write error", writeError);
-        return new Response(JSON.stringify({ error: writeError }), {
-          status: 500,
-          headers: corsHeaders
-        });
-      }
-
       return new Response(JSON.stringify({ ok: true }), {
         headers: { "Content-Type": "application/json", ...corsHeaders }
       });
+
     } catch (e) {
-      console.error("Unhandled error", e);
-      return new Response(JSON.stringify({ error: "Invalid request" }), {
-        status: 400,
+      console.error("POST failed", e);
+      return new Response(JSON.stringify({ error: "Unexpected error" }), {
+        status: 500,
         headers: corsHeaders
       });
     }
   }
+
+  return new Response("Not Found", { status: 404, headers: corsHeaders });
 });
