@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>{{ page.title }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 720px;
+      margin: 3rem auto;
+      padding: 1rem;
+      line-height: 1.6;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    li {
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>{{ page.title }}</h1>
+  <div id="popular-posts">Loading view data...</div>
+
+  <script>
+    fetch("https://dxwpncxfauzspnqwwbxj.supabase.co/rest/v1/views?select=slug,count&order=count.desc&limit=10", {
+      headers: {
+        "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4d3BuY3hmYXV6c3BucXd3YnhqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQwNDE2MjQsImV4cCI6MjA1OTYxNzYyNH0.1Pdrk8G9UjzTBdE5w__5led6LjeXIdN_8g5mDLIQnIg"
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      const container = document.getElementById("popular-posts");
+
+      if (data.length === 0) {
+        container.innerHTML = "<p>No view records found yet.</p>";
+        return;
+      }
+
+      const listItems = data.map(item => {
+        const url = item.slug.startsWith("/") ? item.slug : `/${item.slug}`;
+        return `<li><a href="${url}">${url}</a> – ${item.count} views</li>`;
+      });
+
+      container.innerHTML = `<ul>${listItems.join("")}</ul>`;
+    })
+    .catch(err => {
+      document.getElementById("popular-posts").innerHTML = "Failed to load view data.";
+      console.error("View tracking error:", err);
+    });
+  </script>
+</body>
+</html>
