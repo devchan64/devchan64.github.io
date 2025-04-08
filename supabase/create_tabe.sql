@@ -1,8 +1,10 @@
 -- Create table
 create table if not exists public.views (
-  slug text primary key,
+  slug text not null,
+  viewed_at date not null default current_date,
   count int not null default 1,
-  updated_at timestamptz not null default now()
+  updated_at timestamptz not null default now(),
+  primary key (slug, viewed_at)
 );
 
 -- Enforce RLS

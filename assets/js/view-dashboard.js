@@ -25,12 +25,19 @@
   };
 
   const fetchPostIndex = async () => {
-    const [ko, en] = await Promise.all([
-      fetch("/posts.json").then((res) => res.json()),
-      fetch("/en/posts.json").then((res) => res.json()),
-    ]);
-    return [...ko, ...en];
-  };
+    const isEnglish = location.pathname.startsWith("/en/");
+    const path = isEnglish ? "/en/posts.json" : "/posts.json";
+  
+    const posts = await fetch(path).then((res) => res.json());
+    const slugToTitle = {};
+  
+    posts.forEach((post) => {
+      const slug = isEnglish ? `/en${post.url}` : post.url;
+      slugToTitle[slug] = post.title;
+    });
+  
+    return slugToTitle;
+  };  
 
   const fetchViewCounts = async () => {
     const res = await fetch(`${API_URL}?select=slug,count&order=count.desc&limit=${MAX_ITEMS}`, {
@@ -45,16 +52,10 @@
     container.innerHTML = `<p class="loading">Loading...</p>`;
 
     try {
-      const [posts, views] = await Promise.all([
+      const [slugToTitle, views] = await Promise.all([
         fetchPostIndex(),
         fetchViewCounts(),
       ]);
-
-      const slugToTitle = {};
-      posts.forEach((post) => {
-        const normalized = normalizeSlug(post.url);
-        slugToTitle[normalized] = post.title;
-      });
 
       if (!views.length) {
         container.innerHTML = "<p class='error'>No view records found.</p>";
@@ -99,7 +100,7 @@
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          indexAxis: "y", // 👈 가로 막대
+          indexAxis: "y",
           scales: {
             x: {
               beginAtZero: true,
