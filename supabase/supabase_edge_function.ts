@@ -165,37 +165,6 @@ serve(async (req) => {
 
       const slug = rawSlug.replace(/^\/en(?=\/)/, "");
 
-      // 사용자 슬러그 기준 리밋 (10회/일)
-      const { data: userLimit, error: userLimitErr } = await supabase
-        .from("views_limiter_users")
-        .select("count")
-        .eq("user_id", userId)
-        .eq("key", slug)
-        .eq("ts", today)
-        .maybeSingle();
-
-      if (userLimitErr) throw userLimitErr;
-
-      const userCount = userLimit?.count ?? 0;
-      if (userCount >= 10) {
-        return new Response("Too Many Requests (user)", {
-          status: 429,
-          headers: corsHeaders
-        });
-      }
-
-      await supabase
-        .from("views_limiter_users")
-        .upsert({
-          user_id: userId,
-          key: slug,
-          ts: today,
-          count: userCount + 1,
-          updated_at: new Date().toISOString()
-        }, {
-          onConflict: ['user_id', 'key', 'ts']
-        });
-
       // slug별 조회수 증가
       const { data: existing, error: readError } = await supabase
         .from("views")
