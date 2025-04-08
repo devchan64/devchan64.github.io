@@ -38,3 +38,14 @@ create table views_limiter_ips (
 
 -- RLS 활성화 (행 수준 보안)
 alter table views_limiter_ips enable row level security;
+
+-- 오래된 데이터 삭제 쿼리 (30일 초과)
+delete from public.views
+where viewed_at < current_date - interval '30 days';
+
+delete from public.views_limiter_users
+where ts < to_char(current_date - interval '30 days', 'YYYY-MM-DD');
+
+delete from public.views_limiter_ips
+where date < to_char(current_date - interval '30 days', 'YYYY-MM-DD');
+
