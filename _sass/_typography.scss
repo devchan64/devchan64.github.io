@@ -7,15 +7,25 @@ h2, h3 {
 }
 
 h1 {
+  font-size: 1.8em;
   margin-top: 3em;
-  margin-bottom: 1em;
+  margin-bottom: 1.5em;
   padding: 0.2rem 0;
   border-top: 3px solid #e1aac9;
   border-bottom: 3px solid #e1aac9;
 }
 
 h2 {
+  margin-top: 2em;
+  margin-bottom: 1em;
+  font-size: 1.4em;
   border-bottom: 2px solid #8e004f;
+}
+
+h3 {
+  font-size: 1.17em;
+  margin-top: 2em;
+  margin-bottom: 0em;
 }
 
 code,
