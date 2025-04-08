@@ -79,7 +79,7 @@ serve(async (req) => {
     POST: 100,
     OPTIONS: 500,
   };
-  if (method in methodLimits) {        
+  if (method in methodLimits) {
     const limited = await limitRequest(supabase, ip, method, methodLimits[method]);
     if (limited) {
       return new Response(`Too Many Requests (${method})`, {
@@ -108,10 +108,13 @@ serve(async (req) => {
 
   if (method === "GET") {
     const rawDays = url.searchParams.get("days");
-    const days = rawDays === null ? 30 : parseInt(rawDays, 10);
+    const rawLimit = url.searchParams.get("limit");
 
-    if (isNaN(days) || days < 1 || days > 365) {
-      return new Response(JSON.stringify({ error: "Invalid days parameter" }), {
+    const days = rawDays === null ? 30 : parseInt(rawDays, 10);
+    const limit = rawLimit === null ? 10 : parseInt(rawLimit, 10);
+
+    if (isNaN(days) || days < 1 || days > 365 || isNaN(limit) || limit < 1 || limit > 100) {
+      return new Response(JSON.stringify({ error: "Invalid query parameters" }), {
         status: 400,
         headers: corsHeaders
       });
@@ -124,7 +127,9 @@ serve(async (req) => {
     const { data, error } = await supabase
       .from("views")
       .select("slug, viewed_at, count")
-      .gte("viewed_at", fromDateStr);
+      .gte("viewed_at", fromDateStr)
+      .order("count", { ascending: false }) // 💡 조회수 기준 정렬
+      .limit(limit);                        // 💡 limit 적용
 
     if (error) {
       console.error("GET failed", error);
@@ -138,6 +143,7 @@ serve(async (req) => {
       headers: { "Content-Type": "application/json", ...corsHeaders }
     });
   }
+
 
   if (method === "POST") {
     const jwt = req.headers.get("authorization")?.replace("Bearer ", "");
