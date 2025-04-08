@@ -13,7 +13,13 @@ serve(async (req) => {
   }
 
   try {
-    const { slug } = await req.json();
+    const rawSlug = await req.json();
+    let { slug } = rawSlug;
+
+    // /en/로 시작하면 /만 남기고 경로 축소
+    if (slug.startsWith("/en/")) {
+      slug = slug.replace(/^\/en/, ""); // '/en/...' → '/...'
+    }
 
     if (!slug || typeof slug !== "string") {
       return new Response(JSON.stringify({ error: "Invalid slug" }), {

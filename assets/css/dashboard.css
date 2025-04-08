@@ -1,0 +1,23 @@
+.count {
+  float: right;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.loading,
+.error {
+  color: #999;
+  font-style: italic;
+  padding-top: 1rem;
+}
+
+.chart-wrapper {
+  height: 200px;
+  position: relative;
+}
+
+canvas#views-chart {
+  height: 100% !important;
+  width: 100% !important;
+  display: block;
+}
