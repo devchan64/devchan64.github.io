@@ -277,6 +277,8 @@ As a designer and developer, I always aim to maintain an attitude that looks at 
 
 While this article discusses EMQX, underlying it is the **designer's thought and standard that seeks to define and design flows centered around messages**.
 
+---
+
 # Conclusion: Designing Messages
 
 Designing a system is about defining flows.
