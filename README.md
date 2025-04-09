@@ -20,6 +20,7 @@
 |------------------|-----------------------------------------------|
 | Static Generator | [Jekyll](https://jekyllrb.com/)               |
 | 스타일링         | Sass (SCSS 구조화)                             |
+| 검색         | pathfind |
 | CI/CD            | GitHub Actions + GitHub Pages                 |
 | 데이터 백엔드    | [Supabase](https://supabase.com/)             |
 | AI 연동          | [OpenAI API (GPT-4 Turbo)](https://platform.openai.com/) |
