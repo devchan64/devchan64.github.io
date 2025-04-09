@@ -1,11 +1,12 @@
 -- 조회수 테이블 생성: 슬러그별 일간 조회수를 기록
-create table if not exists public.views (
+create table views (
   slug text not null,                                -- 페이지 식별자
-  viewed_at date not null default current_date,      -- 조회 날짜
-  count int not null default 1,                      -- 조회수
-  updated_at timestamptz not null default now(),     -- 마지막 업데이트 시각
-  primary key (slug, viewed_at)
+  viewed_at date not null default current_date,      -- 조회 날짜 (날짜만)
+  ip text not null,                                   -- IP 주소 (중복 방지용)
+  created_at timestamptz default now(),              -- 요청 시간
+  constraint views_unique_slug_date_ip unique (slug, viewed_at, ip)
 );
+
 
 -- RLS 활성화 (행 수준 보안)
 alter table public.views enable row level security;

@@ -1,19 +1,29 @@
+// Deno 표준 HTTP 서버와 Supabase 클라이언트 가져오기
 import { serve } from "https://deno.land/std/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-// CORS 허용 도메인
+// 허용된 CORS Origin 목록
 const ALLOWED_ORIGINS = [
   "https://devchan64.github.io",
-  // "http://localhost:4000"
+  // "http://localhost:4000"  // 로컬 테스트용
 ];
 
+// CORS 헤더 설정
 const corsHeaders = {
   "Access-Control-Allow-Origin": ALLOWED_ORIGINS[0],
   "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type"
 };
 
-// 공통 Rate Limit 함수 (IP + method 기준)
+// Supabase 클라이언트 생성 함수
+function createSupabaseClient() {
+  return createClient(
+    Deno.env.get("SUPABASE_URL") ?? "",
+    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+  );
+}
+
+// Rate Limit 처리 함수 (IP + method 기준, views_limiter_ips 테이블 사용)
 async function limitRequest(
   supabase: ReturnType<typeof createClient>,
   ip: string,
@@ -22,6 +32,7 @@ async function limitRequest(
 ): Promise<boolean> {
   const today = new Date().toISOString().slice(0, 10);
 
+  // 오늘 해당 IP가 method 요청한 횟수 조회
   const { data, error } = await supabase
     .from("views_limiter_ips")
     .select("count")
@@ -32,12 +43,13 @@ async function limitRequest(
 
   if (error) {
     console.error(`Rate limit read error [${method}]`, error);
-    return true; // fail-safe
+    return true; // 에러 발생 시 fail-safe로 차단
   }
 
   const count = data?.count ?? 0;
   if (count >= max) return true;
 
+  // 요청 횟수 증가 (upsert)
   const { error: writeError } = await supabase
     .from("views_limiter_ips")
     .upsert({
@@ -58,27 +70,19 @@ async function limitRequest(
   return false;
 }
 
-function createSupabaseClient() {
-  return createClient(
-    Deno.env.get("SUPABASE_URL") ?? "",
-    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
-  );
-}
-
 // 서버 시작
 serve(async (req) => {
-
   const method = req.method;
-  const today = new Date().toISOString().slice(0, 10);
   const ip = req.headers.get("x-forwarded-for") ?? "unknown";
   const supabase = createSupabaseClient();
 
-  // 공통 Rate Limit 적용 (GET/POST)
+  // 공통 Rate Limit 제한 (method별 최대 요청 수)
   const methodLimits = {
     GET: 300,
     POST: 100,
     OPTIONS: 500,
   };
+
   if (method in methodLimits) {
     const limited = await limitRequest(supabase, ip, method, methodLimits[method]);
     if (limited) {
@@ -89,11 +93,12 @@ serve(async (req) => {
     }
   }
 
+  // CORS 프리플라이트 요청 처리
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
   }
 
-  // Referer / Origin 체크
+  // 허용된 origin/referer가 아니면 요청 차단
   const referer = req.headers.get("referer") || "";
   const origin = req.headers.get("origin") || "";
   const isAllowed = ALLOWED_ORIGINS.some(o =>
@@ -106,54 +111,60 @@ serve(async (req) => {
 
   const url = new URL(req.url);
 
+  // ✅ GET: 조회수 집계 조회 (JavaScript로 count 처리)
   if (method === "GET") {
     const rawDays = url.searchParams.get("days");
     const rawLimit = url.searchParams.get("limit");
 
-    const days = rawDays === null ? 30 : parseInt(rawDays, 10);
-    const limit = rawLimit === null ? 10 : parseInt(rawLimit, 10);
+    const days = Number(rawDays ?? 30);
+    const limit = Number(rawLimit ?? 10);
 
+    // 파라미터 유효성 검사
     if (isNaN(days) || days < 1 || days > 365 || isNaN(limit) || limit < 1 || limit > 100) {
-      return new Response(JSON.stringify({ error: "Invalid query parameters" }), {
+      return new Response(JSON.stringify({ error: "Invalid query parameters", days, limit }), {
         status: 400,
         headers: corsHeaders
       });
     }
 
+    // 조회 기준 날짜 계산
     const fromDate = new Date();
-    fromDate.setDate(fromDate.getDate() - days);
+    fromDate.setUTCDate(fromDate.getUTCDate() - days);
     const fromDateStr = fromDate.toISOString().slice(0, 10);
 
+    // Supabase에서 조회 로그 조회
     const { data, error } = await supabase
       .from("views")
-      .select("slug, viewed_at, count")
-      .gte("viewed_at", fromDateStr)
-      .order("count", { ascending: false }) // 💡 조회수 기준 정렬
-      .limit(limit);                        // 💡 limit 적용
+      .select("slug, viewed_at")
+      .gte("viewed_at", fromDateStr);
 
     if (error) {
       console.error("GET failed", error);
-      return new Response(JSON.stringify({ error }), {
+      return new Response(JSON.stringify({ error: error.message, details: error.details }), {
         status: 500,
         headers: corsHeaders
       });
     }
 
-    return new Response(JSON.stringify(data), {
+    // JavaScript로 group by + count 처리
+    const countBySlug: Record<string, number> = {};
+    for (const row of data ?? []) {
+      countBySlug[row.slug] = (countBySlug[row.slug] || 0) + 1;
+    }
+
+    // 정렬 + limit 적용
+    const result = Object.entries(countBySlug)
+      .map(([slug, count]) => ({ slug, count }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, limit);
+
+    return new Response(JSON.stringify(result), {
       headers: { "Content-Type": "application/json", ...corsHeaders }
     });
   }
 
-
+  // ✅ POST: 슬러그 조회 기록 등록
   if (method === "POST") {
-    const jwt = req.headers.get("authorization")?.replace("Bearer ", "");
-    if (!jwt) {
-      return new Response("Unauthorized", { status: 401, headers: corsHeaders });
-    }
-
-    const payload = JSON.parse(atob(jwt.split(".")[1]));
-    const userId = payload.sub;
-
     try {
       const { slug: rawSlug } = await req.json();
       if (!rawSlug || typeof rawSlug !== "string") {
@@ -165,26 +176,24 @@ serve(async (req) => {
 
       const slug = rawSlug.replace(/^\/en(?=\/)/, "");
 
-      // slug별 조회수 증가
-      const { data: existing, error: readError } = await supabase
-        .from("views")
-        .select("count")
-        .eq("slug", slug)
-        .eq("viewed_at", today)
-        .maybeSingle();
-
-      if (readError) throw readError;
-
-      await supabase
+      // views 테이블에 upsert (중복 방지: slug + viewed_at + ip)
+      const { error: insertError } = await supabase
         .from("views")
         .upsert({
           slug,
-          viewed_at: today,
-          count: existing ? existing.count + 1 : 1,
-          updated_at: new Date().toISOString()
+          ip,
+          created_at: new Date().toISOString()
         }, {
-          onConflict: ['slug', 'viewed_at']
+          onConflict: ['slug', 'viewed_at', 'ip']
         });
+
+      if (insertError) {
+        console.error("Insert failed", insertError);
+        return new Response(JSON.stringify({ error: "Insert failed" }), {
+          status: 500,
+          headers: corsHeaders
+        });
+      }
 
       return new Response(JSON.stringify({ ok: true }), {
         headers: { "Content-Type": "application/json", ...corsHeaders }
@@ -199,5 +208,6 @@ serve(async (req) => {
     }
   }
 
+  // 정의되지 않은 요청 처리
   return new Response("Not Found", { status: 404, headers: corsHeaders });
 });
