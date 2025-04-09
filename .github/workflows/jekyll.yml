@@ -58,6 +58,17 @@ jobs:
         # Automatically uploads an artifact from the './_site' directory by default
         uses: actions/upload-pages-artifact@v3
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # 최신 LTS
+
+      - name: Install Pagefind
+        run: npm install pagefind
+
+      - name: Run Pagefind
+        run: npx pagefind --site _site
+
   # Deployment job
   deploy:
     environment:
