@@ -15,14 +15,26 @@
     .post-list-grid li {
         margin-bottom: 1.5rem;
     }
+
+    svg.diagram{
+        max-width: 400px;
+        max-height: 550px;
+    }
 }
 
+/* 태블릿 */
 @media (max-width: 1024px) and (min-width: 769px) {
     .container {
         width: 90%;
     }
+
+    svg.diagram{
+        max-width: 800px;
+        max-height: 550px;
+    }
 }
 
+/* PC */
 @media (min-width: 1025px) {
     .container {
         width: 85%;
@@ -30,5 +42,10 @@
 
     button {
         width: auto;
+    }
+
+    svg.diagram{
+        max-width: 1100px;
+        max-height: 800px;
     }
 }

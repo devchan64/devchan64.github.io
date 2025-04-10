@@ -82,6 +82,7 @@ The diagram below visually represents the hierarchical composition and message f
 It structurally explains how user requests and external events are introduced and processed.
 
 ```d2
+direction: right
 device.hw -- service_platform.auth -- service_platform.core
 device.app -- service_platform.auth -- service_platform.api_gateway
 

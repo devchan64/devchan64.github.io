@@ -79,6 +79,7 @@ ROS는 기본적으로 `Publisher`-`Subscriber` 방식의 메시지 통신 구�
 사용자 요청 및 외부 이벤트가 어떻게 유입되고 처리되는지를 구조적 관점에서 설명합니다.
 
 ```d2
+direction: right
 device.hw -- service_platform.auth -- service_platform.core
 device.app -- service_platform.auth -- service_platform.api_gateway
 
