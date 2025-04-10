@@ -74,7 +74,7 @@ device.app -- service_platform.auth -- service_platform.api_gateway
 
 3rd_party.app -- 3rd_party.cloud
 3rd_party.hw -- 3rd_party.cloud
-3rd_party.cloud -- service_platform.core
+3rd_party.cloud -- service_platform.bridge -- service_platform.core
 
 service_platform.core.messaging -- service_platform.core.event_rule
 service_platform.core.event_rule -- service_platform.container
