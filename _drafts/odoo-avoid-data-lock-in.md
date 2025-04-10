@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Odoo Erp - 데이터 주도권 확보"
+title: "Odoo Erp 도입을 결정하느 과정에서 - 데이터 주도권 확보"
 tags: [설계철학]
 ---
 
