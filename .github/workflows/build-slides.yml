@@ -32,7 +32,9 @@ jobs:
           npm install
 
       - name: Run Marp build script
-        run: bash marp/build_marp.sh
+        run: |
+          cd marp
+          bash build_marp.sh
 
       - name: Commit and push generated JPEGs
         run: |

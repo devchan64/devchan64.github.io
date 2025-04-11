@@ -5,12 +5,12 @@
 - trace ID + 메시지 목록 = **운영 관측성** 확보  
 - 네임스페이스 기반 계층 분리로 기능 그룹화 및 협업 정렬
 
-```mermaid
-graph TD
+<div class="mermaid">
+graph LR
 device[Device / App] --> API[API Gateway]
 API --> MSG[Message Queue]
-MSG --> Container[Worker]
-Container --> Data[Data Core]
-```
+MSG --> MSA[Worker]
+MSA --> Data[Data Core]
+</div>
 
 > **"시스템은 연결로 복잡해지고, 메시지로 단순해진다."**
