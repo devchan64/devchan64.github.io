@@ -11,21 +11,14 @@ on:
   push:
     branches: ["main"]
     paths:    
-    - '_includes/**'
-    - '_layouts/**'
-    - '_posts/**'
-    - '_sass/**'
-    - '_sass/**'
+    - '_includes/**/*'
+    - '_layouts/**/*'
+    - '_posts/**/*'
+    - '_sass/**/*'
     - 'assets/**/*'
     - 'en/**/*'
     - 'guestbook/**/*'
     - 'views/**/*'
-    paths-ignore:
-    - 'supabase/**'
-    - 'README.md'
-    - '*.sh'
-    - '*.py'
-    - "_drafts/**"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:

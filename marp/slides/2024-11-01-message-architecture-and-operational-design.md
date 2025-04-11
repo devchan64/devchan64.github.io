@@ -13,4 +13,5 @@ MSG --> MSA[Worker]
 MSA --> Data[Data Core]
 </div>
 
+
 > **"시스템은 연결로 복잡해지고, 메시지로 단순해진다."**
