@@ -22,7 +22,6 @@ linkedin_profile: "https://www.linkedin.com/in/changbo-sim-bb8397270"
 include:
   - README.md
   - en/README.md
-  - slides
 
 exclude:
   - marp
