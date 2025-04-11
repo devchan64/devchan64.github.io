@@ -10,6 +10,16 @@ on:
   # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
+    paths:    
+    - '_includes/**'
+    - '_layouts/**'
+    - '_posts/**'
+    - '_sass/**'
+    - '_sass/**'
+    - 'assets/**/*'
+    - 'en/**/*'
+    - 'guestbook/**/*'
+    - 'views/**/*'
     paths-ignore:
     - 'supabase/**'
     - 'README.md'

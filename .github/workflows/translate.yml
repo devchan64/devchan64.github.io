@@ -2,6 +2,7 @@ name: Translate Markdown Posts
 
 on:
   push:
+    branches: ["main"]
     paths:
       - '_posts/*.md'
   workflow_dispatch:  # 수동 실행도 가능
