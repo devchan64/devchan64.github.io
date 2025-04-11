@@ -32,8 +32,16 @@ jobs:
       - name: Run Marp build script
         run: bash marp/build_marp.sh
 
-      - name: Upload generated JPEGs as artifacts (optional)
-        uses: actions/upload-artifact@v3
-        with:
-          name: marp-slides
-          path: assets/images/slides/*.jpg
+      - name: Commit and push generated JPEGs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add assets/images/slides/*.jpg
+
+          if git diff --cached --quiet; then
+            echo "✅ No changes to commit"
+          else
+            git commit -m "🤖 Auto-update Marp slides (JPEG)"
+            git push
+          fi
