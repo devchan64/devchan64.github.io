@@ -1,12 +1,12 @@
-{%- assign slug = page.url | split: '/' | last | split: '.' | first -%}
-{%- assign image_path = '/assets/images/slides/' | append: slug | append: '.jpg' -%}
-{%- assign image_exists = false -%}
+{% assign slug = page.url | split: '/' | last | split: '.' | first %}
+{% assign image_path = '/assets/images/slides/' | append: slug | append: '.jpg' %}
+{% assign image_exists = false %}
 
-{%- for file in site.static_files -%}
-  {%- if file.relative_path == image_path -%}
-    {%- assign image_exists = true -%}
-  {%- endif -%}
-{%- endfor -%}
+{% for file in site.static_files %}
+  {% if file.path == image_path %}
+    {% assign image_exists = true %}
+  {% endif %}
+{% endfor %}
 
 <meta property="og:title" content="{{ page.title | escape }}" />
 <meta property="og:type" content="article" />
