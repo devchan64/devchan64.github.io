@@ -27,7 +27,9 @@ jobs:
           sudo apt-get install -y libnss3 libxss1 fonts-noto-color-emoji
 
       - name: Install Node packages
-        run: npm ci
+        run: |
+          cd marp
+          npm install
 
       - name: Run Marp build script
         run: bash marp/build_marp.sh
