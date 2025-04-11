@@ -1,0 +1,22 @@
+{% assign slug = page.url | split: '/' | last | split: '.' | first %}
+{% assign image_path = '/assets/images/slides/' | append: slug | append: '.jpg' %}
+{% assign image_exists = false %}
+
+{% for file in site.static_files %}
+  {% if file.path == image_path %}
+    {% assign image_exists = true %}
+  {% endif %}
+{% endfor %}
+
+{% if image_exists %}
+<details style="margin-bottom: 2rem;">
+  <summary style="cursor: pointer; font-weight: bold; color: #BB2649; margin-bottom: 1rem;">
+    요약 슬라이드 보기
+  </summary>
+  <img
+    src="{{ image_path }}"
+    alt="슬라이드 미리보기"
+    style="width: 100%; height: auto; margin-top: 1rem; border: 1px solid #ddd;"
+  />
+</details>
+{% endif %}

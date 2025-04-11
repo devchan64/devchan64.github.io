@@ -1,0 +1,16 @@
+{
+  "name": "marp",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "scripts": {
+    "build": "npx marp -I ./slides --html -o ../assets/images/slides --engine ./engine.js --template bare --theme theme.css --image jpeg --debug=true"
+  },
+  "devDependencies": {
+    "@marp-team/marp-cli": "^4.1.2",
+    "@marp-team/marp-core": "^4.0.1",
+    "markdown-it-mark": "^4.0.0"
+  }
+}

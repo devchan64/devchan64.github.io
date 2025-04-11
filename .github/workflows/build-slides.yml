@@ -1,0 +1,39 @@
+name: Build Marp Slides
+
+on:
+  push:
+    paths:
+      - 'marp/slides/**'
+      - 'marp/build_marp.sh'
+      - 'marp/theme.css'
+      - 'marp/engine.js'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install system dependencies for Puppeteer
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libnss3 libxss1 libasound2 fonts-noto-color-emoji
+
+      - name: Install Node packages
+        run: npm ci
+
+      - name: Run Marp build script
+        run: bash marp/build_marp.sh
+
+      - name: Upload generated JPEGs as artifacts (optional)
+        uses: actions/upload-artifact@v3
+        with:
+          name: marp-slides
+          path: assets/images/slides/*.jpg
