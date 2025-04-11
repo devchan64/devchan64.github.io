@@ -73,7 +73,11 @@ async function limitRequest(
 // 서버 시작
 serve(async (req) => {
   const method = req.method;
-  const ip = req.headers.get("x-forwarded-for") ?? "unknown";
+  const ip =
+    req.headers.get("cf-connecting-ip") ??
+    req.headers.get("x-real-ip") ??
+    req.headers.get("x-forwarded-for")?.split(",")[0].trim() ??
+    req.headers.get("remote-addr") ?? "unknown";
   const supabase = createSupabaseClient();
 
   // 공통 Rate Limit 제한 (method별 최대 요청 수)
