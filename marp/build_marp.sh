@@ -11,7 +11,7 @@ mkdir -p "$OUTPUT_DIR"
 
 for mdfile in "$INPUT_DIR"/*.md; do
   filename=$(basename -- "$mdfile" .md)
-  outfile="$OUTPUT_DIR/$filename.jpg"
+  outfile="$OUTPUT_DIR/$filename.png"
 
   if [ -f "$outfile" ]; then
     echo "✅ Skipping $filename (already exists)"
@@ -19,10 +19,12 @@ for mdfile in "$INPUT_DIR"/*.md; do
     echo "⚙️  Building $filename..."
     npx marp "$mdfile" \
       --html \
-      --image jpeg \
+      --image png \
       --theme "$THEME" \
       --engine "$ENGINE" \
       --template bare \
+      --width 1280 \
+      --height 720 \
       -o "$outfile"
   fi
 done
