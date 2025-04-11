@@ -7,10 +7,15 @@
 
 <div class="mermaid">
 graph LR
-device[Device / App] --> API[API Gateway]
+APP[App] --> API[API Gateway]
 API --> MSG[Message Queue]
+DEV[Device] --> MSG[Message Queue]
 MSG --> MSA[Worker]
+MSG --> MSA1[Worker]
+MSG --> MSA2[Worker]
 MSA --> Data[Data Core]
+MSA1 --> Data[Data Core]
+MSA2 --> Data[Data Core]
 </div>
 
 
