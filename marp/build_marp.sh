@@ -2,8 +2,8 @@
 
 set -e
 
-INPUT_DIR="./slides"
-OUTPUT_DIR="../assets/images/slides"
+INPUT_DIR="./covers"
+OUTPUT_DIR="../assets/images/covers"
 ENGINE="./engine.js"
 THEME="theme.css"
 

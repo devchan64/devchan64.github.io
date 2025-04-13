@@ -1,5 +1,5 @@
 {% assign slug = page.url | split: '/' | last | split: '.' | first %}
-{% assign image_path = '/assets/images/slides/' | append: slug | append: '.png' %}
+{% assign image_path = '/assets/images/covers/' | append: slug | append: '.png' %}
 {% assign image_exists = false %}
 
 {% for file in site.static_files %}
