@@ -61,10 +61,8 @@ Based on these advantages, specific cases were presented comparing it with the e
 
 ## 4. Namespace-Based Hierarchical Structure and Design Philosophy
 
-```plaintext
-※ Note: The `data_service` area is not defined in this structure. 
-This was a strategic choice considering future integration possibilities into `data_platform`, as the role and responsibility of that layer were not clear at the time of design.
-```
+> ※ Note: The `data_service` area is not defined in this structure. 
+> This was a strategic choice considering future integration possibilities into `data_platform`, as the role and responsibility of that layer were not clear at the time of design.
 
 - `3rd_party.`: External system integration area
 - `device.`: User access and device control interface
