@@ -4,6 +4,7 @@ set -e
 
 INPUT_DIR="./ppt"
 OUTPUT_DIR="../assets/ppt"
+ENGINE="./engine.js"
 
 mkdir -p "$OUTPUT_DIR"
 
@@ -17,6 +18,7 @@ for mdfile in "$INPUT_DIR"/*.md; do
     echo "⚙️  Building $filename..."
     npx marp "$mdfile" \
       --html \
+      --engine "$ENGINE" \
       -o "$outfile"
   fi
 done

@@ -76,27 +76,54 @@ ROS는 기본적으로 `Publisher`-`Subscriber` 방식의 메시지 통신 구�
 아래 도식은 전체 시스템의 계층 구성과 메시지 흐름을 시각적으로 표현한 것입니다. 
 사용자 요청 및 외부 이벤트가 어떻게 유입되고 처리되는지를 구조적 관점에서 설명합니다.
 
-```d2
-direction: right
-device.hw -- service_platform.auth -- service_platform.core
-device.app -- service_platform.auth -- service_platform.api_gateway
+```mermaid
+graph TB
+    %% --- 상위 서비스 구조 ---
+    subgraph SRV [Service]
+        DEV[Device]
+        DEV1[Device] --> AGENT[Agent]
+        APP[App] --> ALB 
+    end    
+    
+    subgraph 3RD [External Service]
+        3RD_DEV[Ext. Device] --> 3RD_CLOUD[Ext. Cloud] --> BRIDGE[C2C Bridge]
+    end
 
-3rd_party.app -- 3rd_party.cloud
-3rd_party.hw -- 3rd_party.cloud
-3rd_party.cloud -- service_platform.bridge -- service_platform.core
+    %% --- 메인 서비스 플랫폼 ---
+    subgraph SP [Service Platform]
+        AUTH[Auth] --> API[API Gateway]
+        X509[X.509] --> MSG[Message Broker]
+        BRIDGE --> MSG
+        API --> MSG
+        MSG --> RULE[Rule Engine] --> DT[Device Tween] --> MSG
 
-service_platform.core.messaging -- service_platform.core.event_rule
-service_platform.core.event_rule -- service_platform.container
+        subgraph OC [Container]
+            MSA[Worker A]
+            MSA1[Worker B]
+            MSA2[Worker C]
+        end
 
-service_platform.api_gateway -- service_platform.container
-service_platform.api_gateway -- data_core.data_api
+        API --> MSA
+        RULE --> MSA1
+        RULE --> MSA2 --> MSG
+    end
 
-service_platform.container.worker1 -- data_core.data_api
-service_platform.container.worker2 -- data_core.data_api
+    %% --- 데이터 플랫폼 ---
+    subgraph DP [Data Platform]
+        DATA_API[Data API] --> MODEL[Data Model]
+        DATA_BRIDGE[Data Bridge] --> MODEL
+        ETL[ETL Service] --> MODEL
+        MODEL --> DATA[Storage]
+    end
 
-data_core.data_api -- data_core.datalake
-data_core.data_api -- data_core.etl_service
-data_core.etl_service -- data_core.data_warehouse
+    %% --- Cross-domain 연결 ---
+    MSA --> DATA_API
+    API --> DATA_API
+    RULE --> DATA_BRIDGE
+    DATA_BRIDGE --> ETL
+    DEV[Device] --> X509
+    AGENT --> X509
+    ALB --> AUTH
 ```
 
 ## 6. 설계 주요 구성 요소

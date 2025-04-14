@@ -23,8 +23,6 @@ for mdfile in "$INPUT_DIR"/*.md; do
       --theme "$THEME" \
       --engine "$ENGINE" \
       --template bare \
-      --width 1200 \
-      --height 627 \
       -o "$outfile"
 
   fi
