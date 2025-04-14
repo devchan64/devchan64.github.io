@@ -2,33 +2,33 @@
 @import 'default';
 
 html{
-  font-size: 20px;
+  font-size: 36px;
 }
 
 section {
   background-color: #ffffff;
   color: #0A2540;
   font-family: 'Noto Sans KR', sans-serif;
-  font-size: 24px;
-  padding: 120px; 
+  font-size: 36px;
+  padding: 64px; 
 }
 
 h1 {
-  font-size: 48px;
+  font-size: 60px;
   color: #1A1A1A;
-  border-bottom: 4px solid #BB2649;
+  border-bottom: 6px solid #BB2649;
 }
 
 h2 {
-  padding-top: 32px;
-  font-size: 32px;
+  padding-top: 48px;
+  font-size: 48px;
   color: #333;
 }
 
 blockquote {
   font-style: italic;
-  border-left: 4px solid #BB2649;
-  padding-left: 12px;
+  border-left: 6px solid #BB2649;
+  padding-left: 18px;
   color: #555;
 }
 
@@ -42,7 +42,7 @@ footer {
   max-width: 100%;
   height: auto;
   display: block;
-  margin: 1rem auto;
+  margin: 24px auto;
 }
 
 .mermaid svg {

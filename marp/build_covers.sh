@@ -27,8 +27,6 @@ for mdfile in "$INPUT_DIR"/*.md; do
       --height 627 \
       -o "$outfile"
 
-    convert "$outfile" -gravity center -crop 1200x627+0+0 +repage "$outfile"
-
   fi
 done
 
