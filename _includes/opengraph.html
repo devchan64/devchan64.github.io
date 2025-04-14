@@ -8,11 +8,13 @@
   {% endif %}
 {% endfor %}
 
-<meta property="og:title" content="{{ page.title | escape }}" />
+<meta name="title" property="og:title" content="{{ page.title | escape }}" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+<meta property="og:url" content="{{ page.data | escape }}" />
+<meta name="author" content="Dev.Chan64" />
 
 {%- if image_exists -%}
-  <meta property="og:image" content="{{ site.url }}{{ image_path }}" />
+<meta name="image" property="og:image" content="{{ site.url }}{{ image_path }}" />
 {%- endif -%}
 
