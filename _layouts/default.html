@@ -21,8 +21,12 @@
 
   <main>
 
-    {% include slide.html %}
+    {%- include ppt.html -%}
+    {%- include cover.html -%}    
+    
     {{ content }}
+
+    <hr/>
 
     {% unless page.url == "/" or page.url == "/en/" %}
       <a href="{% if is_english %}/en/{% else %}/{% endif %}" class="button">
