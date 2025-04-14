@@ -23,9 +23,12 @@ for mdfile in "$INPUT_DIR"/*.md; do
       --theme "$THEME" \
       --engine "$ENGINE" \
       --template bare \
-      --width 1280 \
-      --height 720 \
+      --width 1200 \
+      --height 627 \
       -o "$outfile"
+
+    convert "$outfile" -gravity center -crop 1200x627+0+0 +repage "$outfile"
+
   fi
 done
 
