@@ -1,0 +1,18 @@
+name: "Hashnode Publish"
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Publish to Hashnode
+        uses: raunakgurud09/hashnode-publish@v1.1
+        with:
+          host: "yourname.hashnode.dev"
+          file: "test/*.md"
+          hashnode_key: ${{ secrets.HASHNODE_ACCESS_TOKEN }}
