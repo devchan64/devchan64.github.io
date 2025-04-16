@@ -8,6 +8,7 @@ tags:
 title: Why Do We Need to Delete Code?
 ---
 > `gpt-4-turbo` has translated this article into English.
+---
 
 # I. Understanding Philosophy
 

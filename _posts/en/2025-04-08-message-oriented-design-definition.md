@@ -8,7 +8,7 @@ title: '"Defining Design with a Focus on the Message"'
 ---
 > `gpt-4-turbo` has translated this article into English.
 
---
+---
 
 Today, most devices are connected to the network.
 

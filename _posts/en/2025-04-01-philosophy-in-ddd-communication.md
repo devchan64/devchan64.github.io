@@ -9,6 +9,7 @@ title: Let's Not Instrumentalize Philosophy – At Its Core, It's About Communic
   (feat. DDD)
 ---
 > `gpt-4-turbo` has translated this article into English.
+---
 
 ### Modeling is a Conversation. Structure is Merely the Outcome.
 

@@ -10,7 +10,7 @@ title: '"Message-Based Architecture and Operations-Centric Design"'
 ---
 > `gpt-4-turbo` has translated this article into English.
 
---
+---
 
 ## 1. Problem Situation and the Crossroads of Choice
 

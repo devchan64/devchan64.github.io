@@ -8,7 +8,7 @@ title: '"It''s Not Technical Debt, It''s Just What We Didn''t Know"'
 ---
 > `gpt-4-turbo` has translated this article into English.
 
---
+---
 
 ### We are Confusing Ignorance with Technical Debt
 

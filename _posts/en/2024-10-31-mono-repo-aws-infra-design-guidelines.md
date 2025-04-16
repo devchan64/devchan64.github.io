@@ -8,6 +8,7 @@ tags:
 title: Design Principles for AWS Infrastructure Based on Monorepo
 ---
 > `gpt-4-turbo` has translated this article into English.
+---
 
 > Container-Centric Infrastructure Design Philosophy for Removable Structures
 

@@ -9,6 +9,7 @@ tags:
 title: Is Our Agile Really 'Agile'?
 ---
 > `gpt-4-turbo` has translated this article into English.
+---
 
 Sprints rotate, and meetings are held regularly.
 

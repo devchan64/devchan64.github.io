@@ -11,8 +11,6 @@ title: 'Case Study: Revamping the Edge + Cloud Platform Architecture to Secure a
 ---
 > `gpt-4-turbo` has translated this article into English.
 
---
-
 ---
 **Redesigning an Initially Implemented System into a Scalable Architecture and Verifying the Feasibility for Platform Reusability**
 

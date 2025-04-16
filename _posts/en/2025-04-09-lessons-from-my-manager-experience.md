@@ -9,7 +9,7 @@ title: '"Leadership Lessons Learned While Working as a Manager"'
 ---
 > `gpt-4-turbo` has translated this article into English.
 
---
+---
 
 ## 1. **The Importance of Listening**
 As a manager, the first lesson I learned is that the surest way to make team members **feel respected is through listening**.  

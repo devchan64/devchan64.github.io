@@ -10,7 +10,8 @@ title: Designing App Architecture to Maintain Quality and Speed Without a UI/UX 
 ---
 > `gpt-4-turbo` has translated this article into English.
 
---
+---
+
 
 # **Structural Design Case Study for Delivering an App on Schedule While Maintaining Design Quality Without a UI/UX Designer**
 We approached the situation with the philosophy that **when lacking personnel, one should design processes, not tools**.

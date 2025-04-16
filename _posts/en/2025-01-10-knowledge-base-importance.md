@@ -9,6 +9,7 @@ tags:
 title: The Need for a Knowledge Base
 ---
 > `gpt-4-turbo` has translated this article into English.
+---
 
 ### The Start of a Development Culture: ‘Transparent Information Sharing’ and ‘Building a Knowledge Base’
 

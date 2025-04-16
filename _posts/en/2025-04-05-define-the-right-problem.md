@@ -7,6 +7,7 @@ tags:
 title: Defining the Problem – Distinguish Between Real and Fake Issues
 ---
 > `gpt-4-turbo` has translated this article into English.
+---
 
 Over the 15 years of working in software development and system architecture,  
 the most common scenario I've encountered is this:

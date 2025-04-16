@@ -9,7 +9,7 @@ title: '"Technical Debt is Not a Technology Issue"'
 ---
 > `gpt-4-turbo` has translated this article into English.
 
---
+---
 
 # Technical Debt: A Reflection for HR and Management
 

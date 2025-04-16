@@ -8,6 +8,7 @@ tags:
 title: '"Separating Design and Content, Operating with DX"'
 ---
 > `gpt-4-turbo` has translated this article into English.
+---
 
 # "Low-Cost, Flexibility, and Speed-Focused Structuring Strategy"
 

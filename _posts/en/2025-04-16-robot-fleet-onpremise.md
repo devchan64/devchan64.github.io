@@ -10,7 +10,7 @@ title: Designing a Robot Control System that Implements Cloud Development Experi
 ---
 > `gpt-4-turbo` has translated this article into English.
 
---
+---
 
 This is a case study of transitioning a robot control system designed for the cloud to an on-premise environment, while maintaining the same development flow and collaboration efficiency. The key was not moving the technology stack, but **transplanting the development experience itself into the design structure**.
 

@@ -9,6 +9,7 @@ tags:
 title: '"Strategies to Avoid Technical Debt Through Removable Code"'
 ---
 > `gpt-4-turbo` has translated this article into English.
+---
 
 ## Background
 

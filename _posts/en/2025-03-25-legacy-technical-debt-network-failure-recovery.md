@@ -8,6 +8,7 @@ tags:
 title: '"Strategic Solutions to Network Failures by Addressing Legacy Technical Debt"'
 ---
 > `gpt-4-turbo` has translated this article into English.
+---
 
 ### 1. Problem Background: Recurring Failures and Accumulating Technical Debt
 

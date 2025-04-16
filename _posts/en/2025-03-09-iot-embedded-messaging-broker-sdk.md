@@ -6,8 +6,7 @@ tags:
 title: Optimizing Messaging and Designing Broker-Based SDKs in IoT Embedded Environments
 ---
 > `gpt-4-turbo` has translated this article into English.
-
---
+---
 
 ## **1. Messaging and Asynchronous Structures in IoT Environments**
 

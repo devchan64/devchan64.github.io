@@ -11,7 +11,7 @@ title: 'Case Study: Structuring Development Organizations by Domain and Designin
 ---
 > `gpt-4-turbo` has translated this article into English.
 
---
+---
 
 **Case Study: Structuring the Development Organization's Domain and Designing Hiring Standards and Interview Flow for a New Service Deployment**  
 This was a process of completing a flow that could solve problems with people, not just hiring technicians.

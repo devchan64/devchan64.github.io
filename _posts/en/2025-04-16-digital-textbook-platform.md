@@ -11,7 +11,7 @@ title: 'Case Study: Resolving Collaboration Bottlenecks through the Platformizat
 ---
 > `gpt-4-turbo` has translated this article into English.
 
---
+---
 
 **Transitioning from a Closed Structure Combined with Design and Development to a Skin-Module Separation Strategy and SDK-based Platform Structure**,  
 **Eliminating Collaboration Bottlenecks and More Than Doubling Productivity: A Case Study**
