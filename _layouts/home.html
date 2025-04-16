@@ -16,9 +16,10 @@
   <script src="/pagefind/pagefind.js" type="module"></script>
   {% include common.html %}
 </head>
+
 <body class="container">
-  
-  {% include header.html %}  
+
+  {% include header.html %}
 
   <main class="post-content">
     <div id="search"></div>
@@ -48,7 +49,7 @@
     const postsPerPage = 4;
     let currentPage = 1;
     const tagsSet = new Set();
-    
+
 
     const isEnglish = window.location.pathname.startsWith("/en");
     const fullUrl = (url) => isEnglish ? `/en${url}` : url;
@@ -85,17 +86,64 @@
     }
 
     function renderFilters() {
-      const isEnglish = window.location.pathname.startsWith("/en");
       const tagList = document.getElementById('tag-list');
-      // tagList.innerHTML = ''; // 기존 태그 초기화
+      const initialVisibleCount = 10;
 
-      // console.log("[tagSet]", tagsSet);
-
-      tagsSet.forEach(tag => {
-        const li = document.createElement('li');
-          li.innerHTML = `<a href="?tag=${encodeURIComponent(tag)}">${tag}</a>`;
-          tagList.appendChild(li);
+      // 1. 태그 사용 빈도 계산
+      const tagFrequency = {};
+      posts.forEach(post => {
+        post.tags.forEach(tag => {
+          tagFrequency[tag] = (tagFrequency[tag] || 0) + 1;
+        });
       });
+
+      // 2. 많이 쓰인 순으로 정렬
+      const allTags = Object.entries(tagFrequency)
+        .sort((a, b) => b[1] - a[1])
+        .map(([tag]) => tag);
+
+      tagList.innerHTML = ''; // 초기화
+
+      // 3. "More Tag" 버튼 추가
+      const toggleLi = document.createElement('li');
+      const toggleLink = document.createElement('a');
+      toggleLink.href = '#';
+      toggleLink.id = 'toggle-tags';
+      toggleLink.textContent = '[More Tag]';
+      toggleLi.appendChild(toggleLink);
+      tagList.appendChild(toggleLi);
+
+      // 4. 태그 리스트 생성
+      allTags.forEach((tag, index) => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = `?tag=${encodeURIComponent(tag)}`;
+        a.textContent = `${tag} (${tagFrequency[tag]})`; // 빈도 수 표시(Optional)
+
+        if (index >= initialVisibleCount) {
+          li.classList.add('hidden-tag');
+          li.style.display = 'none';
+        }
+
+        li.appendChild(a);
+        tagList.appendChild(li);
+      });
+
+      // 5. 토글 기능
+      if (allTags.length > initialVisibleCount) {
+        let expanded = false;
+
+        toggleLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          expanded = !expanded;
+          document.querySelectorAll('.hidden-tag').forEach(tagEl => {
+            tagEl.style.display = expanded ? 'list-item' : 'none';
+          });
+          toggleLink.textContent = expanded ? '[Fold]' : '[More Tag]';
+        });
+      } else {
+        toggleLi.style.display = 'none';
+      }
     }
 
 
