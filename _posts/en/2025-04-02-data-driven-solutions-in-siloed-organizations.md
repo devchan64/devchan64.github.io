@@ -7,6 +7,7 @@ tags:
 - DevOps
 - Leadership
 - Organizational Culture
+- Bottleneck resolution
 title: Solving Non-Expert Domain Issues with Data Within Siloed Organizational Structures
 ---
 > `gpt-4-turbo` has translated this article into English.

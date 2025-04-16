@@ -5,6 +5,7 @@ permalink: /en/2024/11/01/message-architecture-and-operational-design.html
 tags:
 - Project
 - DevOps
+- Platformization
 title: '"Message-Based Architecture and Operations-Centric Design"'
 ---
 > `gpt-4-turbo` has translated this article into English.
