@@ -1,4 +1,4 @@
-{% assign slug = page.url | split: '/' | last | split: '.' | first %}
+{% assign slug = page.slug | default: page.url | split: '/' | last | split: '.' | first %}
 {% assign image_path = '/assets/images/covers/' | append: slug | append: '.png' %}
 {% assign image_exists = false %}
 
@@ -12,8 +12,19 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
 <meta name="author" content="Dev.Chan64" />
+<meta property="og:description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 | escape }}" />
 
-{%- if image_exists -%}
-<meta name="image" property="og:image" content="{{ site.url }}{{ image_path }}" />
-{%- endif -%}
+{% if image_exists %}
+  <meta name="image" property="og:image" content="{{ site.url }}{{ image_path }}" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="{{ site.url }}{{ image_path }}" />
+{% endif %}
 
+<meta name="twitter:title" content="{{ page.title | escape }}" />
+<meta name="twitter:description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 | escape }}" />
+
+{% if page.tags %}
+  {% for tag in page.tags %}
+    <meta property="article:tag" content="{{ tag }}" />
+  {% endfor %}
+{% endif %}
