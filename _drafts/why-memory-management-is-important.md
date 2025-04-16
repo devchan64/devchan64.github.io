@@ -130,39 +130,6 @@ tags: [설계철학]
 
 ---
 
-### 메모리 관리 문제 해결 예시:
-1. **메모리 누수(Memory Leak)**:  
-   해결: `Valgrind`, `AddressSanitizer`를 사용하여 할당된 메모리 추적하고 해제 여부 확인.
-
-2. **잘못된 메모리 참조(Invalid Memory Access)**:  
-   해결: `GDB`, `Valgrind`를 사용하여 포인터 참조 오류 추적.
-
-3. **메모리 단편화(Memory Fragmentation)**:  
-   해결: `메모리 풀(Memory Pool)` 또는 `슬랩 할당(Slab Allocation)` 기법 사용.
-
-4. **버퍼 오버플로(Buffer Overflow)**:  
-   해결: 배열 크기 검사를 통해 입력 데이터를 제한하고, 안전한 함수 사용 (`strncpy`, `snprintf`).
-
-5. **스택 오버플로(Stack Overflow)**:  
-   해결: 재귀 깊이 제한, 동적 메모리 할당으로 스택 크기 조정.
-
-6. **동기화 문제(Synchronization Issues)**:  
-   해결: `Mutex`, `Semaphore`, `Condition Variable` 등을 사용하여 동기화.
-
-7. **메모리 오염(Memory Corruption)**:  
-   해결: 주소 공간 보호(`ASLR`), 메모리 관리 도구 사용하여 문제 추적.
-
-8. **주소 공간 부족(Address Space Exhaustion)**:  
-   해결: 64비트 시스템으로 전환, 메모리 분할 및 최적화.
-
-9. **가비지 컬렉션 문제(Garbage Collection Issues)**:  
-   해결: 수동 메모리 관리 또는 가비지 컬렉션 주기 조정.
-
-10. **메모리 접근 속도 저하(Memory Access Speed Degradation)**:  
-    해결: 메모리 접근 패턴 최적화, 데이터 지역성(Locality of Reference) 고려한 설계.
-
----
-
 # 6. 결론: 왜 메모리 중심 사고가 중요한가?
 
 **메모리 관리 중심 사고**는 **소프트웨어 설계**에서 매우 중요한 요소입니다. 메모리 관리의 중요성을 이해하고, 이를 **시스템 설계**의 초석으로 삼는 것은 **성능 최적화**와 **시스템 안정성**을 보장하는 데 필수적입니다.
