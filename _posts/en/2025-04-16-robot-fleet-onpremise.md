@@ -4,7 +4,7 @@ permalink: /en/2025/04/16/robot-fleet-onpremise.html
 tags:
 - Platformization
 - Business Connection
-- The translation of the Korean word "프로젝트" to English is "Project."
+- Project
 title: Designing a Robot Control System that Implements Cloud Development Experience
   On-Premises
 ---

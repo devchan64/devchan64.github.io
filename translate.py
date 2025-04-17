@@ -19,20 +19,31 @@ def split_front_matter(text):
 def reconstruct_front_matter(front_dict):
     return "---\n" + yaml.dump(front_dict, allow_unicode=True) + "---\n"
 
-def translate_tags(tags: list) -> list:
+# 우선 대체할 수 있는 표현을 정의
+BASELINE_TAGS = ["Project", "Design Philosophy", "Leadership", "Technical Debt"]
+
+def translate_tags(tags: list[str]) -> list[str]:
     translated = []
+
     for tag in tags:
         prompt = (
-            "Translate the following single-word tag or phrase to English, "
-            "suitable for use in a technical blog.\n\n"
-            f"{tag}"
+            "You are translating technical blog tags to natural English.\n"
+            "If the meaning of the tag is close to one of these standardized terms, "
+            "use it exactly: Project, Design Philosophy, Leadership, Technical Debt.\n"
+            "Otherwise, translate the tag into a suitable English tag for technical audiences.\n\n"
+            f"Tag: {tag}\n"
+            "Result:"
         )
+
         response = client.chat.completions.create(
             model="gpt-4-turbo",
             messages=[{"role": "user", "content": prompt}],
             temperature=0.3,
         )
-        translated.append(response.choices[0].message.content.strip())
+
+        result = response.choices[0].message.content.strip()
+        translated.append(result)
+
     return translated
 
 def translate_body(text: str) -> str:

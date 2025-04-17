@@ -5,7 +5,7 @@ tags:
 - Platformization
 - Business Connection
 - Technical Debt
-- The translation of the Korean word "프로젝트" to English is "Project."
+- Project
 title: 'Case Study: Revamping the Edge + Cloud Platform Architecture to Secure a Technological
   Foundation and Enable Scalable Replication'
 ---
