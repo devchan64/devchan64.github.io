@@ -29,7 +29,7 @@ def translate_tags(tags: list[str]) -> list[str]:
         prompt = (
             "You are translating technical blog tags to natural English.\n"
             "If the meaning of the tag is close to one of these standardized terms, "
-            "use it exactly: Project, Design Philosophy, Leadership, Technical Debt.\n"
+            f"return exactly that term: {', '.join(BASELINE_TAGS)}.\n"
             "Otherwise, translate the tag into a suitable English tag for technical audiences.\n\n"
             f"Tag: {tag}\n"
             "Result:"
