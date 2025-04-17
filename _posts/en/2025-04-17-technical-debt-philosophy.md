@@ -1,5 +1,5 @@
 ---
-date: 2025-04-16
+date: 2025-04-17
 permalink: /en/2025/04/17/technical-debt-philosophy.html
 tags:
 - Technical Debt
