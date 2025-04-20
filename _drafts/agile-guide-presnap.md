@@ -1,6 +1,7 @@
-# 우리는 스크럼하지 않는다. 우리는 Pre-snap 한다  
-## Agile Guide
-
+---
+title: "우리는 Scrum하지 않는다. 우리는 Pre-Snap한다"
+date: 2025-04-21
+tags: [조직문화, 애자일, 리더십]
 ---
 
 ## 1. Agile Manifesto (애자일 선언문)
