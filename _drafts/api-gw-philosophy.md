@@ -1,6 +1,6 @@
 ---
 title: API Gateway는 왜 구조 설계의 시작점이어야 하는가
-layout: default
+layout: post
 date: 2025-04-16
 tags: [설계철학]
 summary: API Gateway는 선언(OpenAPI), 인증(OAuth), 흐름 제어가 분산된 시대를 통합하는 실천 도구다. 설계자는 흐름을 설계하는 사람이며, 그 시작점은 Gateway가 되어야 한다.

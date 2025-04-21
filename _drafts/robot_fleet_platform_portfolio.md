@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: "온프레미스 로봇 운영 플랫폼 설계 사례"
 date: 2025-04-15
 tags: [프로젝트]

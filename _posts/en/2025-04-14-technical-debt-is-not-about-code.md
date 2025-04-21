@@ -1,6 +1,6 @@
 ---
 date: 2025-04-14
-layout: default
+layout: post
 permalink: /en/2025/04/14/technical-debt-is-not-about-code.html
 tags:
 - Organizational Culture

@@ -1,6 +1,6 @@
 ---
 title: "기술부채는 기술의 문제가 아니다"
-layout: default
+layout: post
 date: 2025-04-14
 tags: [조직문화, 기술부채]
 ---
