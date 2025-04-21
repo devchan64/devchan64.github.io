@@ -1,9 +1,8 @@
 ---
 title: API Gateway는 왜 구조 설계의 시작점이어야 하는가
-layout: post
+layout: default
 date: 2025-04-16
-tags: [구조설계, 설계철학, API게이트웨이, OpenAPI, OAuth, 시스템아키텍처]
-categories: [architecture, philosophy]
+tags: [설계철학]
 summary: API Gateway는 선언(OpenAPI), 인증(OAuth), 흐름 제어가 분산된 시대를 통합하는 실천 도구다. 설계자는 흐름을 설계하는 사람이며, 그 시작점은 Gateway가 되어야 한다.
 ---
 
@@ -377,10 +376,10 @@ API Gateway는 단순히 요청을 전달하는 도구가 아니다.
   ↳ 현재의 OpenAPI Initiative로 발전: [https://swagger.io/specification/](https://swagger.io/specification/)
 
 - OAuth 1.0 초기 제안: Blaine Cook, Leah Culver 외, *OAuth Core 1.0* (2007), IETF RFC5849 참고  
-  ↳ OAuth 역사 요약: [https://oauth.net/history/](https://oauth.net/history/)
+  ↳ OAuth 역사 요약: [https://oauth.net/core/1.0/](https://oauth.net/core/1.0/)
 
 - Amazon API Gateway 출시 (2015): *Amazon API Gateway – Create, Publish, Maintain, Monitor, and Secure APIs at Any Scale*  
-  ↳ 공식 블로그: [https://aws.amazon.com/blogs/aws/api-gateway-launch/](https://aws.amazon.com/blogs/aws/api-gateway-launch/)
+  ↳ 공식 블로그: [https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html)
 
 ---
 
@@ -410,8 +409,8 @@ API Gateway는 단순히 요청을 전달하는 도구가 아니다.
 
 ### D. 흐름 중심 설계 가이드라인
 
-- AWS Well-Architected Framework – API Gateway Lens  
-  ↳ [https://docs.aws.amazon.com/wellarchitected/latest/apigateway-lens/](https://docs.aws.amazon.com/wellarchitected/latest/apigateway-lens/)
+- AWS Well-Architected Framework – AWS Serverless Lens  
+  ↳ [https://aws.amazon.com/ko/blogs/korea/new-serverless-lens-in-aws-well-architected-tool/](https://aws.amazon.com/ko/blogs/korea/new-serverless-lens-in-aws-well-architected-tool/)
 
 - Google API Design Guide: URI 설계, 인증 경계 가이드  
   ↳ [https://cloud.google.com/apis/design](https://cloud.google.com/apis/design)
