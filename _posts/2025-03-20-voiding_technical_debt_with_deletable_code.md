@@ -46,7 +46,7 @@ End-to-End 연결성이 많은 서비스 환경에서는 기능 변화가 잦고
 
 4. **정리 시간을 통한 퇴장 설계**
     - 스프린트 일정 중 약 20%를 코드 정리, 리팩터링, 문서화에 명시적으로 할당
-        (https://devchan64.github.io/2025/04/14/technical-debt-is-not-about-code.html)[https://devchan64.github.io/2025/04/14/technical-debt-is-not-about-code.html]
+        [https://devchan64.github.io/2025/04/14/technical-debt-is-not-about-code.html](https://devchan64.github.io/2025/04/14/technical-debt-is-not-about-code.html)
     - 단순한 구조 개선이 아닌, "삭제할 수 있는 코드로 만들기"를 목표로 설계
 
 ### 결과
