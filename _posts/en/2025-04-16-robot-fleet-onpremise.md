@@ -1,11 +1,12 @@
 ---
-date: 2025-04-26
+date: 2025-04-16
+layout: post
 permalink: /en/2025/04/16/robot-fleet-onpremise.html
 tags:
 - Platformization
 - Business Integration
 - Project
-title: Designing a Robot Operating Platform that Brings Cloud Experience to On-Premises
+title: 'Designing a Robot Operating Platform that Brings Cloud Experience to On-Premises'
 ---
 
 > `gpt-4-turbo` has translated this article into English.
