@@ -4,7 +4,7 @@ layout: post
 permalink: /en/2025/04/08/message-oriented-design-definition.html
 tags:
 - Design Philosophy
-title: '"Defining Design with a Focus on the Message"'
+title: 'Defining Design with a Focus on the Message'
 ---
 > `gpt-4-turbo` has translated this article into English.
 

@@ -5,7 +5,7 @@ permalink: /en/2025/04/14/technical-debt-is-not-about-code.html
 tags:
 - Organizational Culture
 - Technical Debt
-title: '"Technical Debt is Not a Technology Issue"'
+title: 'Technical Debt is Not a Technology Issue'
 ---
 > `gpt-4-turbo` has translated this article into English.
 

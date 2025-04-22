@@ -4,7 +4,7 @@ permalink: /en/2025/04/17/technical-debt-philosophy.html
 tags:
 - Technical Debt
 - Design Philosophy
-title: '"Structural Thinking and Operational Philosophy on Technical Debt"'
+title: Structural Thinking and Operational Philosophy on Technical Debt
 ---
 > `gpt-4-turbo` has translated this article into English.
 

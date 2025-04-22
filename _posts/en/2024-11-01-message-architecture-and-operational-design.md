@@ -6,7 +6,7 @@ tags:
 - Project
 - DevOps
 - Platformization
-title: '"Message-Based Architecture and Operations-Centric Design"'
+title: 'Message-Based Architecture and Operations-Centric Design'
 ---
 > `gpt-4-turbo` has translated this article into English.
 

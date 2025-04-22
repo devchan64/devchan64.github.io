@@ -26,13 +26,18 @@
   const fetchPostIndex = async () => {
     const isEnglish = location.pathname.startsWith("/en/");
     const path = isEnglish ? "/en/posts.json" : "/posts.json";
+
   
     const posts = await fetch(path).then((res) => res.json());
-    const slugToTitle = {};
+    const slugToTitle = {};    
   
     posts.forEach((post) => {
-      slugToTitle[post.url] = post.title;
-    });
+      if(isEnglish){
+        slugToTitle[post.url.replace("/en/","/")] = post.title;
+      }else{
+        slugToTitle[post.url] = post.title;
+      }      
+    });    
   
     return slugToTitle;
   };  

@@ -6,8 +6,7 @@ tags:
 - Business Connection
 - Technical Debt
 - Project
-title: 'Case Study: Revamping the Edge + Cloud Platform Architecture to Secure a Technological
-  Foundation and Enable Scalable Replication'
+title: 'Case Study: Revamping the Edge + Cloud Platform Architecture to Secure a Technological Foundation and Enable Scalable Replication'
 ---
 > `gpt-4-turbo` has translated this article into English.
 

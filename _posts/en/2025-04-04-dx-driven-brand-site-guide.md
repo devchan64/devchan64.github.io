@@ -5,7 +5,7 @@ permalink: /en/2025/04/04/dx-driven-brand-site-guide.html
 tags:
 - Organizational Culture
 - Project
-title: '"Separating Design and Content, Operating with DX"'
+title: 'Separating Design and Content, Operating with DX'
 ---
 > `gpt-4-turbo` has translated this article into English.
 ---

@@ -5,7 +5,7 @@ permalink: /en/2025/04/09/lessons-from-my-manager-experience.html
 tags:
 - Leadership
 - Organizational Culture
-title: '"Leadership Lessons Learned While Working as a Manager"'
+title: 'Leadership Lessons Learned While Working as a Manager'
 ---
 > `gpt-4-turbo` has translated this article into English.
 

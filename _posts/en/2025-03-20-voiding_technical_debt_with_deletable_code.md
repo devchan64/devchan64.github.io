@@ -6,7 +6,7 @@ tags:
 - Project
 - Technical Debt
 - Design Philosophy
-title: '"Strategies to Avoid Technical Debt Through Removable Code"'
+title: 'Strategies to Avoid Technical Debt Through Removable Code'
 ---
 > `gpt-4-turbo` has translated this article into English.
 

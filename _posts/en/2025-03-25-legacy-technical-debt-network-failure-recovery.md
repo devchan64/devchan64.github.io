@@ -5,7 +5,7 @@ permalink: /en/2025/03/25/legacy-technical-debt-network-failure-recovery.html
 tags:
 - Project
 - Bottleneck resolution
-title: '"Strategic Solutions to Network Failures by Addressing Legacy Technical Debt"'
+title: 'Strategic Solutions to Network Failures by Addressing Legacy Technical Debt'
 ---
 > `gpt-4-turbo` has translated this article into English.
 ---

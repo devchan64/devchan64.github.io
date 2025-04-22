@@ -5,7 +5,7 @@ permalink: /en/2025/04/11/not-tech-debt-just-ignorance.html
 tags:
 - Design Philosophy
 - Technical Debt
-title: '"It''s Not Technical Debt, It''s Just What We Didn''t Know"'
+title: 'It''s Not Technical Debt, It''s Just What We Didn''t Know'
 ---
 > `gpt-4-turbo` has translated this article into English.
 

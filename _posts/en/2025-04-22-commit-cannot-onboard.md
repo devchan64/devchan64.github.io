@@ -6,8 +6,8 @@ tags:
 - Knowledge Base
 - Leadership
 - Organizational Culture
-title: '"Onboarding Doesn''t Happen Through Commits — Why Knowledge Disappears in
-  Startups"'
+title: Onboarding Doesn''t Happen Through Commits — Why Knowledge Disappears in
+  Startups
 ---
 
 > `gpt-4-turbo` has translated this article into English.
