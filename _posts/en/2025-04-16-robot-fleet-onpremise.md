@@ -1,5 +1,5 @@
 ---
-date: 2025-04-22
+date: 2025-04-26
 permalink: /en/2025/04/16/robot-fleet-onpremise.html
 tags:
 - Platformization
