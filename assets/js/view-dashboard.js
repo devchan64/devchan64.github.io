@@ -27,23 +27,23 @@
     const isEnglish = location.pathname.startsWith("/en/");
     const path = isEnglish ? "/en/posts.json" : "/posts.json";
 
-  
+
     const posts = await fetch(path).then((res) => res.json());
-    const slugToTitle = {};    
-  
+    const slugToTitle = {};
+
     posts.forEach((post) => {
-      if(isEnglish){
-        slugToTitle[post.url.replace("/en/","/")] = post.title;
-      }else{
+      if (isEnglish) {
+        slugToTitle[post.url.replace("/en/", "/")] = post.title;
+      } else {
         slugToTitle[post.url] = post.title;
-      }      
-    });    
-  
+      }
+    });
+
     return slugToTitle;
-  };  
+  };
 
   const fetchViewCounts = async () => {
-    const res = await fetch(`${API_URL}?days=${DAYS}&limit=${MAX_ITEMS}`,{
+    const res = await fetch(`${API_URL}?days=${DAYS}&limit=${MAX_ITEMS}`, {
       method: "GET",
       headers: {
         "Authorization": `Bearer ${API_KEY}`
@@ -66,16 +66,18 @@
       const filteredViews = views.filter(item =>
         dateSlugRegex.test(item.slug)
       );
-      
+
       if (!filteredViews.length) {
         container.innerHTML = "<p class='error'>No view records found.</p>";
         return;
       }
 
+      const isEnglish = location.pathname.startsWith("/en/");
+
       const labels = [];
       const counts = [];
       const listItems = filteredViews.map((item) => {
-        const url = item.slug;
+        const url = isEnglish ? "/en" + item.slug : item.slug;
         const title = slugToTitle[url] ?? inferTitle(url);
         const label = trimLabel(title);
         labels.push(label);
