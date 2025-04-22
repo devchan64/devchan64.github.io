@@ -46,7 +46,7 @@ Scrum은 이제 회의로 변질되었고, 정보 공유라는 이름 아래
 - 우리 팀의 Pre-snap은 **매일 1회, 인당 1분**으로 제한됩니다.  
 - 포맷은 명확합니다:  
   `한 일 / 할 일 / 요청 (Did / Doing / Need)`
-- 질문은 Pre-snap 이후 따로 진행하며, **피드백(feedback)은 비동기(asynchronous)**로 공유합니다.
+- 질문은 Pre-snap 이후 따로 진행하며, 피드백(feedback)은 비동기(asynchronous)로 공유합니다.
 
 Pre-snap은 회의(meeting)가 아니라,  
 **실행을 위한 정렬**입니다.
