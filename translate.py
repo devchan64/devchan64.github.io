@@ -125,7 +125,7 @@ def main():
         # 🔁 본문 번역
         translated_body = translate_body(body)
 
-        notice = "> `gpt-4-turbo` has translated this article into English.\n\n---\n\n"
+        notice = "\n> `gpt-4-turbo` has translated this article into English.\n---\n\n"
         translated_body = notice + translated_body
 
         new_front = reconstruct_front_matter(front_dict)
