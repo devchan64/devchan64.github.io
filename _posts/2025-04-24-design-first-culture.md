@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "코드 컨벤션의 역할 변화와 Design-First로 넘어가는 개발 문화"
 date: 2025-04-24
 tags: [설계철학]
