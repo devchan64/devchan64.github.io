@@ -1,6 +1,7 @@
 title: "Dev.Chan64's Blog"
 description: "Tech Generalist and IoT System Architect with expertise in product execution and cross-domain system integration."
 theme: minima
+future: true
 
 url: "https://devchan64.github.io"
 baseurl: ""
