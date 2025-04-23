@@ -1,1 +1,1 @@
-bundle exec jekyll build --trace
+bundle exec jekyll build --verbose
