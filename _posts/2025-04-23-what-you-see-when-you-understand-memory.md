@@ -120,11 +120,11 @@ def append_items():
 
 ```javascript
 function setup() {
-    const el = document.getElementById("btn");
-    el.addEventListener("click", () => {
-        // 무심코 클로저를 만들어 외부 컨텍스트를 참조
-        console.log("clicked");
-    });
+  const el = document.getElementById("btn");
+  el.addEventListener("click", () => {
+    // 무심코 클로저를 만들어 외부 컨텍스트를 참조
+    console.log("clicked");
+  });
 }
 ```
 
@@ -183,8 +183,8 @@ public void load(String key) {
 우리는 앞에서 제어 유닛과 저장 프로그램 개념을 살펴보았습니다.  
 이 구조를 이해하면, 메모리는 단순한 공간이 아니라 **프로그램의 흐름을 지탱하는 핵심**이라는 것을 깨닫게 됩니다.
 
-- 제어 유닛은 명령어를 메모리에서 불러와 해석합니다.  
-- 명령어는 데이터와 함께, 같은 공간에 저장됩니다.  
+- 제어 유닛은 명령어를 메모리에서 불러와 해석합니다.
+- 명령어는 데이터와 함께, 같은 공간에 저장됩니다.
 - 이 저장된 흐름이 곧 프로그램이며, 프로그램은 흐름을 설계한 구조물입니다.
 
 이 사고의 전환은 개발자를 변화시킵니다.
@@ -192,7 +192,7 @@ public void load(String key) {
 단순히 변수명을 잘 짓고, 로직을 효율적으로 구성하는 것을 넘어서,  
 이제는 이런 질문을 던지게 됩니다:
 
-- **이 시스템은 자원을 어떻게 순환시키는가?**  
+- **이 시스템은 자원을 어떻게 순환시키는가?**
 - **이 흐름은 구조적으로 설계되어 있는가?**
 
 그때 비로소 개발자는 단순한 구현자가 아니라,  
@@ -214,8 +214,8 @@ public void load(String key) {
 이 글의 목적은 메모리를 튜닝하는 팁을 나열하려는 것이 아닙니다.  
 **개발자의 관점이 바뀌는 지점**, 그 전환점을 함께 들여다보자는 제안입니다.
 
-- 왜 시스템은 느려지는가?  
-- 왜 GC는 때때로 도움이 되지 않는가?  
+- 왜 시스템은 느려지는가?
+- 왜 GC는 때때로 도움이 되지 않는가?
 - 왜 같은 기능의 코드가 성능 차이를 보이는가?
 
 그 모든 답은 **메모리 위에 있습니다.**  
@@ -242,64 +242,71 @@ public void load(String key) {
 
 **증상**: 시간이 지날수록 메모리 사용량이 줄지 않고 계속 증가하며, 결국 시스템이 느려지거나 종료됩니다.  
 **원리**: 사용이 끝난 객체가 GC 대상에서 제외되거나, 수동 할당된 메모리가 해제되지 않아 힙에 남습니다.  
-**해결 전략**:  
-- 반복 호출되는 함수의 지역 상태를 확인하고, 루트 객체와의 참조 관계를 끊습니다.  
+**해결 전략**:
+
+- 반복 호출되는 함수의 지역 상태를 확인하고, 루트 객체와의 참조 관계를 끊습니다.
 - 객체 수명이 길어지는 원인을 분석합니다.  
-**도구**: `Valgrind`, `AddressSanitizer`, `Memory Profiler`
+  **도구**: `Valgrind`, `AddressSanitizer`, `Memory Profiler`
 
 ## 2. 잘못된 메모리 참조 (Invalid Memory Access)
 
 **증상**: NullPointerException, segmentation fault, 배열 경계 초과 등의 예외 발생  
 **원리**: 유효하지 않은 포인터, 해제된 객체 참조, 경계 외 접근  
-**해결 전략**:  
-- 포인터 유효성 검사를 철저히 하며, 언어별 참조 안전 패턴을 학습합니다.  
+**해결 전략**:
+
+- 포인터 유효성 검사를 철저히 하며, 언어별 참조 안전 패턴을 학습합니다.
 - 자동화된 정적 분석 도구를 사용하여 코딩 시점에 오류를 발견합니다.  
-**도구**: `GDB`, `Valgrind`, `AddressSanitizer`
+  **도구**: `GDB`, `Valgrind`, `AddressSanitizer`
 
 ## 3. 메모리 단편화 (Memory Fragmentation)
 
 **증상**: 충분한 메모리 양이 있음에도 대용량 할당이 실패하거나, 할당/해제 시간이 점점 길어짐  
 **원리**: 자주 할당되고 해제되는 다양한 크기의 블록으로 인해 힙이 조각화됨  
-**해결 전략**:  
-- 동일 크기의 메모리 블록을 사용하는 `Memory Pool` 또는 `Slab Allocator` 구조를 적용합니다.  
+**해결 전략**:
+
+- 동일 크기의 메모리 블록을 사용하는 `Memory Pool` 또는 `Slab Allocator` 구조를 적용합니다.
 - 자주 할당되는 객체는 캐싱하거나 재사용 구조를 설계합니다.  
-**도구**: Slab Allocator, jemalloc, tcmalloc
+  **도구**: Slab Allocator, jemalloc, tcmalloc
 
 ## 4. 버퍼 오버플로 (Buffer Overflow)
 
 **증상**: 갑작스러운 크래시, 스택 손상, 예기치 않은 동작  
 **원리**: 고정된 배열의 범위를 초과하여 데이터를 쓰는 경우 발생  
-**해결 전략**:  
-- 안전한 함수(`strncpy`, `snprintf`)를 사용하고, 모든 배열 연산에 크기 검사를 추가합니다.  
+**해결 전략**:
+
+- 안전한 함수(`strncpy`, `snprintf`)를 사용하고, 모든 배열 연산에 크기 검사를 추가합니다.
 - 컴파일러 플래그로 오버플로 감지를 활성화합니다.  
-**도구**: `AddressSanitizer`, `Stack Smashing Protector (SSP)`
+  **도구**: `AddressSanitizer`, `Stack Smashing Protector (SSP)`
 
 ## 5. GC 관련 문제 (Garbage Collection Issues)
 
 **증상**: 간헐적인 지연, pause, 메모리 회수 실패  
 **원리**: 참조가 끊기지 않은 객체가 GC 루트에 남아 회수되지 않음  
-**해결 전략**:  
-- 객체 참조 주기를 명확히 구분하고, `WeakReference` 등을 활용합니다.  
+**해결 전략**:
+
+- 객체 참조 주기를 명확히 구분하고, `WeakReference` 등을 활용합니다.
 - GC 로그를 분석하여 회수되지 않는 객체 패턴을 파악합니다.  
-**도구**: `G1GC`, `VisualVM`, `Memory Analyzer`
+  **도구**: `G1GC`, `VisualVM`, `Memory Analyzer`
 
 ## 6. 캐시 오염 (Cache Pollution)
 
 **증상**: 캐시 미스 증가, 성능 저하, 데이터 지역성 감소  
 **원리**: 자주 사용되지 않는 데이터가 캐시에 들어가 자주 쓰이는 데이터가 밀려남  
-**해결 전략**:  
-- 데이터 접근 순서를 재설계하여 공간 지역성과 시간 지역성을 높입니다.  
+**해결 전략**:
+
+- 데이터 접근 순서를 재설계하여 공간 지역성과 시간 지역성을 높입니다.
 - Hot/Cold 데이터를 분리 저장하고, 구조체 정렬을 고려합니다.  
-**도구**: `Cachegrind`, `Intel VTune`
+  **도구**: `Cachegrind`, `Intel VTune`
 
 ## 7. 데이터 레이스 (Data Race)
 
 **증상**: 멀티스레드 환경에서 불규칙한 동작, 변수 값이 예상과 다름  
 **원리**: 두 개 이상의 스레드가 동기화 없이 동일한 메모리를 동시에 쓰려고 할 때 발생  
-**해결 전략**:  
-- 공유 자원 접근 시 `Mutex`, `Lock`, `Atomic` 등으로 명확하게 보호합니다.  
+**해결 전략**:
+
+- 공유 자원 접근 시 `Mutex`, `Lock`, `Atomic` 등으로 명확하게 보호합니다.
 - 락의 범위와 소유권을 문서화하고, 테스트에서 레이스 조건을 검출합니다.  
-**도구**: `Helgrind`, `ThreadSanitizer`, `Concurrency Visualizer`
+  **도구**: `Helgrind`, `ThreadSanitizer`, `Concurrency Visualizer`
 
 ## 마무리
 
@@ -333,4 +340,3 @@ public void load(String key) {
 - Serverless: Lambda 메모리 설정과 콜드 스타트 전략
 - Game Dev: 오브젝트 풀링을 통한 프레임 유지
 - Chrome: 프로세스 단위 메모리 리밋 후 재시작
-
