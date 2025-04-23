@@ -310,7 +310,7 @@ Design-First가 필요하다고 말해왔습니다.
 
 ## 첨부 : RFC (Request for Comments)란 무엇인가요?
 
-**RFC(Request for Comments)**는 팀 또는 조직 내에서  
+**RFC**(Request for Comments)는 팀 또는 조직 내에서  
 새로운 설계, 정책, 구조 변경을 제안하고  
 그에 대한 피드백을 받기 위해 작성하는 문서입니다.
 
@@ -346,7 +346,7 @@ RFC는 단순한 문서가 아니라,
 
 ## 첨부 : ADR (Architecture Decision Record)란 무엇인가요?
 
-**ADR(Architecture Decision Record)**는 소프트웨어 시스템을 설계하거나 구성할 때  
+**ADR**(Architecture Decision Record)는 소프트웨어 시스템을 설계하거나 구성할 때  
 내렸던 특정 결정의 배경과 이유, 대안을 명확하게 기록하는 문서입니다.
 
 ### 목적
