@@ -272,7 +272,7 @@ Design-First가 필요하다고 말해왔습니다.
 | 1968      | Edsger Dijkstra, 구조적 프로그래밍 주장 (“Go To Statement Considered Harmful”) |
 | 1974      | Kernighan & Plauger, 『The Elements of Programming Style』 출간                |
 | 1978      | K&R C 스타일 등장, 이후 각 언어별 컨벤션 형성                                  |
-| 1990s\*\* | Java, C++, Python 등 언어 중심 스타일 가이드 확산                              |
+| 1990s     | Java, C++, Python 등 언어 중심 스타일 가이드 확산                              |
 | 2010s     | ESLint, PEP8, gofmt 등 린터/포매터의 자동화 도입                               |
 | 2020s~    | Prettier, Black, clang-format 등 도구 중심 자동 포맷 정착                      |
 
