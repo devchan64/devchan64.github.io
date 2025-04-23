@@ -48,20 +48,20 @@ jobs:
           ruby-version: '3.1' # Not needed with a .ruby-version file
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
           cache-version: 0 # Increment this number if you need to re-download cached gems
-          fetch-depth: 0
 
-      - name: Debug - List checked-out files
-        run: ls -alR
-    
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
+
       - name: Build with Jekyll
         # Outputs to the './_site' directory by default
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
-          JEKYLL_ENV: production      
-
+          JEKYLL_ENV: production
+      
+      - name: Debug - List checked-out files
+        run: ls -alR
+      
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:

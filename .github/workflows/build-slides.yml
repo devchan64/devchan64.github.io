@@ -22,9 +22,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Debug - List checked-out files
-        run: ls -alR
-
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
