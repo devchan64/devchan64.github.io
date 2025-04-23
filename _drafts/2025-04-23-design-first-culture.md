@@ -1,9 +1,9 @@
---
+---
 layout: post
 title: "코드 컨벤션의 역할 변화와 Design-First로 넘어가는 개발 문화"
 date: 2025-04-23
 categories: architecture devculture collaboration
---
+---
 
 # 1. 코드 컨벤션, 아직도 중요한가요?
 
