@@ -110,7 +110,7 @@ def main():
 
         front_raw, body, front_dict = split_front_matter(content)
 
-        # 🔁 title 번역
+        # title 번역
         if "title" in front_dict:
             front_dict["title"] = translate_title(front_dict["title"])
 
@@ -122,7 +122,7 @@ def main():
         front_dict["permalink"] = generate_permalink(path)
 
 
-        # 🔁 본문 번역
+        # 본문 번역
         translated_body = translate_body(body)
 
         notice = "\n> `gpt-4-turbo` has translated this article into English.\n\n---\n\n"
