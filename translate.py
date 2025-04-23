@@ -20,7 +20,9 @@ def reconstruct_front_matter(front_dict):
     return "---\n" + yaml.dump(front_dict, allow_unicode=True) + "---\n"
 
 # 우선 대체할 수 있는 표현을 정의
-BASELINE_TAGS = ["Project", "Design Philosophy", "Leadership", "Technical Debt"]
+BASELINE_TAGS = ["Project", "Design Philosophy", "Leadership", "Technical Debt", 
+                 "Organizational Culture", "Knowledge Base", "Memory Management",
+                 "Onboarding"]
 
 def translate_tags(tags: list[str]) -> list[str]:
     translated = []
