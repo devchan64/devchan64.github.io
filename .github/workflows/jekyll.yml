@@ -10,11 +10,12 @@ on:
   # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
-    paths:    
+    paths:
+    - '.github/**/*'
     - '_includes/**/*'
     - '_layouts/**/*'
     - '_posts/**/*'
-    - '_sass/**/*'
+    - '_sass/**/*'    
     - 'assets/**/*'
     - 'en/**/*'
     - 'pages/**/*'
