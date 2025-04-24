@@ -31,3 +31,7 @@ include:
 exclude:
   - marp
   - vendor
+  - "*.sh"
+  - Gemfile
+  - Gemfile.lock
+  - supabase
