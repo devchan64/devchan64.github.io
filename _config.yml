@@ -11,6 +11,9 @@ kramdown:
   hard_wrap: true
   syntax_highlighter: rouge
 
+plugins:
+  - jekyll-feed
+  
 defaults:
   - scope:
       path: "_posts/*"
