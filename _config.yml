@@ -13,7 +13,12 @@ kramdown:
 
 plugins:
   - jekyll-feed
+  - jekyll-sitemap
 
+collections:
+  tags:
+    output: true
+    
 sass:
   style: compressed
 

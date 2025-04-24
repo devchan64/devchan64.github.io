@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /assets/
+Disallow: /guestbook/
+Disallow: /views/
+Disallow: /pages/
+Allow: /
+
+Sitemap: https://devchan64.github.io/sitemap.xml
