@@ -13,7 +13,10 @@ kramdown:
 
 plugins:
   - jekyll-feed
-  
+
+sass:
+  style: compressed
+
 defaults:
   - scope:
       path: "_posts/*"
