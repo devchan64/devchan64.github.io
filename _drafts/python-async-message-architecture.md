@@ -4,12 +4,6 @@ date: 2025-04-15
 tags: [설계철학, 프로젝트]
 ---
 
-# Python 기반 비동기 메시지 처리 구조 설계
-
----
-
-## 1. 개요 (Overview)
-
 # 1. 개요 (Overview)
 
 본 문서는 AI 기반 로봇 제어 시스템을 개발하고,  
@@ -33,9 +27,9 @@ Queue를 통한 통신과 처리 분리 전략을 중심으로,
 
 ---
 
-## 2. 메시지 기반 구조 이해 (Message-driven Architecture)
+# 2. 메시지 기반 구조 이해 (Message-driven Architecture)
 
-### 2.1 상태 중심 구조의 문제점
+## 2.1 상태 중심 구조의 문제점
 
 상태 중심 시스템(State-centric System)에서는 다음과 같은 현상이 발생한다:
 
@@ -43,7 +37,7 @@ Queue를 통한 통신과 처리 분리 전략을 중심으로,
 - 상태 전이의 복잡화: 로직 곳곳에 분산된 조건 분기문이 상태 전이 흐름을 모호하게 만든다.
 - 로직 커플링: 통신, 상태, 처리 로직이 강하게 결합되어 변경에 취약해진다.
 
-### 2.2 메시지 기반 처리 모델
+## 2.2 메시지 기반 처리 모델
 
 메시지 중심 처리(Message-driven Processing)는 다음과 같은 접근을 택한다:
 
@@ -52,7 +46,7 @@ Queue를 통한 통신과 처리 분리 전략을 중심으로,
 - FSM(Finite State Machine)을 통해 상태 전이만을 담당하고,
   실제 비즈니스 처리는 별도의 핸들러 코루틴으로 위임한다.
 
-### 2.3 FSM 기반 전이 모델
+## 2.3 FSM 기반 전이 모델
 
 FSM(유한 상태 기계) 기반 모델은 다음을 정의한다:
 
@@ -62,14 +56,14 @@ FSM(유한 상태 기계) 기반 모델은 다음을 정의한다:
 
 메시지 기반 FSM 모델 다이어그램:
 
-<mermaid>
+'''mermaid
 stateDiagram-v2
     [*] --> Idle
     Idle --> Working : start(message)
     Working --> Idle : stop(message)
-</mermaid>
+'''
 
-### 2.4 async/await와 메시지 기반 처리의 궁합
+## 2.4 async/await와 메시지 기반 처리의 궁합
 
 Python의 `async/await` 구문은 다음 이유로 메시지 기반 아키텍처에 적합하다:
 
