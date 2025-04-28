@@ -1,5 +1,5 @@
 ---
-date: 2025-04-16
+date: 2025-04-29
 layout: post
 permalink: /en/2025/04/29/api-gw-philosophy.html
 summary: API Gateway는 선언(OpenAPI), 인증(OAuth), 흐름 제어가 분산된 시대를 통합하는 실천 도구다. 설계자는 흐름을
