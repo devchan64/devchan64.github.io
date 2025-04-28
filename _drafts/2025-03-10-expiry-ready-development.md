@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Expiry-Ready 개발론: 스타트업을 위한 지식관리 최소화 전략"
+title: "Expiry-Ready 개발 방법 주장: 스타트업을 위한 지식관리 최소화 전략"
 date: 2025-03-10
 tags: [설계철학, 조직문화, 기술부채, 스타트업]
 ---
