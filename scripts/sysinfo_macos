@@ -1,0 +1,27 @@
+do shell script "
+OUTPUT=~/Desktop/sysinfo_report.txt; 
+echo '========== macOS System Information ==========' > \"$OUTPUT\"; 
+echo 'Host Name: ' $(scutil --get ComputerName) >> \"$OUTPUT\"; 
+echo 'Model: ' $(sysctl -n hw.model) >> \"$OUTPUT\"; 
+echo 'Serial Number: ' $(system_profiler SPHardwareDataType | grep 'Serial Number' | awk '{print $NF}') >> \"$OUTPUT\"; 
+echo 'macOS Version: ' $(sw_vers -productVersion) >> \"$OUTPUT\"; 
+echo 'Kernel Version: ' $(uname -a) >> \"$OUTPUT\"; 
+echo 'Uptime: ' $(uptime) >> \"$OUTPUT\"; 
+echo >> \"$OUTPUT\"; 
+echo '========== CPU Information ==========' >> \"$OUTPUT\"; 
+sysctl -n machdep.cpu.brand_string >> \"$OUTPUT\"; 
+echo 'Physical Cores: ' $(sysctl -n hw.physicalcpu) >> \"$OUTPUT\"; 
+echo 'Logical CPUs: ' $(sysctl -n hw.logicalcpu) >> \"$OUTPUT\"; 
+echo >> \"$OUTPUT\"; 
+echo '========== Memory Information ==========' >> \"$OUTPUT\"; 
+mem=$(sysctl -n hw.memsize); echo \"Total Memory: $((mem / 1024 / 1024 / 1024)) GB\" >> \"$OUTPUT\"; 
+echo >> \"$OUTPUT\"; 
+echo '========== Disk Information ==========' >> \"$OUTPUT\"; 
+df -h / >> \"$OUTPUT\"; 
+echo >> \"$OUTPUT\"; 
+echo '========== Logged-in Users ==========' >> \"$OUTPUT\"; 
+users >> \"$OUTPUT\"; 
+echo >> \"$OUTPUT\"; 
+echo '========== User Sessions ==========' >> \"$OUTPUT\"; 
+who >> \"$OUTPUT\"; 
+"
