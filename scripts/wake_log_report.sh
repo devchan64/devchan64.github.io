@@ -7,8 +7,8 @@ for i in {0..6}; do
   TARGET_DATE=$(date -v -${i}d "+%Y-%m-%d")
   EVENT_LINE=$(pmset -g log \
     | grep "$TARGET_DATE" \
-    | grep -A 30 -e "DarkWake to FullWake from Deep Idle" -e  "DarkWake from Deep Idle" \
-    | grep "Display is turned on" \
+    | grep -B 10 -A 2 "Display is turned on"\
+    | grep " Wake Requests" \
     | head -n 1)
   EVENT_LINE+=$(pmset -g log \
     | grep "$TARGET_DATE" \
