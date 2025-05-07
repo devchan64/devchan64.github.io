@@ -1,6 +1,5 @@
 <header class="layout-header">
   <h1>{{ site.title }}</h1>
-  <h2>{{ page.title }}</h2>
   {% unless page.url == "/" or page.url == "/en/" %}
   <a href="{% if is_english %}/en/{% else %}/{% endif %}" class="button">
     {% if is_english %}Go Home{% else %}홈으로 가기{% endif %}
