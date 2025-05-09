@@ -74,7 +74,7 @@
   
     <nav class="pagination">
       {% if previous_post %}
-        <a class="prev" href="{{ next_post.url | relative_url }}">&laquo; {{ previous_post.title }}</a>
+        <a class="prev" href="{{ previous_post.url | relative_url }}">&laquo; {{ previous_post.title }}</a>
       {% else %}
         <div></div>
       {% endif %}
