@@ -23,7 +23,7 @@ tags: [설계철학]
 
 그 흐름은 이렇게 요약됩니다:
 
-> **EDA → MSA → Metrics → O11y**
+> **EDA → MSA → Metrics → O11y(_Observability_)**
 
 그리고 그 안에서 저는  
 **분산 컴퓨팅**, **데이터 중심 설계**,  
