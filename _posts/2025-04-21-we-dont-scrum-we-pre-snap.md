@@ -31,33 +31,48 @@ tags: [조직문화, 애자일, 리더십]
 
 # 2. 우리는 스크럼하지 않습니다. 우리는 Pre-snap을 합니다.
 
-### 스크럼은 더 이상 기민하지 않습니다
+### 2-1. 스크럼은 실행을 방해하는 형식이 되었습니다
 
-Scrum은 이제 회의로 변질되었고, 정보 공유라는 이름 아래  
-실행(execution)을 늦추는 구조로 자리잡았습니다.  
-계획과 회의가 많아질수록 민첩성은 사라집니다.
+Scrum은 본래 민첩함을 추구하는 방법이었지만,  
+현실에서의 스크럼은 **회의와 계획 중심의 형식**으로 굳어졌습니다.  
+‘정보 공유’를 명목으로 한 정례 회의들은 실행을 늦추고,  
+**실행보다 회의가 우선되는 구조**로 변질되었습니다.
 
-### 스프린트는 Lock-in 되지 못합니다
+> 계획이 많아질수록 민첩성은 사라집니다.
 
-| “Once a Sprint begins, no one is allowed to interfere with the work of the Scrum Team.”
-| “Requirements are frozen during a Sprint, allowing a team to focus on implementation and reach a stable product increment.”
+---
 
-일정과 자주 바뀌는 요구사항들은 스프린트를 유지하지 못하게 합니다.
-스크럼과 스프린트에 의한 프로세서는 동작하지 못합니다
+### 2-2. 스프린트는 Lock-in되지 못합니다
 
-### Pre-snap은 정렬이고, 실행입니다
+> “Once a Sprint begins, no one is allowed to interfere with the work of the Scrum Team.”  
+> “Requirements are frozen during a Sprint, allowing a team to focus on implementation and reach a stable product increment.”  
+> (Ken Schwaber & Jeff Sutherland, SCRUM Development Process, OOPSLA 1995)
+
+현실의 스프린트는 **요구사항의 잦은 변경과 외부 요청**으로 인해  
+**집중된 실행을 보장하지 못하는 형식적 장치**가 되어버렸습니다.  
+결국, 스크럼은 이상만 남고 실행은 무너진 구조가 됩니다.
+
+---
+
+### 2-3. Pre-snap은 실행 직전, 전략을 재확인하는 정렬입니다
 
 우리는 미식축구에서 배웁니다.  
-**Pre-snap**은 플레이를 시작하기 전,  
-모든 포지션이 **짧은 시간 내 정렬**(**alignment**)되는 순간입니다.
+**Pre-snap**은 공격이 시작되기 전,  
+쿼터백이 **수비 진형을 읽고, 전략을 확인하고, 팀 전체를 정렬**하는 순간입니다.
 
-- 우리 팀의 Pre-snap은 **매일 1회, 인당 1분**으로 제한됩니다.
-- 포맷은 명확합니다:  
-  `한 일 / 할 일 / 요청 (Did / Doing / Need)`
-- 질문은 Pre-snap 이후 따로 진행하며, 피드백(feedback)은 비동기(asynchronous)로 공유합니다.
+우리 팀의 Pre-snap도 마찬가지입니다:
 
-Pre-snap은 회의(meeting)가 아니라,  
-**실행을 위한 정렬**입니다.
+- 매일 1회, **인당 1분**
+- 포맷은 간단합니다: `한 일 / 할 일 / 요청 (Did / Doing / Need)`
+- 질문은 Pre-snap 이후, 피드백은 비동기로 진행합니다
+
+Pre-snap은 **회의가 아닙니다.**  
+그것은 팀 전체가 **전략적 방향을 확인하고, 실행 흐름을 재정렬하는 순간**입니다.  
+우리는 매일 전략을 짧게 되짚고, **불확실한 플레이를 줄입니다.**
+
+> 우리는 실행 전에 묻습니다:  
+> **“지금 이 방향이 맞는가?”**  
+> Pre-snap은 그 질문을 매일 반복하게 하는 구조입니다.
 
 ---
 
