@@ -12,8 +12,6 @@ title: Korea's Silicon Valley Syndrome
 
 ---
 
-# Korea's Silicon Valley Syndrome
-
 ## 1. Why can't we be like Apple, Silicon Valley, or Tesla?
 
 Many startup owners say,  
