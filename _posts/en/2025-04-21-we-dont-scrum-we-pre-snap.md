@@ -36,24 +36,46 @@ Thus, although the items on the right have value, we place more value on the ite
 
 ---
 
-# 2. We don't do scrum. We Pre-snap.
+# 2. We don’t do Scrum. We Pre-snap.
 
-## Scrum is no longer agile
+### 2-1. Scrum has become a structure that delays execution
 
-Scrum has now devolved into meetings, establishing structures that delay execution under the guise of information sharing.  
-The more planning and meetings there are, the less agility remains.
+Scrum was originally designed to enable agility.  
+But in reality, it has become a **ritual of meetings and planning**.  
+Under the name of "information sharing,"  
+**execution is delayed**, and meetings often take precedence over actual progress.
 
-## Pre-snap is about alignment and execution
+> The more we plan, the less agile we become.
 
-We learn from American football.  
-**Pre-snap** is the moment before starting a play when all positions are **aligned in a short amount of time**.
+### 2-2. Sprints are no longer locked in
 
-- Our team's Pre-snap is limited to **once daily, one minute per person**.
-- The format is clear:  
-  `Did / Doing / Need`
-- Questions are addressed after Pre-snap, and **feedback is shared asynchronously**.
+> “Once a Sprint begins, no one is allowed to interfere with the work of the Scrum Team.”  
+> “Requirements are frozen during a Sprint, allowing a team to focus on implementation and reach a stable product increment.”  
+> (Ken Schwaber & Jeff Sutherland, SCRUM Development Process, OOPSLA 1995)
 
-Pre-snap is not a meeting, but an **alignment for execution**.
+In practice, sprints are often **disrupted by changing requirements and external demands**.  
+Sprints fail to ensure focused execution, and  
+the process becomes a **symbol without substance**.
+
+### 2-3. Pre-snap is about aligning and reaffirming strategy
+
+We take inspiration from American football.  
+**Pre-snap** is the moment before the play begins,  
+when the quarterback **reads the defense, confirms the play, and aligns the entire team**.
+
+In our team, Pre-snap is:
+
+- Once a day, **1 minute per person**
+- Simple format: `Did / Doing / Need`
+- Questions come after; feedback is shared asynchronously
+
+Pre-snap is **not a meeting**.  
+It’s a **strategic alignment moment for execution**.  
+Each day, we briefly revisit the plan to reduce uncertainty.
+
+> Before we execute, we ask:  
+> **"Is this still the right direction?"**  
+> Pre-snap exists to make sure we ask this—every single day.
 
 ---
 
