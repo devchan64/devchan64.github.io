@@ -37,6 +37,14 @@ Scrum은 이제 회의로 변질되었고, 정보 공유라는 이름 아래
 실행(execution)을 늦추는 구조로 자리잡았습니다.  
 계획과 회의가 많아질수록 민첩성은 사라집니다.
 
+### 스프린트는 Lock-in 되지 못합니다
+
+| “Once a Sprint begins, no one is allowed to interfere with the work of the Scrum Team.”
+| “Requirements are frozen during a Sprint, allowing a team to focus on implementation and reach a stable product increment.”
+
+일정과 자주 바뀌는 요구사항들은 스프린트를 유지하지 못하게 합니다.
+스크럼과 스프린트에 의한 프로세서는 동작하지 못합니다
+
 ### Pre-snap은 정렬이고, 실행입니다
 
 우리는 미식축구에서 배웁니다.  
