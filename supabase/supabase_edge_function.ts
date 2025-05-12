@@ -124,7 +124,7 @@ async function get(url: URL, supabase: ReturnType<typeof createClient>) {
   for (const row of data ?? []){
     const { slug, viewed_at } = row;
     const dateStr = new Date(viewed_at).toISOString().slice(0, 10);
-    console.log("dateStr", JSON.stringify(dateStr));
+    
     if (totalByDate[dateStr] !== undefined) {
       totalByDate[dateStr] += 1;
     }
@@ -141,7 +141,7 @@ async function get(url: URL, supabase: ReturnType<typeof createClient>) {
     countBySlug[slug].count += 1;
     countBySlug[slug].counts_day[dateStr] += 1;
   }
-  console.log("countBySlug", JSON.stringify(countBySlug));
+  
   const bySlug = Object.entries(countBySlug).map(([slug, { count, counts_day }])=>({
       slug,
       count,
