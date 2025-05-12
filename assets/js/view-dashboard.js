@@ -49,10 +49,8 @@
         "Authorization": `Bearer ${API_KEY}`
       }
     });
-    console.log("res",res);
-    const result = res.json();    
-    console.log("result",JSON.stringify(result));
-    return result;
+    const result = await res.json();    
+    return result.by_slug;
   };
 
   const render = async () => {
