@@ -2,15 +2,10 @@
 import { serve } from "https://deno.land/std/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-// 허용된 CORS Origin 목록
-const ALLOWED_ORIGINS = [
-  "https://devchan64.github.io",
-  // "http://localhost:4000"  // 로컬 테스트용
-];
-
 // CORS 헤더 설정
 const corsHeaders = {
-  "Access-Control-Allow-Origin": ALLOWED_ORIGINS[0],
+  // "http://localhost:4000" 로컬 테스트용
+  "Access-Control-Allow-Origin": "https://devchan64.github.io", 
   "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type"
 };
