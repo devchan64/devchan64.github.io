@@ -39,7 +39,7 @@ tags: [설계철학]
 
 이 과정에서 자연스럽게 다음과 같은 사고 흐름을 밟아왔습니다:
 
-### ▸ EDA (Event-Driven Architecture)
+### EDA (Event-Driven Architecture)
 
 계산은 필요할 때만 일어나야 한다고 생각했습니다.  
 불필요한 연산을 줄이고, 시스템이 반응할 수 있는 조건을 정의하려면  
@@ -48,7 +48,7 @@ tags: [설계철학]
 이 방식은 자원을 아끼는 것이 목적이었지만,  
 결국 시스템 흐름을 **관측 가능한 단위로 나누는 첫 출발**이기도 했습니다.
 
-### ▸ MSA (Microservices Architecture)
+### MSA (Microservices Architecture)
 
 흐름을 더 작게 나누기 위해, 저는 점점 책임 단위를 나누게 되었습니다.  
 경계가 생기고, 흐름이 독립되면 **서비스 간의 결합도는 낮아지고**,  
@@ -58,7 +58,7 @@ tags: [설계철학]
 자연스럽게 시스템은 분산되었고,  
 그 결과 **MSA의 형태를 갖추게 되어가고 있었습니다.**
 
-### ▸ Metrics (Data-Driven Development)
+### Metrics (Data-Driven Development)
 
 분산된 흐름을 관리하려면,  
 "무슨 일이 벌어졌는가"를 **데이터로 해석할 수 있어야** 했습니다.  
@@ -69,7 +69,7 @@ tags: [설계철학]
 코드가 아니라 **데이터를 기준으로 시스템을 이해하는 방식**이 자연스럽게 자리 잡았습니다.
 
 
-### ▸ O11y (Observability)
+### O11y (Observability)
 
 점차 저는 이런 질문에 도달하게 되었습니다:
 
