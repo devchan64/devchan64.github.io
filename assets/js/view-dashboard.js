@@ -58,7 +58,7 @@
     try {
       const [slugToTitle, views] = await Promise.all([
         fetchPostIndex(),
-        fetchViewCounts(),
+        fetchViewCounts().by_slug,
       ]);
 
       // 슬러그 필터링: post/로 시작하는 것만
