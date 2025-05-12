@@ -49,6 +49,8 @@
         "Authorization": `Bearer ${API_KEY}`
       }
     });
+    const result = res.json();
+    console.log("result",JSON.stringify(result));
     return res.json();
   };
 
@@ -58,7 +60,7 @@
     try {
       const [slugToTitle, views] = await Promise.all([
         fetchPostIndex(),
-        fetchViewCounts().by_slug,
+        fetchViewCounts(),
       ]);
 
       // 슬러그 필터링: post/로 시작하는 것만

@@ -70,6 +70,101 @@ async function limitRequest(
   return false;
 }
 
+async function get(url: URL, supabase: ReturnType<typeof createClient>) {
+  const rawDays = url.searchParams.get("days");
+  const rawLimit = url.searchParams.get("limit");
+  const days = Number(rawDays ?? 30);
+  const limit = Number(rawLimit ?? 10);
+
+  // 파라미터 유효성 검사
+  if (isNaN(days) || days < 1 || days > 365 || isNaN(limit) || limit < 1 || limit > 100) {
+    return new Response(JSON.stringify({
+      error: "Invalid query parameters",
+      days,
+      limit
+    }), {
+      status: 400,
+      headers: corsHeaders
+    });
+  }
+
+  // 조회 기준 날짜 목록 생성
+  const today = new Date();
+  today.setUTCHours(0, 0, 0, 0);
+  const dateList: string[] = [];
+  for (let i = 0; i < days; i++) {
+    const d = new Date(today);
+    d.setUTCDate(today.getUTCDate() - i);
+    dateList.push(d.toISOString().slice(0, 10));
+  }
+
+  const fromDateStr = dateList[dateList.length-1];
+
+  // Supabase에서 조회 로그 조회
+  const { data, error } = await supabase
+    .from("views")
+    .select("slug, viewed_at")
+    .gte("viewed_at", fromDateStr);
+
+  if (error) {
+    console.error("GET failed", error);
+    return new Response(JSON.stringify({
+      error: error.message,
+      details: error.details
+    }), {
+      status: 500,
+      headers: corsHeaders
+    });
+  }
+
+  const filtered_slugs = ["/", "/views/"];
+  const countBySlug: Record<string, any> = {};
+  const totalByDate = Object.fromEntries(dateList.map((d) => [d, 0]));
+
+  for (const row of data ?? []){
+    const { slug, viewed_at } = row;
+    const dateStr = new Date(viewed_at).toISOString().slice(0, 10);
+    console.log("dateStr", JSON.stringify(dateStr));
+    if (totalByDate[dateStr] !== undefined) {
+      totalByDate[dateStr] += 1;
+    }
+    if (filtered_slugs.includes(slug)) continue;
+    if (!countBySlug[slug]) {
+      countBySlug[slug] = {
+        count: 0,
+        counts_day: Object.fromEntries(dateList.map((d)=>[
+            d,
+            0
+          ]))
+      };
+    }
+    countBySlug[slug].count += 1;
+    countBySlug[slug].counts_day[dateStr] += 1;
+  }
+  console.log("countBySlug", JSON.stringify(countBySlug));
+  const bySlug = Object.entries(countBySlug).map(([slug, { count, counts_day }])=>({
+      slug,
+      count,
+      counts_day: dateList.map((date)=>({
+          date,
+          count: counts_day[date]
+        }))
+    })).sort((a, b)=>b.count - a.count).slice(0, limit);
+  const daily = dateList.map((date)=>({
+      date,
+      count: totalByDate[date]
+    }));
+  const total = daily.reduce((sum, entry)=>sum + entry.count, 0);
+
+  return {
+    by_slug: bySlug,
+    total_by_date: {
+      total,
+      daily,
+    },
+  };
+}
+
 // 서버 시작
 serve(async (req) => {
   const method = req.method;
@@ -115,59 +210,7 @@ serve(async (req) => {
 
   const url = new URL(req.url);
 
-  // ✅ GET: 조회수 집계 조회 (JavaScript로 count 처리)
-  if (method === "GET") {
-    const rawDays = url.searchParams.get("days");
-    const rawLimit = url.searchParams.get("limit");
-
-    const days = Number(rawDays ?? 30);
-    const limit = Number(rawLimit ?? 10);
-
-    // 파라미터 유효성 검사
-    if (isNaN(days) || days < 1 || days > 365 || isNaN(limit) || limit < 1 || limit > 100) {
-      return new Response(JSON.stringify({ error: "Invalid query parameters", days, limit }), {
-        status: 400,
-        headers: corsHeaders
-      });
-    }
-
-    // 조회 기준 날짜 계산
-    const fromDate = new Date();
-    fromDate.setUTCDate(fromDate.getUTCDate() - days);
-    const fromDateStr = fromDate.toISOString().slice(0, 10);
-
-    // Supabase에서 조회 로그 조회
-    const { data, error } = await supabase
-      .from("views")
-      .select("slug, viewed_at")
-      .gte("viewed_at", fromDateStr);
-
-    if (error) {
-      console.error("GET failed", error);
-      return new Response(JSON.stringify({ error: error.message, details: error.details }), {
-        status: 500,
-        headers: corsHeaders
-      });
-    }
-
-    // JavaScript로 group by + count 처리
-    const countBySlug: Record<string, number> = {};
-    for (const row of data ?? []) {
-      countBySlug[row.slug] = (countBySlug[row.slug] || 0) + 1;
-    }
-
-    // 정렬 + limit 적용
-    const result = Object.entries(countBySlug)
-      .map(([slug, count]) => ({ slug, count }))
-      .sort((a, b) => b.count - a.count)
-      .slice(0, limit);
-
-    return new Response(JSON.stringify(result), {
-      headers: { "Content-Type": "application/json", ...corsHeaders }
-    });
-  }
-
-  // ✅ POST: 슬러그 조회 기록 등록
+  // POST: 슬러그 조회 기록 등록
   if (method === "POST") {
     try {
       const { slug: rawSlug } = await req.json();
@@ -211,6 +254,14 @@ serve(async (req) => {
       });
     }
   }
+
+  // GET: 조회수 집계 조회 (JavaScript로 count 처리)
+  if (method === "GET") {
+    const result = await get(url, supabase);
+    return new Response(JSON.stringify(result), {
+      headers: { "Content-Type": "application/json", ...corsHeaders }
+    });
+  }  
 
   // 정의되지 않은 요청 처리
   return new Response("Not Found", { status: 404, headers: corsHeaders });
