@@ -2,7 +2,6 @@
 date: 2025-04-16
 permalink: /en/2025/04/16/team-building-hiring.html
 tags:
-- Platformization
 - Business Integration
 - Organizational Culture
 - Onboarding
