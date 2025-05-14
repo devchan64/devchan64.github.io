@@ -2,7 +2,7 @@
 layout: post
 title: "삭제 준비(Expiry-Ready)된 코드를 통한 기술부채 회피 전략"
 date: 2025-03-20
-tags: [프로젝트, 기술부채, 설계철학]
+tags: [기술부채, 설계철학]
 ---
 
 ## 배경
