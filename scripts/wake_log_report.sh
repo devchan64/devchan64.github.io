@@ -9,8 +9,8 @@ for i in {0..6}; do
   TARGET_DATE=$(date -v -${i}d "+%Y-%m-%d")
   EVENT_LINE=$(pmset -g log \
     | grep "$TARGET_DATE" \
-    | grep -B 5 -A 2 "Display is turned on"\
-    | grep -e "UserIsActive \"com.apple.powermanagement.lidopen\"" -e "powerd process is started "\
+    | grep -B 20 -A 2 "Display is turned on"\
+    | grep -e "UserIsActive \"com.apple.powermanagement.lidopen\"" -e "powerd process is started " -e "Created UserIsActive \"Loginwindow User Activity\""\
     | head -n 1)
   EVENT_LINE+=$(pmset -g log \
     | grep "$TARGET_DATE" \
