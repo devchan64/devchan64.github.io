@@ -6,24 +6,48 @@
   <title>{{ page.title }} | {{ site.title }}</title>
   <link rel="stylesheet" href="/assets/css/main.css">
   <script src="/assets/js/view-tracker.js" defer></script>
+  <script src="/assets/js/guestbook.js" defer></script>
   {% include common.html %}
+  <style>
+    .guestbook-form { margin-top: 2em; }
+    .guestbook-form input, .guestbook-form textarea {
+      width: 100%; padding: 0.5em; margin-bottom: 1em;
+      border: 1px solid #ccc; border-radius: 4px;
+    }
+    .guestbook-entry {
+      margin-bottom: 1.5em;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 1em;
+    }
+    .guestbook-entry .meta {
+      font-size: 0.9em; color: #666;
+    }
+  </style>
 </head>
 
 <body class="container">
   {% include header.html %}
-  <main class="guestbook">    
+  <main class="guestbook">
 
     {{ content }}
 
-    <div id="comments"></div>
+    <!-- 방명록 입력 폼 -->
+    <section class="guestbook-form">
+      <h2>방명록 남기기</h2>
+      <form id="guestbook-form">
+        <input type="text" id="name" placeholder="이름" required maxlength="50" />
+        <textarea id="message" placeholder="메시지를 남겨주세요" required maxlength="1000"></textarea>
+        <button type="submit">등록</button>
+      </form>
+      <div id="form-status"></div>
+    </section>
 
-    <script src="https://utteranc.es/client.js"
-            repo="devchan64/devchan64.github.io"
-            issue-term="pathname"
-            theme="github-light"
-            crossorigin="anonymous"
-            async>
-    </script>
+    <!-- 방명록 출력 영역 -->
+    <section id="guestbook-entries">
+      <h2>최근 방명록</h2>
+      <div id="entries"></div>
+    </section>
+
   </main>
   {% include navigation.html %}
   {% include footer.html %}

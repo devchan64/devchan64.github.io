@@ -34,3 +34,36 @@ where viewed_at < current_date - interval '30 days';
 delete from public.views_limiter_ips
 where date < to_char(current_date - interval '30 days', 'YYYY-MM-DD');
 
+
+-- 1. 테이블 생성
+create table if not exists public.guestbook_entries (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  message text not null,
+  created_at timestamp with time zone default now(),
+  ip text,
+  is_public boolean default true
+);
+
+-- 2. 정렬 최적화를 위한 인덱스 (최근순 조회)
+create index if not exists guestbook_created_at_idx
+on public.guestbook_entries (created_at desc);
+
+-- 3. Row Level Security 활성화
+alter table public.guestbook_entries enable row level security;
+
+-- 4. SELECT 정책: 누구나 읽을 수 있도록 허용 (단, 공개된 메시지만)
+create policy "Allow read to all"
+on public.guestbook_entries
+for select
+using (
+  is_public = true
+);
+
+-- 5. INSERT 정책: 엣지 펑션(service_role)에서만 작성 허용
+create policy "Allow insert from edge function only"
+on public.guestbook_entries
+for insert
+with check (
+  current_setting('request.jwt.claims', true)::json ->> 'role' = 'service_role'
+);
