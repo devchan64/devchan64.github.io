@@ -2,10 +2,20 @@ const API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsIn
 const API_URL = "https://dxwpncxfauzspnqwwbxj.supabase.co/functions/v1/guestbook";
 
 async function fetchEntries() {
-  const res = await fetch(API_URL);
+  const res = await fetch(API_URL, {
+    headers: {
+      "Authorization": `Bearer ${API_KEY}`
+    }
+  });
+
   const data = await res.json();
   const container = document.getElementById("entries");
   container.innerHTML = "";
+
+  if (!Array.isArray(data)) {
+    container.innerHTML = `<p class="error">불러오기에 실패했습니다: ${sanitize(data.error || "Unknown error")}</p>`;
+    return;
+  }
 
   data.forEach(entry => {
     const div = document.createElement("div");
