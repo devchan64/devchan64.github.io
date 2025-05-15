@@ -18,7 +18,7 @@ function createSupabaseClient() {
 }
 
 function isValidInput(name: string, message: string): boolean {
-  return name.length <= 50 && message.length <= 1000;
+  return name.length <= 50 && message.length <= 100;
 }
 
 serve(async (req) => {
@@ -27,7 +27,7 @@ serve(async (req) => {
   const supabase = createSupabaseClient();
 
   // Rate limit check
-  const methodLimits = { GET: 300, POST: 100, OPTIONS: 500 };
+  const methodLimits = { GET: 300, POST: 10, OPTIONS: 500 };
   const limit = methodLimits[method as keyof typeof methodLimits];
   if (limit) {
     const limited = await limitRequest(supabase, ip, method, limit);

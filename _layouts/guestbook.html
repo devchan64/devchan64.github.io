@@ -33,18 +33,17 @@
 
     <!-- 방명록 입력 폼 -->
     <section class="guestbook-form">
-      <h2>방명록 남기기</h2>
       <form id="guestbook-form">
-        <input type="text" id="name" placeholder="이름" required maxlength="50" />
-        <textarea id="message" placeholder="메시지를 남겨주세요" required maxlength="1000"></textarea>
-        <button type="submit">등록</button>
+        <input type="text" id="name" placeholder="Name (max 50 characters)" required maxlength="50" />
+        <textarea id="message" placeholder="Message (max 100 characters)" required maxlength="100"></textarea>
+        <button type="submit">Summit</button>
       </form>
       <div id="form-status"></div>
     </section>
 
     <!-- 방명록 출력 영역 -->
     <section id="guestbook-entries">
-      <h2>최근 방명록</h2>
+      <h2>Latest</h2>
       <div id="entries"></div>
     </section>
 
