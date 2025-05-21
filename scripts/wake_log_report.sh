@@ -8,7 +8,9 @@ echo "-------------------------"
 for i in {0..6}; do
   TARGET_DATE=$(date -v -${i}d "+%Y-%m-%d")
   EVENT_LINE=$(pmset -g log \
-    | grep "$TARGET_DATE" \
+    | awk -v date="$TARGET_DATE" '
+      $0 ~ date && $2 >= "07:00:00" && $2 <= "19:00:00"
+    ' \
     | grep -B 10 -A 30 "Display is turned on"\
     | grep -e "powerd process is started " \
     -e "Created UserIsActive \"Loginwindow User Activity\"" \
