@@ -1,5 +1,5 @@
 ---
 layout: dashboard
-title: Popular Posts
+title: Popular Posts (Latest 30 Days)
 permalink: /views/
 ---
