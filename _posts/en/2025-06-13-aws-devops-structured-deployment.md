@@ -11,8 +11,6 @@ title: Retrospective on an AWS DevOps Example Project
 
 ---
 
-# AWS DevOps Example Project Retrospective
-
 This article is a retrospective on the structure and design process of the [`aws-devops-example`](https://github.com/devchan64/aws-devops-example) project.  
 It aims to share practical examples of automating the deployment of infrastructure and applications, with a focus on CloudFormation and GitHub Actions.
 
