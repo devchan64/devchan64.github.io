@@ -5,8 +5,6 @@ date: 2025-06-13
 tags: [프로젝트]
 ---
 
-# AWS DevOps Example 프로젝트 회고
-
 이 글은 [`aws-devops-example`](https://github.com/devchan64/aws-devops-example) 프로젝트의 구조와 설계 과정을 기록한 회고입니다.  
 CloudFormation과 GitHub Actions를 중심으로, 인프라와 애플리케이션의 배포를 자동화한 실전 사례를 공유하고자 합니다.
 
