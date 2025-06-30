@@ -8,6 +8,7 @@ on:
       - 'marp/build_marp.sh'
       - 'marp/theme.css'
       - 'marp/engine.js'
+  workflow_dispatch:
 
 permissions:
   contents: write
