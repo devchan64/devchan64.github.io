@@ -496,8 +496,96 @@ but about the attitude of working together in a way that can be separated later.
 
 ---
 
-## Revision
+## Attachment 3: Foundational Literature Review for MSA Design (Chronological Summary)
 
+### 1. *Domain-Driven Design: Tackling Complexity in the Heart of Software* – Eric Evans (2003)
+
+#### English Summary
+
+This book introduces the concept of bounded context — a clearly defined boundary within which a particular domain model is valid. It emphasizes domain modeling, strategic design, and the importance of aligning software structure with business concepts. These ideas are foundational to defining microservice boundaries that map cleanly to business capabilities.
+
+#### Contribution to MSA Design:
+
+- Encourages services to be built around business domains.
+- Promotes clear ownership, isolation, and internal consistency of models.
+- Introduces the idea that each service has its own ubiquitous language within its context.
+
+### 2. *Service-Oriented Architecture: Concepts, Technology, and Design* – Thomas Erl (2005)
+
+#### English Summary
+
+This book defines core SOA principles including service contract, autonomy, reusability, composability, and statelessness. It offers a technological and conceptual foundation for thinking in services, encouraging interoperability and abstraction from implementation details.
+
+#### Contribution to MSA Design:
+
+- Lays groundwork for service modularity and separation of concerns.
+- Promotes loose coupling through standardized interfaces.
+- Advocates service granularity and orchestration.
+
+### 3. *SOA Manifesto* (2009)
+
+#### English Summary
+
+The manifesto outlines the philosophical stance of SOA, prioritizing business goals over technical implementation. It embraces flexibility, modularity, and contract standardization. These principles philosophically anticipate many of MSA’s later values.
+
+#### Contribution to MSA Design:
+
+- Frames service architecture as a response to business change.
+- Values adaptability and governance over rigid implementation.
+- Advocates contract-first design, later adopted in MSA APIs.
+
+### 4. *Microservices* – James Lewis & Martin Fowler (2014)
+
+#### English Summary
+
+This influential article synthesizes industry practice into a clear set of microservice characteristics: decentralized governance, independent deployability, smart endpoints and dumb pipes, and organization-aligned architecture. It became the conceptual launchpad for MSA in practice.
+
+#### Contribution to MSA Design:
+
+- Defines microservices as independent, business-aligned units.
+- Encourages teams to own the full lifecycle of services.
+- Highlights operational concerns like deployment automation and observability.
+
+### 5. *Microservices: A Systematic Mapping Study* – Pires & Pereira (2018)
+
+#### English Summary
+
+This paper surveys the academic landscape of microservices, classifying literature into categories like architecture, implementation, deployment, and monitoring. It presents challenges such as service granularity, data consistency, and orchestration vs. choreography.
+
+#### Contribution to MSA Design:
+
+- Offers taxonomy of MSA-related concerns in research.
+- Highlights open challenges (e.g., how fine-grained is “too fine”?).
+- Bridges gap between theory and real-world implementation.
+
+### 6. *Microservices: Yesterday, Today, and Tomorrow* – Fritzsch et al. (2019)
+
+#### English Summary
+
+This historical review explores the evolution of service-based systems, analyzing how microservices emerged from SOA, component-based design, and agile delivery practices. It identifies common adoption patterns and anti-patterns from empirical studies.
+
+#### Contribution to MSA Design:
+
+- Tracks historical context that shaped MSA.
+- Informs how organizations transitioned from monoliths.
+- Describes pitfalls like over-fragmentation and distributed complexity.
+
+### Summary Insights for Practical Design
+
+| Year | Work | Core Concept | Design Insight |
+|------|------|---------------|----------------|
+| 2003 | DDD | Bounded Context | Split services by domain boundaries |
+| 2005 | SOA | Reusability, Autonomy | Modular thinking and abstraction in service boundaries |
+| 2009 | SOA Manifesto | Agility, Contract-first | APIs must follow explicit service contracts |
+| 2014 | Lewis & Fowler | Independent Deployment, Ownership | Encourage team-level service responsibility |
+| 2018 | Mapping Study | Research Taxonomy | Provide structured understanding for real-world implementation |
+| 2019 | Historical Review | Evolution, Anti-patterns | Warn against over-fragmentation and complexity in practice |
+
+---
+
+## Revision History
+
+- 2025-07-01: Added Attachment 3: Foundational Literature Review for MSA Design (Chronological Summary)”
 - 2025-06-30: 'Attachment 2: What It Means for a Startup to Aim for MSA' section added
 - 2025-06-30: 'Attachment 1: Common Misunderstandings – Are Kubernetes, Compose, FaaS MSA?' section added
 - 2025-06-30: 'Increased Communication Costs' section added

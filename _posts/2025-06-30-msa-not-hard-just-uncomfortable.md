@@ -507,8 +507,152 @@ MSA는 거창한 구조가 아니라,
 
 ---
 
-## Revision
+## 첨부3: MSA 설계를 위한 철학적 기반 문헌 요약 (연도순 정리)
 
+### 1. "Domain-Driven Design: Tackling Complexity in the Heart of Software" – Eric Evans (2003)
+
+#### English Summary
+
+This book introduces the concept of bounded context — a clearly defined boundary within which a particular domain model is valid. It emphasizes domain modeling, strategic design, and the importance of aligning software structure with business concepts. These ideas are foundational to defining microservice boundaries that map cleanly to business capabilities.
+
+#### Contribution to MSA Design:
+
+- Encourages services to be built around business domains.
+- Promotes clear ownership, isolation, and internal consistency of models.
+- Introduces the idea that each service has its own ubiquitous language within its context.
+
+#### Korean Translation
+
+이 책은 특정 도메인 모델이 유효한 범위인 경계된 컨텍스트(bounded context) 개념을 도입합니다. 또한 도메인 모델링, 전략적 설계, 비즈니스 개념과 소프트웨어 구조 간의 정렬을 강조합니다. 이 개념들은 마이크로서비스가 비즈니스 기능에 대응되도록 경계를 정의하는 데 핵심적인 기반이 됩니다.
+
+#### MSA 설계에의 기여:
+
+- 서비스가 비즈니스 도메인을 기준으로 나뉘어야 함을 강조
+- 명확한 책임 분리와 모델의 일관성을 보장
+- 각 서비스 내부에서 독립적인 언어 체계(ubiquitous language) 유지
+
+### 2. "Service-Oriented Architecture: Concepts, Technology, and Design" – Thomas Erl (2005)
+
+#### English Summary
+
+This book defines core SOA principles including service contract, autonomy, reusability, composability, and statelessness. It offers a technological and conceptual foundation for thinking in services, encouraging interoperability and abstraction from implementation details.
+
+#### Contribution to MSA Design:
+
+- Lays groundwork for service modularity and separation of concerns
+- Promotes loose coupling through standardized interfaces
+- Advocates service granularity and orchestration
+
+#### Korean Translation
+이 책은 서비스 계약, 자율성, 재사용성, 조합성, 무상태성 등의 SOA 핵심 원칙을 정의합니다. 서비스 중심 사고의 기술적·개념적 기반을 제공하며, 구현 세부 사항으로부터의 추상화와 상호 운용성을 장려합니다.
+
+#### MSA 설계에의 기여:
+
+- 서비스 모듈화 및 관심사 분리를 위한 기초 제공
+- 표준화된 인터페이스를 통한 느슨한 결합 구현
+- 적절한 서비스 크기(granularity)와 오케스트레이션 개념 도입
+
+### 3. "SOA Manifesto" (2009)
+
+#### English Summary
+
+The manifesto outlines the philosophical stance of SOA, prioritizing business goals over technical implementation. It embraces flexibility, modularity, and contract standardization. These principles philosophically anticipate many of MSA’s later values.
+
+#### Contribution to MSA Design:
+
+- Frames service architecture as a response to business change
+- Values adaptability and governance over rigid implementation
+- Advocates contract-first design, later adopted in MSA APIs
+
+#### Korean Translation
+
+SOA 선언문은 기술 구현보다 비즈니스 목표 달성을 우선시하는 철학적 관점을 담고 있으며, 유연성, 모듈성, 서비스 계약의 표준화를 강조합니다. 이는 이후 MSA가 받아들인 주요 가치들의 철학적 토대를 형성합니다.
+
+#### MSA 설계에의 기여:
+
+- 서비스 구조를 변화에 대응하는 프레임으로 설정
+- 고정된 구조보다 유연성과 거버넌스를 강조
+- 계약 기반 설계(contract-first)를 강조, 이는 이후 MSA의 API 설계로 이어짐
+
+### 4. "Microservices" – James Lewis & Martin Fowler (2014)
+
+#### English Summary
+This influential article synthesizes industry practice into a clear set of microservice characteristics: decentralized governance, independent deployability, smart endpoints and dumb pipes, and organization-aligned architecture. It became the conceptual launchpad for MSA in practice.
+
+#### Contribution to MSA Design:
+
+- Defines microservices as independent, business-aligned units
+- Encourages teams to own the full lifecycle of services
+- Highlights operational concerns like deployment automation and observability
+
+#### Korean Translation
+이 글은 분산 거버넌스, 독립 배포 가능성, 스마트 엔드포인트와 단순 파이프, 조직 구조와 정렬된 설계 등 마이크로서비스의 핵심 특징들을 명확히 정의하며, 실제 실무에서의 MSA 출발점을 제시합니다.
+
+#### MSA 설계에의 기여:
+
+- 마이크로서비스를 독립적이며 비즈니스에 정렬된 단위로 정의
+- 서비스 수명 주기 전체에 대한 팀의 책임 강조
+- 배포 자동화와 관찰 가능성(observability) 등 운영 측면 강조
+
+5. "Microservices: A Systematic Mapping Study" – Pires & Pereira (2018)
+
+#### English Summary
+
+This paper surveys the academic landscape of microservices, classifying literature into categories like architecture, implementation, deployment, and monitoring. It presents challenges such as service granularity, data consistency, and orchestration vs. choreography.
+
+#### Contribution to MSA Design:
+
+- Offers taxonomy of MSA-related concerns in research
+- Highlights open challenges (e.g., how fine-grained is “too fine”?)
+- Bridges gap between theory and real-world implementation
+
+#### Korean Translation
+이 논문은 마이크로서비스 관련 연구들을 아키텍처, 구현, 배포, 모니터링 등으로 분류하며 체계화합니다. 서비스의 적절한 크기, 데이터 일관성, 오케스트레이션과 코레오그래피 간의 선택 등 실질적인 과제들을 제시합니다.
+
+#### MSA 설계에의 기여:
+
+- MSA 관련 기술/운영 이슈들을 분류하고 구조화
+- 해결되지 않은 과제들(예: 과도한 분리의 위험)을 밝힘
+- 이론과 실무 간의 간극을 메우는 중간자 역할 수행
+
+### 6. "Microservices: Yesterday, Today, and Tomorrow" – Fritzsch et al. (2019)
+
+#### English Summary
+
+This historical review explores the evolution of service-based systems, analyzing how microservices emerged from SOA, component-based design, and agile delivery practices. It identifies common adoption patterns and anti-patterns from empirical studies.
+
+#### Contribution to MSA Design:
+
+- Tracks historical context that shaped MSA
+- Informs how organizations transitioned from monoliths
+- Describes pitfalls like over-fragmentation and distributed complexity
+
+#### Korean Translation
+
+이 논문은 SOA와 구성요소 기반 설계, 애자일 등에서 마이크로서비스가 어떻게 진화했는지를 역사적으로 조망합니다. 또한 마이크로서비스 도입 시 흔히 나타나는 성공 패턴과 실패 패턴을 분석합니다.
+
+#### MSA 설계에의 기여:
+
+- MSA가 어떤 시대적 배경 속에서 등장했는지 설명
+- 조직이 모놀리식에서 어떻게 전환해왔는지를 실증적으로 분석=
+- 과도한 분리, 분산 시스템 복잡도 등의 위험 요인을 정리
+
+### 실무 적용 시 인사이트 요약
+
+| 연도 | 문헌 | 핵심 개념 | 실무 설계 통찰 |
+|------|------|------------|----------------|
+| 2003 | DDD | Bounded Context | 도메인 단위 서비스 분리 |
+| 2005 | SOA | 재사용, 자율성 | 모듈화 기반 설계와 추상화 |
+| 2009 | SOA Manifesto | 민첩성, 계약 기반 설계 | API는 명시적 계약 구조여야 함 |
+| 2014 | Lewis & Fowler | 독립 배포, 팀 소유권 | 팀 기반 서비스 운영 권장 |
+| 2018 | Mapping Study | 아키텍처 체계화 | 실무 적용을 위한 구조적 기준 제공 |
+| 2019 | Historical Review | 진화 과정, 안티패턴 | 과도한 분리나 복잡도 경계 필요 |
+
+---
+
+## Revision History
+
+- 2025-07-01: '첨부 3: MSA 설계를 위한 철학적 기반 문헌 요약 (연도순 정리)' 색션 추가
 - 2025-06-30: '첨부 2: 스타트업으로서 MSA를 지향하여 일한다는 것의 의미' 색션 추가
 - 2025-06-30: '첨부 1: 흔한 오해들 – 쿠버네티스, Compose, FaaS는 MSA인가?' 섹션 추가
 - 2025-06-30: ‘커뮤니케이션 비용 증가’ 섹션 추가
