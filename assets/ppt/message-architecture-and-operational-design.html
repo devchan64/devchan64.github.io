@@ -49,80 +49,190 @@
     
       </head>
       <body>
-        <div id=":$p"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="1" data-paginate="true" lang="ko-KR" data-marpit-pagination="1" style="--paginate:true;" data-marpit-pagination-total="11">
-<h1 id="%EB%A9%94%EC%8B%9C%EC%A7%80-%EA%B8%B0%EB%B0%98-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%EC%99%80">메시지 기반 아키텍처와</h1>
-<h2 id="%EC%9A%B4%EC%98%81-%EC%A4%91%EC%8B%AC-%EC%84%A4%EA%B3%84">운영 중심 설계</h2>
-<p><strong>2024.11.01 | DevOps 사례 공유</strong></p>
+        <div id=":$p"><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="1" data-paginate="true" lang="ko-KR" data-marpit-pagination="1" style="--paginate:true;" data-marpit-pagination-total="18">
+<h1 id="%EB%A9%94%EC%8B%9C%EC%A7%80-%EA%B8%B0%EB%B0%98-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EC%A0%84%ED%99%98">메시지 기반 아키텍처 전환</h1>
+<h2 id="%EC%9A%B4%EC%98%81%EC%9D%84-%EC%9C%84%ED%95%9C-%EA%B5%AC%EC%A1%B0-%EC%84%A4%EA%B3%84-%EA%B2%BD%ED%97%98">운영을 위한 구조 설계 경험</h2>
+<p><strong>2025.07.17</strong></p>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="2" data-paginate="true" lang="ko-KR" data-marpit-pagination="2" style="--paginate:true;" data-marpit-pagination-total="11">
-<h2 id="%EB%AC%B8%EC%A0%9C-%EC%83%81%ED%99%A9%EA%B3%BC-%EC%84%A0%ED%83%9D%EC%9D%98-%EA%B0%88%EB%A6%BC%EA%B8%B8">문제 상황과 선택의 갈림길</h2>
-<p>Monolith + REST API 구조의 특징:</p>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="2" data-paginate="true" lang="ko-KR" data-marpit-pagination="2" style="--paginate:true;" data-marpit-pagination-total="18">
+<h2 id="%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B0%9C%EC%9A%94">프로젝트 개요</h2>
 <ul>
-<li>연결은 쉽지만, 복원은 어렵다</li>
-<li>모든 것이 서로 엮여 있어 변경이 부담된다</li>
-<li>장애는 전체 서비스로 확산된다</li>
-<li>운영자는 어디서 문제인지 추적하기 어렵다</li>
+<li><strong>목표</strong>: 엣지 시스템 포함 전체 서비스의 운영 복원력 개선</li>
+<li><strong>배경</strong>: REST 기반 구조에서 반복되는 장애 확산과 추적 불가</li>
+<li><strong>역할</strong>: 구조 분석, 아키텍처 재설계, 운영 지표 정의, 기술 설득</li>
 </ul>
+<blockquote>
+<p>기술뿐 아니라 <strong>운영과 협업</strong>까지 포함한 구조적 전환 경험</p>
+</blockquote>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="3" data-paginate="true" lang="ko-KR" data-marpit-pagination="3" style="--paginate:true;" data-marpit-pagination-total="11">
-<h2 id="%EB%A9%94%EC%8B%9C%EC%A7%80-%EA%B8%B0%EB%B0%98-%EA%B5%AC%EC%A1%B0%EC%9D%98-%EC%84%A0%ED%83%9D-%EB%B0%B0%EA%B2%BD">메시지 기반 구조의 선택 배경</h2>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="3" data-paginate="true" lang="ko-KR" data-marpit-pagination="3" style="--paginate:true;" data-marpit-pagination-total="18">
+<h2 id="%ED%98%84%EC%9E%A5%EC%97%90%EC%84%9C-%EC%8B%A4%EC%A0%9C-%EA%B2%AA%EC%9D%80-%EB%AC%B8%EC%A0%9C">현장에서 실제 겪은 문제</h2>
 <ul>
-<li>실시간성보다 무결성이 중요한 비즈니스</li>
-<li>느슨한 결합 → 장애 격리</li>
-<li>운영자 추적성 향상</li>
+<li>장비는 작동 중인데 앱은 응답 없음</li>
+<li>운영자: &quot;서버 문제인가요?&quot;</li>
+<li>개발자: &quot;엣지 문제 같은데요?&quot;</li>
+<li>로그는 분산되어 있고, 어디부터 봐야 할지 불분명</li>
 </ul>
-<p><img class="emoji" draggable="false" alt="💡" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4a1.svg" data-marp-twemoji=""/> APM, Grafana 연동이 쉬워 운영 대응 속도 개선</p>
+<blockquote>
+<p>기능이 아니라 흐름이 보이지 않는 구조가 문제였습니다</p>
+</blockquote>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="4" data-paginate="true" lang="ko-KR" data-marpit-pagination="4" style="--paginate:true;" data-marpit-pagination-total="11">
-<h2 id="%EC%84%A4%EA%B3%84-%EC%A0%84%EB%9E%B5%EA%B3%BC-%EA%B8%B0%EC%88%A0%EC%A0%81-%EA%B8%B0%EB%B0%98">설계 전략과 기술적 기반</h2>
-<ul>
-<li>ROS 경험: 메시지 중심 설계에 익숙</li>
-<li><code>Publisher-Subscriber</code> 구조 → 분산과 복원력 강조</li>
-<li>설계 초기부터 운영 지표를 고려한 DevOps 시각</li>
-</ul>
-<p><img class="emoji" draggable="false" alt="🛠" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f6e0.svg" data-marp-twemoji=""/> 운영과 개발을 통합적으로 고려한 설계</p>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="4" data-paginate="true" lang="ko-KR" data-marpit-pagination="4" style="--paginate:true;" data-marpit-pagination-total="18">
+<h2 id="%EA%B8%B0%EC%A1%B4-%EA%B5%AC%EC%A1%B0-%EC%8B%9C%EA%B0%81%ED%99%94">기존 구조 시각화</h2>
+<div class="mermaid">
+flowchart LR
+    subgraph Site
+      Device1 --&gt; Edge
+      Device2 --&gt; Edge
+    end
+Edge --&gt; REST[REST-API-Service]
+REST --&gt; RDS
+</div>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="5" data-paginate="true" lang="ko-KR" data-marpit-pagination="5" style="--paginate:true;" data-marpit-pagination-total="11">
-<h2 id="%ED%8C%80-%EB%82%B4-%EC%88%98%EC%9A%A9-%EC%A0%84%EB%9E%B5">팀 내 수용 전략</h2>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="5" data-paginate="true" lang="ko-KR" data-marpit-pagination="5" style="--paginate:true;" data-marpit-pagination-total="18">
+<h2 id="%EB%AC%B8%EC%A0%9C-%EC%9A%94%EC%95%BD-12">문제 요약 (1/2)</h2>
+<h3 id="%EA%B5%AC%EC%A1%B0%EC%99%80-%EB%B0%B0%ED%8F%AC%EC%9D%98-%EC%A0%9C%EC%95%BD">구조와 배포의 제약</h3>
 <ul>
-<li>복잡하다는 인식 → 구체적 시나리오로 설득</li>
-<li>설계 이점:
-<ul>
-<li>운영 비용 절감 (Kinesis 등 관리형 서비스)</li>
-<li>문제 추적 용이 (trace ID, message list)</li>
-<li>수평 확장 가능 (컨슈머 단위 확장)</li>
-</ul>
+<li>
+<p><strong>모놀리스 서비스</strong><br />
+기능이 단일 흐름으로 묶여 장애가 전체로 확산</p>
+</li>
+<li>
+<p><strong>동일한 엣지 구성</strong><br />
+모든 사이트에 같은 엣지를 배포해야 했고<br />
+네트워크·센서·운영정책의 차이를 반영할 수 없었음</p>
+</li>
+<li>
+<p><strong>REST API 기반 로그</strong><br />
+엣지와 서버 간 연결이 끊기면 상태 기록 자체가 불가</p>
 </li>
 </ul>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="6" data-paginate="true" lang="ko-KR" data-marpit-pagination="6" style="--paginate:true;" data-marpit-pagination-total="11">
-<h2 id="%EB%84%A4%EC%9E%84%EC%8A%A4%ED%8E%98%EC%9D%B4%EC%8A%A4-%EA%B5%AC%EC%A1%B0">네임스페이스 구조</h2>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="6" data-paginate="true" lang="ko-KR" data-marpit-pagination="6" style="--paginate:true;" data-marpit-pagination-total="18">
+<h2 id="%EB%AC%B8%EC%A0%9C-%EC%9A%94%EC%95%BD-22">문제 요약 (2/2)</h2>
+<h3 id="%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%ED%98%84%EC%8B%A4%EA%B3%BC-%EC%9A%B4%EC%98%81-%ED%95%9C%EA%B3%84">네트워크 현실과 운영 한계</h3>
 <ul>
-<li><code>device.</code>, <code>service_platform.</code>, <code>data_platform.</code>, <code>3rd_party.</code></li>
-<li>기능 분리 + 언어 정렬 통한 협업 기준 정립</li>
+<li>
+<p><strong>방화벽·라우터에 의해 엣지 접근 불가</strong><br />
+운영자가 엣지 상태를 직접 확인할 수 없음</p>
+</li>
+<li>
+<p><strong>연결 오류에 대한 복구 부재</strong><br />
+요청 실패 시 자동 재시도도, 오류 알림도 없음</p>
+</li>
+<li>
+<p><strong>문제 발생 시 로그 탐색</strong><br />
+요청 ID도, 흐름 단서도 없어 시간 역추적에 의존</p>
+</li>
 </ul>
-<p><img class="emoji" draggable="false" alt="🎯" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f3af.svg" data-marp-twemoji=""/> 구조 해석의 명확성과 커뮤니케이션 효율성 향상</p>
+<blockquote>
+<p>이런 상황에서는 구조적으로 흐름을 다시 설계해야 했습니다</p>
+</blockquote>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="7" data-paginate="true" lang="ko-KR" data-marpit-pagination="7" style="--paginate:true;" data-marpit-pagination-total="11">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="7" data-paginate="true" lang="ko-KR" data-marpit-pagination="7" style="--paginate:true;" data-marpit-pagination-total="18">
+<h2 id="%EA%B5%AC%EC%A1%B0-%EC%A0%84%ED%99%98-%EB%B0%A9%ED%96%A5">구조 전환 방향</h2>
+<ul>
+<li>기술의 문제가 아닌 운영 흐름 단절의 문제</li>
+<li>단일 구조 해체 → 메시지 중심의 유닛화</li>
+<li>사이트별 조건을 수용할 수 있도록 구조 분화</li>
+</ul>
+<p>전환 전략:</p>
+<ul>
+<li>모놀리스를 쪼개는 것이 아니라 흐름을 분리</li>
+<li>엣지를 하나로 통일하는 것이 아니라 각기 다른 버전 허용</li>
+<li>추적성과 복원력을 메시지 자체로 구성</li>
+</ul>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="8" data-paginate="true" lang="ko-KR" data-marpit-pagination="8" style="--paginate:true;" data-marpit-pagination-total="18">
+<h2 id="%ED%8C%80%EC%9D%98-%EC%9A%B0%EB%A0%A4%EC%99%80-%EC%88%98%EC%9A%A9-%EC%A0%84%EB%9E%B5">팀의 우려와 수용 전략</h2>
+<h3 id="%EA%B8%B0%EC%88%A0">기술</h3>
+<ul>
+<li>“REST가 익숙한데 왜 바꾸죠?”</li>
+<li>“메시지 구조는 디버깅이 어렵습니다”</li>
+</ul>
+<h3 id="%EC%9A%B4%EC%98%81">운영</h3>
+<ul>
+<li>“운영자가 메시지를 이해할 수 있을까요?”</li>
+<li>“MQTT는 안정성이 떨어지지 않나요?”</li>
+</ul>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="9" data-paginate="true" lang="ko-KR" data-marpit-pagination="9" style="--paginate:true;" data-marpit-pagination-total="18">
+<h2 id="%EC%84%A4%EB%93%9D-%EC%A0%84%EB%9E%B5">설득 전략</h2>
+<ul>
+<li>장애 사례를 중심으로 문제를 구체화</li>
+<li>운영 지표 기반의 복원 흐름을 설명</li>
+<li>Kafka 대신 <strong>Kinesis</strong> 같은 관리형 서비스로 진입장벽 완화</li>
+<li>메시지 리스트, request_code, trace ID 등 운영 중심 시야 강조</li>
+</ul>
+<blockquote>
+<p>기술의 장점보다, 운영이 쉬워진다는 메시지를 반복했습니다</p>
+</blockquote>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="10" data-paginate="true" lang="ko-KR" data-marpit-pagination="10" style="--paginate:true;" data-marpit-pagination-total="18">
+<h2 id="%EC%84%A4%EA%B3%84-%EA%B8%B0%EB%B0%98-%EB%A9%94%EC%8B%9C%EC%A7%80-%EC%A4%91%EC%8B%AC-%EA%B2%BD%ED%97%98">설계 기반: 메시지 중심 경험</h2>
+<ul>
+<li>로봇 운영체제 <strong>ROS (Robot Operating System)</strong> 경험</li>
+<li>Pub/Sub 구조 기반의 상태 추적과 복원 설계에 익숙</li>
+<li>구성 요소 간 느슨한 연결 + 유기적 메시지 흐름</li>
+</ul>
+<blockquote>
+<p>기술보다 흐름을 설계하는 데 익숙한 경험이 도움이 됐습니다</p>
+</blockquote>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="11" data-paginate="true" lang="ko-KR" data-marpit-pagination="11" style="--paginate:true;" data-marpit-pagination-total="18">
+<h2 id="%EB%A9%94%EC%8B%9C%EC%A7%80-%EA%B8%B0%EB%B0%98-%EA%B5%AC%EC%A1%B0%EC%9D%98-%EC%9C%84%ED%97%98-%EC%9A%94%EC%86%8C">메시지 기반 구조의 위험 요소</h2>
+<h3 id="%EB%A9%94%EC%8B%9C%EC%A7%80-%EC%88%9C%EC%84%9C-%EB%B6%88%EC%9D%BC%EC%B9%98">메시지 순서 불일치</h3>
+<p>→ <code>request_code</code>, <code>timestamp</code> 등 명시 필요</p>
+<h3 id="%EB%B8%8C%EB%A1%9C%EC%BB%A4-%EC%9E%A5%EC%95%A0">브로커 장애</h3>
+<p>→ 재처리 전략, 모니터링 지표 필요</p>
+<h3 id="%ED%9D%90%EB%A6%84-%EC%B6%94%EC%A0%81-%EC%96%B4%EB%A0%A4%EC%9B%80">흐름 추적 어려움</h3>
+<p>→ <code>trace ID</code>, <code>action_start_time</code>, 메시지 구조화 필요</p>
+<blockquote>
+<p>메시지 구조는 설계 없이는 오히려 혼란을 만듭니다</p>
+</blockquote>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="12" data-paginate="true" lang="ko-KR" data-marpit-pagination="12" style="--paginate:true;" data-marpit-pagination-total="18">
+<h2 id="%EC%9A%B4%EC%98%81%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%A7%80%ED%91%9C-%EC%84%A4%EA%B3%84">운영을 위한 지표 설계</h2>
+<ul>
+<li><code>action_start_time</code>, <code>action_finish_time</code>: 단계별 지연 추적</li>
+<li><code>heartbeat</code>: 장치/엣지 상태 생존 확인</li>
+<li><code>request_code</code>: 요청의 의도 명시</li>
+<li><code>response_code</code>: 결과 분류 (성공, 실패, 무시 등)</li>
+</ul>
+<blockquote>
+<p>지표는 모니터링이 아닌 구조의 일부로 설계했습니다</p>
+</blockquote>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="13" data-paginate="true" lang="ko-KR" data-marpit-pagination="13" style="--paginate:true;" data-marpit-pagination-total="18">
+<h2 id="%EB%84%A4%EC%9E%84%EC%8A%A4%ED%8E%98%EC%9D%B4%EC%8A%A4-%EA%B8%B0%EB%B0%98-%EA%B5%AC%EC%A1%B0">네임스페이스 기반 구조</h2>
+<ul>
+<li>
+<p>기능 중심의 메시지 네이밍 구조:</p>
+<ul>
+<li><code>device.</code>, <code>service_platform.</code>, <code>data_core.</code>, <code>3rd_party.</code></li>
+</ul>
+</li>
+<li>
+<p>단순한 폴더 구분이 아니라 기능 해석 언어</p>
+</li>
+<li>
+<p>팀 간 협업 기준을 통일하는 문법적 기반</p>
+</li>
+</ul>
+<blockquote>
+<p>구조를 읽는 언어가 생기자 협업도 쉬워졌습니다</p>
+</blockquote>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="14" data-paginate="true" lang="ko-KR" data-marpit-pagination="14" style="--paginate:true;" data-marpit-pagination-total="18">
 <h2 id="%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EB%8F%84%EC%8B%9D">아키텍처 도식</h2>
 <div class="mermaid">
 graph LR
-%% --- 상위 서비스 구조 ---
-subgraph SRV [Service]
-DEV[Device]
-DEV1[Device] --&gt; AGENT[Agent]
-APP[App] --&gt; ALB 
-end    
-subgraph 3RD [External Service]
-3RD_DEV[Ext. Device] --&gt; 3RD_CLOUD[Ext. Cloud] --&gt; BRIDGE[C2C Bridge]
-end
 %% --- 메인 서비스 플랫폼 ---
 subgraph SP [Service Platform]
 AUTH[Auth] --&gt; API[API Gateway]
-X509[X.509] --&gt; MSG[Message Broker]
-BRIDGE --&gt; MSG
 API --&gt; MSG
 MSG --&gt; RULE[Rule Engine] --&gt; DT[Device Tween] --&gt; MSG
+X509[X.509] --&gt; MSG[Message Broker]
 subgraph OC [Container]
 MSA[Worker A]
 MSA1[Worker B]
@@ -132,6 +242,16 @@ API --&gt; MSA
 RULE --&gt; MSA1
 RULE --&gt; MSA2 --&gt; MSG
 end
+%% --- 상위 서비스 구조 ---
+subgraph SRV [Service]
+APP[App]
+DEV[Device]
+DEV1[Device] --&gt; AGENT[Agent]
+end
+subgraph 3RD [External Service]
+3RD_DEV[Ext. Device] --&gt; 3RD_CLOUD[Ext. Cloud] --&gt; BRIDGE[C2C Bridge]
+end
+BRIDGE --&gt; MSG
 %% --- 데이터 플랫폼 ---
 subgraph DP [Data Platform]
 DATA_API[Data API] --&gt; MODEL[Data Model]
@@ -146,46 +266,68 @@ RULE --&gt; DATA_BRIDGE
 DATA_BRIDGE --&gt; ETL
 DEV[Device] --&gt; X509
 AGENT --&gt; X509
-ALB --&gt; AUTH
+APP --&gt; AUTH
 </div>
-<p><img class="emoji" draggable="false" alt="🧩" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f9e9.svg" data-marp-twemoji=""/> 계층 간 메시지 흐름으로 구성 요소 유기적 연결</p>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="8" data-paginate="true" lang="ko-KR" data-marpit-pagination="8" style="--paginate:true;" data-marpit-pagination-total="11">
-<h2 id="%EB%A9%94%EC%8B%9C%EC%A7%80%EC%99%80-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%9D%90%EB%A6%84">메시지와 데이터 흐름</h2>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="15" data-paginate="true" lang="ko-KR" data-marpit-pagination="15" style="--paginate:true;" data-marpit-pagination-total="18">
+<h2 id="%EA%B5%AC%EC%A1%B0-%EC%A0%84%ED%99%98-%EC%A0%84%ED%9B%84-%EB%B9%84%EA%B5%90">구조 전환 전후 비교</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>전 (REST 기반)</th>
+<th>후 (메시지 기반)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>장애 복원</td>
+<td>없음</td>
+<td>메시지 단위 격리, 장애전파 차단</td>
+</tr>
+<tr>
+<td>문제 추적</td>
+<td>로그 수작업 탐색</td>
+<td>trace ID + 지표 기반 추적</td>
+</tr>
+<tr>
+<td>협업 기준</td>
+<td>직관·감각 의존</td>
+<td>네임스페이스 기반 공통 언어</td>
+</tr>
+<tr>
+<td>운영 유연성</td>
+<td>엣지 구성 고정</td>
+<td>엣지 버전 분화 + 사이트 맞춤 구성 가능</td>
+</tr>
+</tbody>
+</table>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="16" data-paginate="true" lang="ko-KR" data-marpit-pagination="16" style="--paginate:true;" data-marpit-pagination-total="18">
+<h2 id="%EC%A0%84%ED%99%98-%EC%9D%B4%ED%9B%84%EC%9D%98-%EC%84%B1%EA%B3%BC">전환 이후의 성과</h2>
 <ul>
-<li>MQTT + Kinesis → 이벤트 기반 비동기 처리</li>
-<li><code>data_platform</code>: 수집 → ETL → 분석</li>
-<li>도메인별 계층 분리로 변경 용이성 강화</li>
+<li>장애 추적 시간: 수 시간 → 수 분</li>
+<li>운영자와 개발자 간 문제 인식 공유</li>
+<li>실시간 모니터링 가능 (APM, CloudWatch 등)</li>
+<li>엣지 구성 다양화로 현장 대응력 증가</li>
 </ul>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="9" data-paginate="true" lang="ko-KR" data-marpit-pagination="9" style="--paginate:true;" data-marpit-pagination-total="11">
-<h2 id="%EC%9A%B4%EC%98%81-%EC%84%B1%EA%B3%BC">운영 성과</h2>
-<p><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> 실시간 모니터링<br />
-<img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> 장애 격리 및 빠른 복원<br />
-<img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2705.svg" data-marp-twemoji=""/> 운영자와 개발자의 협업 강화</p>
 <blockquote>
-<p>장애 분석 시간: <strong>수 시간 → 수 분</strong></p>
+<p>기술 전환보다 <strong>운영 구조 재설계</strong>가 핵심이었습니다</p>
 </blockquote>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="10" data-paginate="true" lang="ko-KR" data-marpit-pagination="10" style="--paginate:true;" data-marpit-pagination-total="11">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="17" data-paginate="true" lang="ko-KR" data-marpit-pagination="17" style="--paginate:true;" data-marpit-pagination-total="18">
 <h2 id="%EC%84%A4%EA%B3%84-%EC%B2%A0%ED%95%99">설계 철학</h2>
 <ul>
-<li>메시지는 통신이 아닌 구조</li>
-<li>네임스페이스는 언어 정렬 도구</li>
-<li>아키텍처는 조직 구조와 연결되어야 함</li>
+<li>메시지는 통신이 아니라 <strong>구조</strong></li>
+<li>네임스페이스는 협업을 위한 <strong>공통 언어</strong></li>
+<li>아키텍처는 기술 이전에 <strong>운영과 조직의 구조</strong></li>
 </ul>
 <blockquote>
-<p>설계자는 기술과 협업의 중재자</p>
+<p>설계란, 기술과 협업을 함께 설계하는 일입니다</p>
 </blockquote>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="11" data-paginate="true" lang="ko-KR" data-marpit-pagination="11" style="--paginate:true;" data-marpit-pagination-total="11">
-<h2 id="%ED%95%B5%EC%8B%AC-%EB%A9%94%EC%8B%9C%EC%A7%80">핵심 메시지</h2>
-<blockquote>
-<p>&quot;좋은 메시지 설계는 결국 좋은 운영 설계입니다.&quot;</p>
-</blockquote>
-<blockquote>
-<p>&quot;복잡한 연결에 의한 시스템 구성은 메시지로 단순해집니다.&quot;</p>
-</blockquote>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="18" data-paginate="true" lang="ko-KR" data-marpit-pagination="18" style="--paginate:true;" data-marpit-pagination-total="18">
+<h2 id="%EA%B0%90%EC%82%AC%ED%95%A9%EB%8B%88%EB%8B%A4">감사합니다</h2>
 </section>
 <script>!function(){"use strict";const t={h1:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"1"},style:"display: block; font-size: 2em; margin-block-start: 0.67em; margin-block-end: 0.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h2:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"2"},style:"display: block; font-size: 1.5em; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h3:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"3"},style:"display: block; font-size: 1.17em; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h4:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"4"},style:"display: block; margin-block-start: 1.33em; margin-block-end: 1.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h5:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"5"},style:"display: block; font-size: 0.83em; margin-block-start: 1.67em; margin-block-end: 1.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h6:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"6"},style:"display: block; font-size: 0.67em; margin-block-start: 2.33em; margin-block-end: 2.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},span:{proto:()=>HTMLSpanElement},pre:{proto:()=>HTMLElement,style:"display: block; font-family: monospace; white-space: pre; margin: 1em 0; --marp-auto-scaling-white-space: pre;"}},e="data-marp-auto-scaling-wrapper",i="data-marp-auto-scaling-svg",n="data-marp-auto-scaling-container";class s extends HTMLElement{container;containerSize;containerObserver;svg;svgComputedStyle;svgPreserveAspectRatio="xMinYMid meet";wrapper;wrapperSize;wrapperObserver;constructor(){super();const t=t=>([e])=>{const{width:i,height:n}=e.contentRect;this[t]={width:i,height:n},this.updateSVGRect()};this.attachShadow({mode:"open"}),this.containerObserver=new ResizeObserver(t("containerSize")),this.wrapperObserver=new ResizeObserver(((...e)=>{t("wrapperSize")(...e),this.flushSvgDisplay()}))}static get observedAttributes(){return["data-downscale-only"]}connectedCallback(){this.shadowRoot.innerHTML=`\n<style>\n  svg[${i}] { display: block; width: 100%; height: auto; vertical-align: top; }\n  span[${n}] { display: table; white-space: var(--marp-auto-scaling-white-space, nowrap); width: max-content; }\n</style>\n<div ${e}>\n  <svg part="svg" ${i}>\n    <foreignObject><span ${n}><slot></slot></span></foreignObject>\n  </svg>\n</div>\n    `.split(/\n\s*/).join(""),this.wrapper=this.shadowRoot.querySelector(`div[${e}]`)??void 0;const t=this.svg;this.svg=this.wrapper?.querySelector(`svg[${i}]`)??void 0,this.svg!==t&&(this.svgComputedStyle=this.svg?window.getComputedStyle(this.svg):void 0),this.container=this.svg?.querySelector(`span[${n}]`)??void 0,this.observe()}disconnectedCallback(){this.svg=void 0,this.svgComputedStyle=void 0,this.wrapper=void 0,this.container=void 0,this.observe()}attributeChangedCallback(){this.observe()}flushSvgDisplay(){const{svg:t}=this;t&&(t.style.display="inline",requestAnimationFrame((()=>{t.style.display=""})))}observe(){this.containerObserver.disconnect(),this.wrapperObserver.disconnect(),this.wrapper&&this.wrapperObserver.observe(this.wrapper),this.container&&this.containerObserver.observe(this.container),this.svgComputedStyle&&this.observeSVGStyle(this.svgComputedStyle)}observeSVGStyle(t){const e=()=>{const i=(()=>{const e=t.getPropertyValue("--preserve-aspect-ratio");if(e)return e.trim();return`x${(({textAlign:t,direction:e})=>{if(t.endsWith("left"))return"Min";if(t.endsWith("right"))return"Max";if("start"===t||"end"===t){let i="rtl"===e;return"end"===t&&(i=!i),i?"Max":"Min"}return"Mid"})(t)}YMid meet`})();i!==this.svgPreserveAspectRatio&&(this.svgPreserveAspectRatio=i,this.updateSVGRect()),t===this.svgComputedStyle&&requestAnimationFrame(e)};e()}updateSVGRect(){let t=Math.ceil(this.containerSize?.width??0);const e=Math.ceil(this.containerSize?.height??0);void 0!==this.dataset.downscaleOnly&&(t=Math.max(t,this.wrapperSize?.width??0));const i=this.svg?.querySelector(":scope > foreignObject");if(i?.setAttribute("width",`${t}`),i?.setAttribute("height",`${e}`),this.svg&&(this.svg.setAttribute("viewBox",`0 0 ${t} ${e}`),this.svg.setAttribute("preserveAspectRatio",this.svgPreserveAspectRatio),this.svg.style.height=t<=0||e<=0?"0":""),this.container){const t=this.svgPreserveAspectRatio.toLowerCase();this.container.style.marginLeft=t.startsWith("xmid")||t.startsWith("xmax")?"auto":"0",this.container.style.marginRight=t.startsWith("xmi")?"auto":"0"}}}const r=(t,{attrs:e={},style:i})=>class extends t{constructor(...t){super(...t);for(const[t,i]of Object.entries(e))this.hasAttribute(t)||this.setAttribute(t,i);this._shadow()}static get observedAttributes(){return["data-auto-scaling"]}connectedCallback(){this._update()}attributeChangedCallback(){this._update()}_shadow(){if(!this.shadowRoot)try{this.attachShadow({mode:"open"})}catch(t){if(!(t instanceof Error&&"NotSupportedError"===t.name))throw t}return this.shadowRoot}_update(){const t=this._shadow();if(t){const e=i?`<style>:host { ${i} }</style>`:"";let n="<slot></slot>";const{autoScaling:s}=this.dataset;if(void 0!==s){n=`<marp-auto-scaling exportparts="svg:auto-scaling" ${"downscale-only"===s?"data-downscale-only":""}>${n}</marp-auto-scaling>`}t.innerHTML=e+n}}};let o;const a=Symbol();let l;const c="marpitSVGPolyfill:setZoomFactor,",d=Symbol(),h=Symbol();const g=()=>{const t="Apple Computer, Inc."===navigator.vendor,e=t?[u]:[],i={then:e=>(t?(async()=>{if(void 0===l){const t=document.createElement("canvas");t.width=10,t.height=10;const e=t.getContext("2d"),i=new Image(10,10),n=new Promise((t=>{i.addEventListener("load",(()=>t()))}));i.crossOrigin="anonymous",i.src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2210%22%20height%3D%2210%22%20viewBox%3D%220%200%201%201%22%3E%3CforeignObject%20width%3D%221%22%20height%3D%221%22%20requiredExtensions%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%3E%3Cdiv%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%20style%3D%22width%3A%201px%3B%20height%3A%201px%3B%20background%3A%20red%3B%20position%3A%20relative%22%3E%3C%2Fdiv%3E%3C%2FforeignObject%3E%3C%2Fsvg%3E",await n,e.drawImage(i,0,0),l=e.getImageData(5,5,1,1).data[3]<128}return l})().then((t=>{null==e||e(t?[u]:[])})):null==e||e([]),i)};return Object.assign(e,i)};let p,m;function u(t){const e="object"==typeof t&&t.target||document,i="object"==typeof t?t.zoom:t;window[h]||(Object.defineProperty(window,h,{configurable:!0,value:!0}),document.body.style.zoom=1.0001,document.body.offsetHeight,document.body.style.zoom=1,window.addEventListener("message",(({data:t,origin:e})=>{if(e===window.origin)try{if(t&&"string"==typeof t&&t.startsWith(c)){const[,e]=t.split(","),i=Number.parseFloat(e);Number.isNaN(i)||(m=i)}}catch(t){console.error(t)}})));let n=!1;Array.from(e.querySelectorAll("svg[data-marpit-svg]"),(t=>{var e,s,r,o;t.style.transform||(t.style.transform="translateZ(0)");const a=i||m||t.currentScale||1;p!==a&&(p=a,n=a);const l=t.getBoundingClientRect(),{length:c}=t.children;for(let i=0;i<c;i+=1){const n=t.children[i];if(n.getScreenCTM){const t=n.getScreenCTM();if(t){const i=null!==(s=null===(e=n.x)||void 0===e?void 0:e.baseVal.value)&&void 0!==s?s:0,c=null!==(o=null===(r=n.y)||void 0===r?void 0:r.baseVal.value)&&void 0!==o?o:0,d=n.children.length;for(let e=0;e<d;e+=1){const s=n.children[e];if("SECTION"===s.tagName){const{style:e}=s;e.transformOrigin||(e.transformOrigin=`${-i}px ${-c}px`),e.transform=`scale(${a}) matrix(${t.a}, ${t.b}, ${t.c}, ${t.d}, ${t.e-l.left}, ${t.f-l.top}) translateZ(0.0001px)`;break}}}}}})),!1!==n&&Array.from(e.querySelectorAll("iframe"),(({contentWindow:t})=>{null==t||t.postMessage(`${c}${n}`,"null"===window.origin?"*":window.origin)}))}function v({once:t=!1,target:e=document}={}){const i=function(t=document){if(t[d])return t[d];let e=!0;const i=()=>{e=!1,delete t[d]};Object.defineProperty(t,d,{configurable:!0,value:i});let n=[],s=!1;(async()=>{try{n=await g()}finally{s=!0}})();const r=()=>{for(const e of n)e({target:t});s&&0===n.length||e&&window.requestAnimationFrame(r)};return r(),i}(e);return t?(i(),()=>{}):i}p=1,m=void 0;const w=Symbol(),b=(e=document)=>{if("undefined"==typeof window)throw new Error("Marp Core's browser script is valid only in browser context.");if(((e=document)=>{const i=window[a];i||customElements.define("marp-auto-scaling",s);for(const n of Object.keys(t)){const s=`marp-${n}`,a=t[n].proto();(o??(o=!!document.createElement("div",{is:"marp-auto-scaling"}).outerHTML.startsWith("<div is"),o))&&a!==HTMLElement?i||customElements.define(s,r(a,{style:t[n].style}),{extends:n}):(i||customElements.define(s,r(HTMLElement,t[n])),e.querySelectorAll(`${n}[is="${s}"]`).forEach((t=>{t.outerHTML=t.outerHTML.replace(new RegExp(`^<${n}`,"i"),`<${s}`).replace(new RegExp(`</${n}>$`,"i"),`</${s}>`)})))}window[a]=!0})(e),e[w])return e[w];const i=v({target:e}),n=()=>{i(),delete e[w]},l=Object.assign(n,{cleanup:n,update:()=>b(e)});return Object.defineProperty(e,w,{configurable:!0,value:l}),l},y=document.currentScript;b(y?y.getRootNode():document)}();
 </script></foreignObject></svg></div>
