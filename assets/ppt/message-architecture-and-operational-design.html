@@ -58,8 +58,8 @@
 <h2 id="%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B0%9C%EC%9A%94">프로젝트 개요</h2>
 <ul>
 <li><strong>목표</strong>: 엣지 시스템 포함 전체 서비스의 운영 복원력 개선</li>
-<li><strong>배경</strong>: REST 기반 구조에서 반복되는 장애 확산과 추적 불가</li>
-<li><strong>역할</strong>: 구조 분석, 아키텍처 재설계, 운영 지표 정의, 기술 설득</li>
+<li><strong>배경</strong>: 모놀리스+REST 기반 구조에서 반복되는 장애 확산과 추적 불가</li>
+<li><strong>역할</strong>: 구조 분석, 아키텍처 재설계, 운영 지표 정의, 기술 도입 설득</li>
 </ul>
 <blockquote>
 <p>기술뿐 아니라 <strong>운영과 협업</strong>까지 포함한 구조적 전환 경험</p>
@@ -133,14 +133,14 @@ REST --&gt; RDS
 <h2 id="%EA%B5%AC%EC%A1%B0-%EC%A0%84%ED%99%98-%EB%B0%A9%ED%96%A5">구조 전환 방향</h2>
 <ul>
 <li>기술의 문제가 아닌 운영 흐름 단절의 문제</li>
-<li>단일 구조 해체 → 메시지 중심의 유닛화</li>
+<li>모놀리스 구조 해체 → 메시지 중심의 유닛화</li>
 <li>사이트별 조건을 수용할 수 있도록 구조 분화</li>
 </ul>
 <p>전환 전략:</p>
 <ul>
-<li>모놀리스를 쪼개는 것이 아니라 흐름을 분리</li>
+<li>모놀리스를 기능별로 분리하는 것이 아니라 흐름을 분리</li>
 <li>엣지를 하나로 통일하는 것이 아니라 각기 다른 버전 허용</li>
-<li>추적성과 복원력을 메시지 자체로 구성</li>
+<li>추적성과 복원력을 메시지 방식으로 개선</li>
 </ul>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="8" data-paginate="true" lang="ko-KR" data-marpit-pagination="8" style="--paginate:true;" data-marpit-pagination-total="18">
@@ -152,7 +152,7 @@ REST --&gt; RDS
 </ul>
 <h3 id="%EC%9A%B4%EC%98%81">운영</h3>
 <ul>
-<li>“운영자가 메시지를 이해할 수 있을까요?”</li>
+<li>“운영에서 메시지를 이해할 수 있을까요?”</li>
 <li>“MQTT는 안정성이 떨어지지 않나요?”</li>
 </ul>
 </section>
@@ -160,9 +160,9 @@ REST --&gt; RDS
 <h2 id="%EC%84%A4%EB%93%9D-%EC%A0%84%EB%9E%B5">설득 전략</h2>
 <ul>
 <li>장애 사례를 중심으로 문제를 구체화</li>
-<li>운영 지표 기반의 복원 흐름을 설명</li>
-<li>Kafka 대신 <strong>Kinesis</strong> 같은 관리형 서비스로 진입장벽 완화</li>
-<li>메시지 리스트, request_code, trace ID 등 운영 중심 시야 강조</li>
+<li>운영 지표 기반의 예방 / 복원 흐름을 설명</li>
+<li>Kafka 대신 <strong>AWS IoT(mqtt)</strong> 같은 관리형 서비스로 진입장벽 완화</li>
+<li>메시지 리스트, request_code, trace ID 등 관측/추적성 강조</li>
 </ul>
 <blockquote>
 <p>기술의 장점보다, 운영이 쉬워진다는 메시지를 반복했습니다</p>
@@ -181,12 +181,12 @@ REST --&gt; RDS
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="11" data-paginate="true" lang="ko-KR" data-marpit-pagination="11" style="--paginate:true;" data-marpit-pagination-total="18">
 <h2 id="%EB%A9%94%EC%8B%9C%EC%A7%80-%EA%B8%B0%EB%B0%98-%EA%B5%AC%EC%A1%B0%EC%9D%98-%EC%9C%84%ED%97%98-%EC%9A%94%EC%86%8C">메시지 기반 구조의 위험 요소</h2>
-<h3 id="%EB%A9%94%EC%8B%9C%EC%A7%80-%EC%88%9C%EC%84%9C-%EB%B6%88%EC%9D%BC%EC%B9%98">메시지 순서 불일치</h3>
-<p>→ <code>request_code</code>, <code>timestamp</code> 등 명시 필요</p>
 <h3 id="%EB%B8%8C%EB%A1%9C%EC%BB%A4-%EC%9E%A5%EC%95%A0">브로커 장애</h3>
 <p>→ 재처리 전략, 모니터링 지표 필요</p>
+<h3 id="%EB%A9%94%EC%8B%9C%EC%A7%80-%EC%88%9C%EC%84%9C-%EB%B6%88%EC%9D%BC%EC%B9%98">메시지 순서 불일치</h3>
+<p>→ <code>timestamp</code> 등 명시 필요</p>
 <h3 id="%ED%9D%90%EB%A6%84-%EC%B6%94%EC%A0%81-%EC%96%B4%EB%A0%A4%EC%9B%80">흐름 추적 어려움</h3>
-<p>→ <code>trace ID</code>, <code>action_start_time</code>, 메시지 구조화 필요</p>
+<p>→ <code>trace ID</code>, <code>requester ID</code>, 메시지 구조화 필요</p>
 <blockquote>
 <p>메시지 구조는 설계 없이는 오히려 혼란을 만듭니다</p>
 </blockquote>
@@ -194,8 +194,9 @@ REST --&gt; RDS
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="12" data-paginate="true" lang="ko-KR" data-marpit-pagination="12" style="--paginate:true;" data-marpit-pagination-total="18">
 <h2 id="%EC%9A%B4%EC%98%81%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%A7%80%ED%91%9C-%EC%84%A4%EA%B3%84">운영을 위한 지표 설계</h2>
 <ul>
-<li><code>action_start_time</code>, <code>action_finish_time</code>: 단계별 지연 추적</li>
+<li><code>action_duration_time</code>: 단계별 지연 추적</li>
 <li><code>heartbeat</code>: 장치/엣지 상태 생존 확인</li>
+<li><code>request_id</code>: 요청자 ID</li>
 <li><code>request_code</code>: 요청의 의도 명시</li>
 <li><code>response_code</code>: 결과 분류 (성공, 실패, 무시 등)</li>
 </ul>
@@ -207,13 +208,13 @@ REST --&gt; RDS
 <h2 id="%EB%84%A4%EC%9E%84%EC%8A%A4%ED%8E%98%EC%9D%B4%EC%8A%A4-%EA%B8%B0%EB%B0%98-%EA%B5%AC%EC%A1%B0">네임스페이스 기반 구조</h2>
 <ul>
 <li>
-<p>기능 중심의 메시지 네이밍 구조:</p>
+<p>기능 중심의 Topic 네이밍 구조:</p>
 <ul>
 <li><code>device.</code>, <code>service_platform.</code>, <code>data_core.</code>, <code>3rd_party.</code></li>
 </ul>
 </li>
 <li>
-<p>단순한 폴더 구분이 아니라 기능 해석 언어</p>
+<p>단순한 카테고리 분류가 아닌 서비스 해석 언어</p>
 </li>
 <li>
 <p>팀 간 협업 기준을 통일하는 문법적 기반</p>
@@ -320,7 +321,7 @@ APP --&gt; AUTH
 <ul>
 <li>메시지는 통신이 아니라 <strong>구조</strong></li>
 <li>네임스페이스는 협업을 위한 <strong>공통 언어</strong></li>
-<li>아키텍처는 기술 이전에 <strong>운영과 조직의 구조</strong></li>
+<li>아키텍처는 기술 이전에 <strong>운영과 조직의 구조</strong>를 반영</li>
 </ul>
 <blockquote>
 <p>설계란, 기술과 협업을 함께 설계하는 일입니다</p>
