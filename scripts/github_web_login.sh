@@ -24,10 +24,12 @@ set -e
 
 if [[ $AUTH_STATUS -ne 0 ]]; then
   echo "[INFO] 아직 GitHub 로그인되지 않았습니다. 웹 브라우저를 통해 로그인합니다."
-  gh auth login \
+  # 브라우저 자동 실행을 막고, 콘솔에 장치 코드 + URL을 출력하게 함
+  GH_BROWSER=none BROWSER=none gh auth login \
     --hostname "${GITHUB_HOST}" \
     --git-protocol https \
     --web
+
 else
   echo "[INFO] 이미 로그인된 상태입니다."
 fi
