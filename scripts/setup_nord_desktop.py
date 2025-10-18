@@ -71,9 +71,13 @@ print("[INFO] GNOME 다크모드 + 폰트 설정")
 gsettings_set("org.gnome.desktop.interface", "color-scheme", "'prefer-dark'")
 gsettings_set("org.gnome.desktop.interface", "monospace-font-name", "'JetBrains Mono 12'")
 
-# ==== 3) Dock 하단 설정 ======================================================
-print("[INFO] Dock 하단 고정")
+# ==== 3) Dock 하단-가운데 ======================================
+print("[INFO] Dock 하단-가운데 정렬 (panel-mode 키 없이 구성)")
 gsettings_set("org.gnome.shell.extensions.dash-to-dock", "dock-position", "'BOTTOM'")
+# 전체 폭으로 늘리는 동작을 끄면 아이콘이 가운데로 배치됨
+gsettings_set("org.gnome.shell.extensions.dash-to-dock", "extend-height", "false")
+
+
 
 # ==== 4) 배경화면 (background.jpg) ===========================================
 print("[INFO] background.jpg 파일 설정")
