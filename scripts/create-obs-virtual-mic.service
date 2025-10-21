@@ -1,0 +1,16 @@
+# scripts/create-obs-virtual-mic.service
+[Unit]
+Description=Create OBS Virtual Mic (OBS_VirtualMic from OBS_Monitor.monitor)
+After=pipewire.service pipewire-pulse.service wireplumber.service create-obs-monitor-sink.service default.target
+Requires=create-obs-monitor-sink.service
+Wants=pipewire.service pipewire-pulse.service wireplumber.service
+
+[Service]
+Type=oneshot
+ExecStartPre=/usr/bin/env bash -lc 'pactl info >/dev/null'
+ExecStartPre=/usr/local/bin/create-obs-monitor-sink.sh
+ExecStart=/usr/local/bin/create-obs-virtual-mic.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target
