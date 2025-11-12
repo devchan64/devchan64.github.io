@@ -22,7 +22,7 @@ def reconstruct_front_matter(front_dict):
 # 우선 대체할 수 있는 표현을 정의
 BASELINE_TAGS = ["Project", "Design Philosophy", "Leadership", "Technical Debt", 
                  "Organizational Culture", "Knowledge Base", "Memory Management",
-                 "Onboarding"]
+                 "Onboarding", "Retrospective"]
 
 def translate_tags(tags: list[str]) -> list[str]:
     translated = []
