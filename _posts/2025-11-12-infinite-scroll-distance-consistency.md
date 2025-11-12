@@ -2,8 +2,7 @@
 layout: post
 title: "무한 스크롤과 스크롤 거리의 정합에 대한 아이데이션"
 date: 2025-11-12
-categories: [frontend, ux, virtualization]
-tags: [infinite-scroll, pagination, ux, virtual-list, data-consistency]
+tags: [회고]
 ---
 
 # 무한 스크롤과 스크롤 거리의 정합에 대한 아이데이션
