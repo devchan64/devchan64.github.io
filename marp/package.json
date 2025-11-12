@@ -9,8 +9,9 @@
     "build": "npx marp -I ./covers --html -o ../assets/images/covers --engine ./engine.js --template bare --theme theme.css --image jpeg --debug=true"
   },
   "devDependencies": {
-    "@marp-team/marp-cli": "^4.1.2",
+    "@marp-team/marp-cli": "^4.2.3",
     "@marp-team/marp-core": "^4.0.1",
-    "markdown-it-mark": "^4.0.0"
+    "markdown-it-mark": "^4.0.0",
+    "puppeteer-core": "^24.29.1"
   }
 }
