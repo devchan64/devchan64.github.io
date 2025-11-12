@@ -11,8 +11,6 @@ title: Ideation on Infinite Scrolling and Scroll Depth Alignment
 
 ---
 
-# Ideation on Infinite Scrolling and Scroll Distance Alignment
-
 ## 🧭 Overview
 
 Infinite scrolling offers users a seamless navigation experience.  
