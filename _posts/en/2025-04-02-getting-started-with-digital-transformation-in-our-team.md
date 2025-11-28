@@ -10,6 +10,8 @@ title: Need Documentation for Onboarding DX?
 > `gpt-4-turbo` has translated this article into English.
 ---
 
+# Need Documentation for Onboarding DX?
+
 # Introduction
 
 We have repeatedly made big and small mistakes in our work.

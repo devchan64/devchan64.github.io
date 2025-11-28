@@ -13,6 +13,8 @@ title: 'Case Study: Resolving Collaboration Bottlenecks through the Platformizat
 
 ---
 
+# Case Study: Resolving Collaboration Bottlenecks through the Platformization of Digital Textbooks
+
 **Transitioning from a Closed Structure Combined with Design and Development to a Skin-Module Separation Strategy and SDK-based Platform Structure**,  
 **Eliminating Collaboration Bottlenecks and More Than Doubling Productivity: A Case Study**
 

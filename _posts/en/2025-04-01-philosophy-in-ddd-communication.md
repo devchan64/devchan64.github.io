@@ -11,6 +11,8 @@ title: Let's Not Instrumentalize Philosophy – At Its Core, It's About Communic
 > `gpt-4-turbo` has translated this article into English.
 ---
 
+# Let's Not Instrumentalize Philosophy – At Its Core, It's About Communication
+
 ### Modeling is a Conversation. Structure is Merely the Outcome.
 
 Recently, Domain-Driven Design (DDD) has been frequently mentioned in various communities and practical fields.  

@@ -12,6 +12,8 @@ title: '"Strategies to Avoid Technical Debt with Expiry-Ready Code"'
 
 ---
 
+# Strategies to Avoid Technical Debt with Expiry-Ready Code
+
 ## Background
 
 In environments with extensive End-to-End connectivity, functional changes are frequent, and integration with external interfaces is complex. Various temporary solutions and exception handling logics accumulate rapidly. Especially, 'make-it-work' codes if not organized in the long term:

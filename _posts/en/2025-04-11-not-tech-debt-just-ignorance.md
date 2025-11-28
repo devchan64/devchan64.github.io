@@ -11,6 +11,8 @@ title: 'It''s Not Technical Debt, It''s Just What We Didn''t Know'
 
 ---
 
+# It''s Not Technical Debt, It''s Just What We Didn''t Know
+
 ### We are Confusing Ignorance with Technical Debt
 
 # 1. Introduction: The Term "Technical Debt" Is Used Too Freely

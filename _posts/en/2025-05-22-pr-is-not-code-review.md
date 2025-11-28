@@ -12,6 +12,8 @@ title: 'PR is Not Code Review: Structural Separation Begun Through Conversation'
 
 ---
 
+# PR is Not Code Review: Structural Separation Begun Through Conversation
+
 ## 1. Misunderstandings Originating from Conversations
 
 Recently, while discussing code reviews, I realized a mistake I made myself.  

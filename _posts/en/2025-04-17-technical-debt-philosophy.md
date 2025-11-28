@@ -10,6 +10,8 @@ title: Structural Thinking and Operational Philosophy on Technical Debt
 
 ---
 
+# Structural Thinking and Operational Philosophy on Technical Debt
+
 I was once asked in an interview, "How do you manage technical debt?" At that time, I had not clearly defined the concept of technical debt, so I am writing this article to organize my thoughts.
 
 ## Language Alignment of Technical Debt

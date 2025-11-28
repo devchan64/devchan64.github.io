@@ -11,6 +11,8 @@ title: Is Our Agile Really 'Agile'?
 > `gpt-4-turbo` has translated this article into English.
 ---
 
+# Is Our Agile Really 'Agile'?
+
 Sprints rotate, and meetings are held regularly.
 
 The backlog is also neatly organized.

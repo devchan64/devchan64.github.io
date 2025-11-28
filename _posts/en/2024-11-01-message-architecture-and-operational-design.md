@@ -12,6 +12,8 @@ title: 'Message-Based Architecture and Operations-Centric Design'
 
 ---
 
+# Message-Based Architecture and Operations-Centric Design
+
 ## 1. Problem Situation and the Crossroads of Choice
 
 In an End-to-End service structure, devices, apps, authentication systems, and data platforms need to be organically connected. 

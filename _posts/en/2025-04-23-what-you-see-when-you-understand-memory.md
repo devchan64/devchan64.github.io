@@ -12,6 +12,8 @@ title: '"Things You See Once You Understand Memory"'
 
 ---
 
+# Things You See Once You Understand Memory
+
 > The Hidden Structures and Performance Behind Code
 > This article addresses the memory perspective necessary for transitioning from 'someone who writes code' to 'someone who designs systems.'
 

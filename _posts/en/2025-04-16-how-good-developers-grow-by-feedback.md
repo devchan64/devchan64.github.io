@@ -14,6 +14,8 @@ title: How Do Good Developers Grow Through Evaluation?
 
 ---
 
+# How Do Good Developers Grow Through Evaluation?
+
 Performance evaluation is a sensitive and sometimes exhausting topic for developers.  
 However, if the desired image of a developer is clearly defined, evaluation can transform from a ranking tool into a **method for growth and cultural training**.
 

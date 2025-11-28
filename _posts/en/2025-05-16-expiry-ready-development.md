@@ -15,6 +15,10 @@ title: 'Advocating Expiry-Ready Development Methods: Minimalist Knowledge Manage
 
 ---
 
+# Advocating Expiry-Ready Development Methods: Minimalist Knowledge Management Strategies for Startups
+
+---
+
 # Preface: What is Expiry-Ready?
 
 > Let's prepare to give way to better code

@@ -11,6 +11,10 @@ title: Who I Am — Turning Flow into Structure
 
 ---
 
+# Who I Am — Turning Flow into Structure
+
+---
+
 # Why I Write
 
 Hello.  

@@ -9,6 +9,8 @@ title: Multi-Tenant Based Data/Workspace Management Service
 > `gpt-4-turbo` has translated this article into English.
 ---
 
+# Multi-Tenant Based Data/Workspace Management Service
+
 ## **Service Overview**
 
 Our **Multi-Tenant Architecture-Based Data Management Service** is a platform designed to securely manage and support multiple workspaces (tenants). The data for each tenant is managed according to strict **data isolation** principles, providing a customized environment for each workspace that enables efficient and stable operations.

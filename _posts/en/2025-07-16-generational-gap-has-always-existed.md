@@ -10,6 +10,8 @@ title: Generational Differences Have Always Existed
 
 ---
 
+# Generational Differences Have Always Existed
+
 I recently read a post on the internet about someone struggling with generational differences.  
 The endless debate over generational differences makes me realize that everyone has their own perceptions and emotions.
 

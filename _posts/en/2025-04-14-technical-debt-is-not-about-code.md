@@ -11,6 +11,10 @@ title: 'Technical Debt is Not a Technology Issue'
 
 ---
 
+# Technical Debt is Not a Technology Issue
+
+---
+
 # Technical Debt: A Reflection for HR and Management
 
 > If technical debt is accumulating, it is not just a problem for the tech team,  

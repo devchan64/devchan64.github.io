@@ -12,6 +12,10 @@ title: '"The Changing Role of Code Conventions and the Shift to a Design-First D
 
 ---
 
+# The Changing Role of Code Conventions and the Shift to a Design-First Development Culture
+
+---
+
 # 1. Code Conventions, Are They Still Important?
 
 Indentation, bracket placement, variable names.  

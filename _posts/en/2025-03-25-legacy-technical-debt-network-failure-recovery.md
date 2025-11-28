@@ -10,6 +10,8 @@ title: 'Strategic Solutions to Network Failures by Addressing Legacy Technical D
 > `gpt-4-turbo` has translated this article into English.
 ---
 
+# Strategic Solutions to Network Failures by Addressing Legacy Technical Debt
+
 ### 1. Problem Background: Recurring Failures and Accumulating Technical Debt
 
 - At the onset of integration, **real-time video transmission functionality** was consistently experiencing monthly failures.

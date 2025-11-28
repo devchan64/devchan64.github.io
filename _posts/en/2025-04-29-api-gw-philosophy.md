@@ -13,6 +13,8 @@ title: Why Should API Gateway Be the Starting Point of Architectural Design?
 
 ---
 
+# Why Should API Gateway Be the Starting Point of Architectural Design?
+
 ## 1. Structureless Flow – The Design Problem of the API Era
 
 In modern systems, APIs are no longer just technical elements.  

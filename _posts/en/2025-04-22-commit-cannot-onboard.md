@@ -14,6 +14,10 @@ title: Onboarding Doesn''t Happen Through Commits — Why Knowledge Disappears i
 
 ---
 
+# Onboarding Doesn''t Happen Through Commits — Why Knowledge Disappears in Startups
+
+---
+
 # 1. Starting Point: The Absence of Knowledge Management
 
 In startups, code and features quickly accumulate. 

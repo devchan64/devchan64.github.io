@@ -11,6 +11,10 @@ title: '"Defining Design with a Focus on the Message"'
 
 ---
 
+# Defining Design with a Focus on the Message
+
+---
+
 # The Era of Every Device Becoming a Browser
 
 Recently, digital devices have evolved from mere command receivers and data collectors to active participants in the network, **reacting in real-time and exchanging messages**.

@@ -11,6 +11,8 @@ title: 'Leadership Lessons Learned While Working as a Manager'
 
 ---
 
+# Leadership Lessons Learned While Working as a Manager
+
 ## 1. **The Importance of Listening**
 As a manager, the first lesson I learned is that the surest way to make team members **feel respected is through listening**.  
 Listening is not just hearing but seriously considering what team members voice.

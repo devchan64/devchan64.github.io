@@ -12,6 +12,10 @@ title: We Don't Do Scrum. We Pre-Snap.
 
 ---
 
+# We Don't Do Scrum. We Pre-Snap.
+
+---
+
 # 1. Agile Manifesto
 
 > We are uncovering better ways of developing software by doing it and helping others do it.  

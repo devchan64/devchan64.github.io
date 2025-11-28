@@ -5,6 +5,10 @@ layout: post
 tags: [조직문화, 애자일, 리더십]
 ---
 
+# 우리는 Scrum하지 않는다. 우리는 Pre-Snap한다
+
+---
+
 # 1. Agile Manifesto (애자일 선언문)
 
 > We are uncovering better ways of developing software by doing it and helping others do it.  

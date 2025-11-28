@@ -11,6 +11,8 @@ title: The Need for a Knowledge Base
 > `gpt-4-turbo` has translated this article into English.
 ---
 
+# The Need for a Knowledge Base
+
 ### The Start of a Development Culture: ‘Transparent Information Sharing’ and ‘Building a Knowledge Base’
 
 I believe that the most crucial elements for creating a healthy development culture are **transparent information sharing** and **systematic knowledge base construction**.

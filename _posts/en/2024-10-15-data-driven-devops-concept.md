@@ -10,6 +10,8 @@ title: Data-Driven DevOps Concepts
 > `gpt-4-turbo` has translated this article into English.
 ---
 
+# Data-Driven DevOps Concepts
+
 ## 1. **Team Strategy**
 
 - **Knowledge Management and Collaboration Culture:** Utilize centralized knowledge management tools and real-time collaboration tools to manage the team's knowledge and problem-solving methods, and facilitate rapid collaboration.

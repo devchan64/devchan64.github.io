@@ -12,6 +12,10 @@ title: Guide to Process Transition for Startups
 
 ---
 
+# Guide to Process Transition for Startups
+
+---
+
 # Why is Process Transition Important for Startups?
 
 The strength of startups lies in rapid execution. However, non-repetitive execution leads to chaos, and execution without feedback does not lead to growth.  

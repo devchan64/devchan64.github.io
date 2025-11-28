@@ -14,6 +14,8 @@ title: MSA Does Not Increase Costs; It's Just Inconvenient.
 
 ---
 
+# MSA Does Not Increase Costs; It's Just Inconvenient.
+
 ## Preface
 
 Many people talk about MSA.  

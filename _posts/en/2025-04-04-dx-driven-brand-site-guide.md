@@ -12,7 +12,8 @@ title: '"Separating Design and Content, Operating with DX"'
 
 ---
 
-# "Low-Cost, Flexibility, and Speed-Focused Structuring Strategy"
+# Separating Design and Content, Operating with DX
+> "Low-Cost, Flexibility, and Speed-Focused Structuring Strategy"
 
 ---
 
