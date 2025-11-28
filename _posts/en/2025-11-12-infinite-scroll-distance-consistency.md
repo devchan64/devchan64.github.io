@@ -3,13 +3,15 @@ date: 2025-11-12
 layout: post
 permalink: /en/2025/11/12/infinite-scroll-distance-consistency.html
 tags:
-- Retrospective
+  - Retrospective
 title: Ideation on Infinite Scrolling and Scroll Depth Alignment
 ---
 
 > `gpt-4-turbo` has translated this article into English.
 
 ---
+
+# Ideation on Infinite Scrolling and Scroll Depth Alignment
 
 ## 🧭 Overview
 
@@ -24,14 +26,14 @@ documenting personal insights on how to make "users scroll naturally and systems
 
 Infinite scrolling is predicated on two uncertainties: asynchronous loading and dynamic height changes.  
 If each item's rendering height varies, or if images, ads, and content load late,  
-the scroll position does not directly correspond to the data index.  
+the scroll position does not directly correspond to the data index.
 
 Commonly observed phenomena in this process include:
 
-- Failure to restore the scroll position  
-- Height jumps during loading  
-- Difficulty in handling jumps to yet-to-be-loaded data  
-- Discontinuous sections with missing or duplicated data  
+- Failure to restore the scroll position
+- Height jumps during loading
+- Difficulty in handling jumps to yet-to-be-loaded data
+- Discontinuous sections with missing or duplicated data
 
 These phenomena are not resolved by simple viewport control or virtual lists alone,  
 ultimately touching on the fundamental issue of "consistency between data and position."
@@ -40,18 +42,20 @@ ultimately touching on the fundamental issue of "consistency between data and po
 
 ## 2. A Structure Requiring Consideration of Both Server and Client
 
-Alignment cannot be achieved by the efforts of one side alone.  
+Alignment cannot be achieved by the efforts of one side alone.
 
-**On the server side:**  
-- It is necessary to maintain clear and stable sorting criteria (e.g., createdAt + id combination).  
-- Cursor-based pagination should ensure idempotence and order.  
-- A snapshotId can facilitate continuous requests based on the same moment.  
-- Providing rendering hints (such as expected heights) can help clients with distance calculations.  
+**On the server side:**
 
-**On the client side:**  
-- Manage the scroll position using data anchors.  
-- Set a safe window to control the range of loading and unloading.  
-- Maintain a consistent state by bundling data, cursor, and height information into a snapshot.  
+- It is necessary to maintain clear and stable sorting criteria (e.g., createdAt + id combination).
+- Cursor-based pagination should ensure idempotence and order.
+- A snapshotId can facilitate continuous requests based on the same moment.
+- Providing rendering hints (such as expected heights) can help clients with distance calculations.
+
+**On the client side:**
+
+- Manage the scroll position using data anchors.
+- Set a safe window to control the range of loading and unloading.
+- Maintain a consistent state by bundling data, cursor, and height information into a snapshot.
 
 When the server and client recognize each other's roles,  
 the balance between scroll distance and data alignment becomes clearer.
@@ -70,7 +74,7 @@ A snapshot includes the following information:
 
 - `items`: An array of loaded data (order guaranteed)
 - `cursors`: Cursor information for requesting previous and next pages
-- `estimatedHeights`: Estimated heights for each item  
+- `estimatedHeights`: Estimated heights for each item
 - `measuredHeights`: Heights measured after rendering
 - `cumulativeHeights`: Cumulative height sum up to the i-th item
 - `totalScrollableHeight`: Total scrollable height
@@ -129,24 +133,25 @@ Define a normalized distance value based on the screen height.
 `jumpVh = |targetScrollTop - currentScrollTop| / viewportHeight`  
 This value represents how many screens' worth the user intends to skip.
 
-For instance,  
-- `jumpVh = 0.5` → about half a screen of movement  
-- `jumpVh = 2` → two to three pages' worth of jump  
-- `jumpVh = 8` → moving to a far-off position  
+For instance,
+
+- `jumpVh = 0.5` → about half a screen of movement
+- `jumpVh = 2` → two to three pages' worth of jump
+- `jumpVh = 8` → moving to a far-off position
 
 This ratio can be used to differentiate loading strategies.
 
 ### Strategies by Distance Segment
 
-| Segment | Characteristics | Handling Method |
-|---------|-----------------|-----------------|
-| Short range (≤L1) | Movement within safe area | Move indices based on current anchor |
-| Medium range (L1~L2) | Continuous loading possible | Limit movement to a maximum range |
-| Long range (>L2) | Hard jump | Estimate approximate position based on ratio or domain axis |
+| Segment              | Characteristics             | Handling Method                                             |
+| -------------------- | --------------------------- | ----------------------------------------------------------- |
+| Short range (≤L1)    | Movement within safe area   | Move indices based on current anchor                        |
+| Medium range (L1~L2) | Continuous loading possible | Limit movement to a maximum range                           |
+| Long range (>L2)     | Hard jump                   | Estimate approximate position based on ratio or domain axis |
 
-- Short-range movements utilize cumulative heights to handle by adding deltaIndex to the anchor index.  
+- Short-range movements utilize cumulative heights to handle by adding deltaIndex to the anchor index.
 - Medium-range movements limit the movement to a certain range,  
-  ensuring expansion only within a system-manageable safe area.  
+  ensuring expansion only within a system-manageable safe area.
 - Long-range movements eschew pixel-based estimates in favor of  
   data ratios or domain axes (e.g., timestamp),  
   roughly interpreting as `targetIndex ≈ N × r`  
@@ -183,12 +188,12 @@ key tools in stabilizing UX quality.
 
 The safe window refers to the range of data pre-loaded around the current viewport.  
 Even if users scroll quickly,  
-data within this area can be rendered immediately.  
+data within this area can be rendered immediately.
 
-- The upper safe area prevents loading delays when quickly scrolling back.  
-- The lower safe area provides a buffer until the next section is fully loaded.  
+- The upper safe area prevents loading delays when quickly scrolling back.
+- The lower safe area provides a buffer until the next section is fully loaded.
 - If the width of the area is too wide, memory and computation costs increase,  
-  so a dynamic approach based on screen height ratio is necessary.  
+  so a dynamic approach based on screen height ratio is necessary.
 
 In real environments, adjusting the size of the safe area gradually based on network delays, user scroll speed, and device performance  
 seems to result in the highest perceived quality.
@@ -198,10 +203,10 @@ seems to result in the highest perceived quality.
 Preloading involves requesting or rendering the next content before it comes into the user's view.  
 Elements with high loading costs, such as images, videos, and ads, benefit significantly from this approach.
 
-- **Near-distance preloading**: Fetch data for the immediate next page in advance.  
-- **Context-based preloading**: Predictively load only the necessary sections based on scroll direction, speed, and patterns.  
+- **Near-distance preloading**: Fetch data for the immediate next page in advance.
+- **Context-based preloading**: Predictively load only the necessary sections based on scroll direction, speed, and patterns.
 - **Priority adjustment**: When network resources are limited,  
-  prioritize content adjacent to the current viewport.  
+  prioritize content adjacent to the current viewport.
 
 Preloading directly influences the maintenance of visual smoothness.  
 Even without perfect alignment,  
@@ -210,12 +215,12 @@ it provides an experiential stability that makes the screen appear "always ready
 ### 6.3 Visual Buffering Devices
 
 - Using **loading placeholders** to secure height changes in advance  
-  can reduce the jarring effect when new data arrives.  
-- **Skeleton UIs** provide temporary visual stability before the actual content is loaded.  
+  can reduce the jarring effect when new data arrives.
+- **Skeleton UIs** provide temporary visual stability before the actual content is loaded.
 - **Hard jump sections** are temporarily represented as "loading blocks,"  
-  replaced naturally once the actual data is ready.  
+  replaced naturally once the actual data is ready.
 - **Error sections** should not be quietly hidden but instead provide visual feedback,  
-  such as "retry guidance blocks" or gray areas.  
+  such as "retry guidance blocks" or gray areas.
 
 These visual buffering devices  
 create a perception for users of being "within a continuous flow,"  
@@ -234,7 +239,7 @@ Ultimately, the core of UX quality lies not in perfect numerical alignment but i
 
 The design of infinite scrolling seems to be a balancing act between mathematical accuracy and user perception.  
 Securing a **minimum standard of accuracy** through server cursors, snapshot structures, and safe area control, and  
-adding **natural movement** seems like a realistic approach.  
+adding **natural movement** seems like a realistic approach.
 
 Rather than making alignment an absolute goal,  
 maintaining a consistent system within an expected margin of error seems to be a more effective approach in real environments.
@@ -244,7 +249,7 @@ maintaining a consistent system within an expected margin of error seems to be a
 ## 8. Mindset for Handling Alignment
 
 Alignment in infinite scrolling is not merely a technical issue of matching pixels.  
-It is understood as a **structural problem involving dynamic adjustments between data, cursors, heights, and distances.**  
+It is understood as a **structural problem involving dynamic adjustments between data, cursors, heights, and distances.**
 
 Thus, designers prioritize **consistency of flow over pixel precision**.  
 What users perceive is not absolute coordinates, but  
@@ -258,23 +263,28 @@ Despite all efforts, achieving complete alignment remains challenging.
 Recognizing these limitations feels naturally appropriate.
 
 ### 9.1 Uncertainty of Asynchronous Data
-- Server data can change in real-time, altering the meaning of calculated heights and cursors.  
-- Even data from the same moment can be reordered due to delays or rearrangements.  
+
+- Server data can change in real-time, altering the meaning of calculated heights and cursors.
+- Even data from the same moment can be reordered due to delays or rearrangements.
 
 ### 9.2 Errors in Client Estimates
-- Differences between expected and actual heights accumulate due to image loading or responsive layout changes.  
+
+- Differences between expected and actual heights accumulate due to image loading or responsive layout changes.
 
 ### 9.3 Damage in Intermediate Sections
-- Rapid returns after hard jumps can leave intermediate sections empty, losing anchors.  
-- If downloaded data is deleted, cumulative height calculations break.  
+
+- Rapid returns after hard jumps can leave intermediate sections empty, losing anchors.
+- If downloaded data is deleted, cumulative height calculations break.
 
 ### 9.4 Exceptions in User Operations
-- Fast scrolls, such as trackpad acceleration, exceed loading speeds.  
-- Browser scroll restoration behaviors vary by environment, making full consistency challenging.  
+
+- Fast scrolls, such as trackpad acceleration, exceed loading speeds.
+- Browser scroll restoration behaviors vary by environment, making full consistency challenging.
 
 ### 9.5 UX Limits
-- Users hardly notice position differences of ±10%.  
-- Efforts to excessively increase alignment may not yield substantial perceptual benefits relative to complexity.  
+
+- Users hardly notice position differences of ±10%.
+- Efforts to excessively increase alignment may not yield substantial perceptual benefits relative to complexity.
 
 ---
 
