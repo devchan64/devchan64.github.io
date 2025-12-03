@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "모노레포 기반 AWS 인프라 설계 기준"
-date: 2025-05-13
 tags: [프로젝트, 설계철학]
 ---
 
