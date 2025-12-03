@@ -1,12 +1,13 @@
 ---
-categories:
-- 회고
-- 설계철학
 date: 2025-12-03
 layout: post
 permalink: /en/2025/12/03/iot-saas-authorization-design-notes.html
-title: 'IoT Control SaaS: Notes on Data Isolation, Permissions, and Tenant Inheritance
-  Design'
+title:
+  "IoT Control SaaS: Notes on Data Isolation, Permissions, and Tenant Inheritance
+  Design"
+tags:
+  - Retrospective
+  - Design Philosophy
 ---
 
 > `gpt-4-turbo` has translated this article into English.
@@ -170,14 +171,14 @@ Rather, it is the form **naturally required by the domain-specific demands of Io
 
 ### Requirements ↔ Structure Correspondence Table
 
-| Requirement                        | Solution Structure                   |
-| ---------------------------------- | ------------------------------------ |
-| Complete data isolation between customers | Document isolation based on tenantId |
-| Headquarters–branch structure      | Tenant hierarchy (Tree)              |
-| Differentiated roles               | Role inheritance                     |
+| Requirement                                            | Solution Structure                   |
+| ------------------------------------------------------ | ------------------------------------ |
+| Complete data isolation between customers              | Document isolation based on tenantId |
+| Headquarters–branch structure                          | Tenant hierarchy (Tree)              |
+| Differentiated roles                                   | Role inheritance                     |
 | Control of sub-organizations by the upper organization | UserRole scope = WITH_DESCENDANTS    |
-| Fast authorization determination   | Caching effectivePermissions         |
-| Scalability based on documents     | Schema-based Document model          |
+| Fast authorization determination                       | Caching effectivePermissions         |
+| Scalability based on documents                         | Schema-based Document model          |
 
 Ultimately, this design is derived from the intersection of **domain requirements, data model constraints, and operational realities**.
 
@@ -291,9 +292,11 @@ This document summarizes how to design and implement **data isolation (multi-ten
 In particular, it focuses on the following three goals:
 
 1. **Complete data separation by customer/organization unit**
+
    - Each tenant has an independent data area, and the structure ensures that data from different tenants is neither mixed nor exposed at any level.
 
 2. **Maintaining a flexible document-based data model**
+
    - Manages various data types such as IoT device status, settings, profiles, recipes, and user logs uniformly at the document level, while ensuring structural stability and validity through the schema.
 
 3. **Building a scalable permission/authorization model**
@@ -484,4 +487,4 @@ Each schema consists of the following elements:
 - **Generator (Generator)**  
   Defines the rules for filling fields when creating a new document.
 
-- **Validator (
+- \*\*Validator (

@@ -2,7 +2,7 @@
 layout: post
 title: "IoT 관제 SaaS: 데이터 격리 · 권한 · 테넌트 상속 설계 노트"
 date: 2025-12-03
-categories: [회고, 설계철학]
+tags: [회고, 설계철학]
 ---
 
 # 1부. IoT 관제 SaaS 설계 노트
