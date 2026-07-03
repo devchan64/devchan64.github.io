@@ -7,7 +7,7 @@ tags:
 title: Retrospective on an AWS DevOps Example Project
 ---
 
-> `gpt-4-turbo` has translated this article into English.
+> This article was translated from the original Korean source. The English version was regenerated from the latest Korean document.
 
 ---
 
@@ -15,6 +15,8 @@ This article is a retrospective on the structure and design process of the [`aws
 It aims to share practical examples of automating the deployment of infrastructure and applications, with a focus on CloudFormation and GitHub Actions.
 
 ---
+
+# Retrospective on an AWS DevOps Example Project
 
 ## Why Did We Start This Project?
 

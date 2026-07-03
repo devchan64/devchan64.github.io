@@ -512,6 +512,16 @@ This book introduces the concept of bounded context — a clearly defined bounda
 - Promotes clear ownership, isolation, and internal consistency of models.
 - Introduces the idea that each service has its own ubiquitous language within its context.
 
+#### Korean Translation
+
+This book introduces the concept of a bounded context, the scope in which a given domain model remains valid. It emphasizes domain modeling, strategic design, and alignment between business concepts and software structure. Those ideas form a core foundation for defining microservice boundaries in ways that map cleanly to business capability.
+
+#### Contribution to MSA Design:
+
+- Reinforces the idea that services should be split along business-domain boundaries.
+- Supports clear ownership and model consistency inside each service boundary.
+- Helps frame each service as having its own shared domain language.
+
 ### 2. *Service-Oriented Architecture: Concepts, Technology, and Design* – Thomas Erl (2005)
 
 #### English Summary
@@ -523,6 +533,16 @@ This book defines core SOA principles including service contract, autonomy, reus
 - Lays groundwork for service modularity and separation of concerns.
 - Promotes loose coupling through standardized interfaces.
 - Advocates service granularity and orchestration.
+
+#### Korean Translation
+
+This book defines core SOA principles such as service contracts, autonomy, reusability, composability, and statelessness. It offers a conceptual and technical basis for service-oriented thinking, encouraging interoperability and abstraction away from implementation details.
+
+#### Contribution to MSA Design:
+
+- Provides a foundation for service modularity and separation of concerns.
+- Promotes loose coupling through standardized interfaces.
+- Introduces ideas about appropriate service granularity and orchestration.
 
 ### 3. *SOA Manifesto* (2009)
 
@@ -536,6 +556,16 @@ The manifesto outlines the philosophical stance of SOA, prioritizing business go
 - Values adaptability and governance over rigid implementation.
 - Advocates contract-first design, later adopted in MSA APIs.
 
+#### Korean Translation
+
+The SOA Manifesto presents a philosophical stance that prioritizes business outcomes over implementation details. It emphasizes flexibility, modularity, and standardized service contracts. Those ideas became part of the philosophical ground that MSA later inherited.
+
+#### Contribution to MSA Design:
+
+- Frames service architecture as a response to change.
+- Values flexibility and governance over rigid structure.
+- Reinforces contract-first thinking that later shaped MSA API design.
+
 ### 4. *Microservices* – James Lewis & Martin Fowler (2014)
 
 #### English Summary
@@ -548,7 +578,17 @@ This influential article synthesizes industry practice into a clear set of micro
 - Encourages teams to own the full lifecycle of services.
 - Highlights operational concerns like deployment automation and observability.
 
-### 5. *Microservices: A Systematic Mapping Study* – Pires & Pereira (2018)
+#### Korean Translation
+
+This influential article clearly describes core microservice characteristics such as decentralized governance, independent deployability, smart endpoints and dumb pipes, and architecture aligned with organizational structure. It effectively became the practical launch point for MSA.
+
+#### Contribution to MSA Design:
+
+- Defines microservices as independent units aligned to business.
+- Encourages end-to-end team ownership across the service lifecycle.
+- Highlights operational concerns such as deployment automation and observability.
+
+5. *Microservices: A Systematic Mapping Study* – Pires & Pereira (2018)
 
 #### English Summary
 
@@ -559,6 +599,16 @@ This paper surveys the academic landscape of microservices, classifying literatu
 - Offers taxonomy of MSA-related concerns in research.
 - Highlights open challenges (e.g., how fine-grained is “too fine”?).
 - Bridges gap between theory and real-world implementation.
+
+#### Korean Translation
+
+This paper organizes microservice-related research into categories such as architecture, implementation, deployment, and monitoring. It surfaces practical issues such as proper service granularity, data consistency, and the choice between orchestration and choreography.
+
+#### Contribution to MSA Design:
+
+- Structures MSA-related technical and operational concerns into a clearer taxonomy.
+- Highlights unresolved challenges, including the risk of over-fragmentation.
+- Helps bridge the gap between academic theory and real implementation practice.
 
 ### 6. *Microservices: Yesterday, Today, and Tomorrow* – Fritzsch et al. (2019)
 
@@ -571,6 +621,16 @@ This historical review explores the evolution of service-based systems, analyzin
 - Tracks historical context that shaped MSA.
 - Informs how organizations transitioned from monoliths.
 - Describes pitfalls like over-fragmentation and distributed complexity.
+
+#### Korean Translation
+
+This historical review looks at how microservices evolved out of SOA, component-based design, and agile practice. It also examines common success patterns and failure patterns seen in microservice adoption.
+
+#### Contribution to MSA Design:
+
+- Explains the historical context in which MSA emerged.
+- Shows how organizations transitioned away from monoliths.
+- Summarizes risks such as over-fragmentation and distributed-system complexity.
 
 ### Summary Insights for Practical Design
 

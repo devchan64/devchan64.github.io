@@ -5,12 +5,12 @@ permalink: /en/2025/04/02/getting-started-with-digital-transformation-in-our-tea
 tags:
 - DevOps
 - Organizational Culture
-title: Need Documentation for Onboarding DX?
+title: What If We Needed a Document to Onboard DX?
 ---
-> `gpt-4-turbo` has translated this article into English.
+> This article was translated from the original Korean source. The English version was regenerated from the latest Korean document.
 ---
 
-# Need Documentation for Onboarding DX?
+# What If We Needed a Document to Onboard DX?
 
 # Introduction
 
@@ -361,7 +361,6 @@ To this end, the CS team began using a template when transferring issues, contri
 
 ### Issue Transfer Template Item Configuration
 
-| --- | --- |
 | Item | Description |
 | --- | --- |
 | Location | Installation site of the device, address, etc. |
@@ -377,7 +376,6 @@ To this end, the CS team began using a template when transferring issues, contri
 | Time customer noticed the problem | When the customer noticed the symptoms |
 | Symptom reproduction frequency | Always/intermittent/under specific conditions, etc. |
 | Customer desired response | Replacement/visit/phone/remote support, etc. |
-| --- | --- |
 
 ---
 
@@ -445,4 +443,20 @@ Information Work for You
 - According to Deloitte research, an effective knowledge management system can shorten the onboarding speed by up to 30%.
 - Well-written records and searchable platforms are the starting points for sustainable collaboration.
 
->
+> Source: Deloitte Insights (2020), Knowledge management: Accelerating workforce performance
+
+---
+
+### 5. Records create organizational sustainability
+
+- Records are not temporary reference material. They are a structure that preserves the context behind decisions.
+- Documented records act as collective intelligence for the organization, remaining useful even when people leave or teams change.
+- They reduce repeated questions, make it possible to review decision processes, and accelerate onboarding for new members.
+- A single well-written record can eliminate the cost of dozens of repeated conversations.
+
+> Source: Harvard Business Review (2022), The Case for Writing Things Down
+
+## Summary
+
+> DX = a culture of writing + the ability to find what was written  
+> If it is never written down, it does not remain. If it cannot be found later, it might as well never have existed.

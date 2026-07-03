@@ -6,142 +6,169 @@ tags:
 - Project
 - DevOps
 - Platformization
-title: 'Message-Based Architecture and Operations-Centric Design'
+title: Message-Based Architecture and Operations-Centric Design
 ---
-> `gpt-4-turbo` has translated this article into English.
+> This article was translated from the original Korean source. The English version was regenerated from the latest Korean document.
 
 ---
 
 # Message-Based Architecture and Operations-Centric Design
 
-## 1. Problem Situation and the Crossroads of Choice
+## 1. The Problem and the Architectural Fork in the Road
 
-In an End-to-End service structure, devices, apps, authentication systems, and data platforms need to be organically connected. 
-However, as connectivity increases, resilience to failures and maintainability decrease, and sensitivity to functional changes sharply increases.
+In an end-to-end service structure, devices, apps, authentication systems, and data platforms must be connected as a single operating flow. But as connectivity increases, resilience and maintainability tend to drop, while sensitivity to change rises sharply.
 
-Initially, the system was configured using a REST-based API calling method, but the following problems continuously occurred:
+The initial system was built around REST-based API calls, and it kept running into the same structural problems:
 
-- Chain impacts on the entire service during failures
-- Difficulties in service addition and change due to a near-monolithic structure
-- Limited access for operators to trace or recover from problems
+- Failures cascaded across the broader service
+- The structure was close to a monolith, which made service additions and changes difficult
+- Operators had limited visibility into the information needed for investigation and recovery
 
-To overcome these structural limits, it was deemed more appropriate in the long term to transition to a message-centered asynchronous architecture rather than maintaining the existing structure.
+Because of those limits, I concluded that continuing to maintain the existing structure was less effective than moving to an asynchronous, message-centered architecture.
 
-## 2. Background for Choosing a Message-Based Design
+```mermaid
+flowchart LR
+    Device --> TCP
+    TCP --> Edge
+    Edge --> MQTT
+    MQTT --> Bridge[MQTT-REST-Bridge]
+    Bridge --> REST[REST-API-Service]
+    REST --> RDS
+```
 
-A message-based structure means that each service is not directly called but is indirectly connected and operates independently through messages.
+## 2. Why a Message-Based Design Was the Better Choice
 
-The reasons for choosing this structure are as follows:
+A message-based structure connects services indirectly through messages rather than through direct service-to-service calls. Each component can remain more independent while still participating in the same business flow.
 
-- **Integrity is more important than real-time performance for business characteristics**
-- **Isolation of failures through loose coupling between components**
-- **Improved traceability for operators**
+I chose this structure for three main reasons:
 
-Especially, the message-centered structure has facilitated integration with visualization tools such as APM and Grafana, significantly helping improve real-time monitoring and response speed to problems.
+- The business cared more about integrity than strict real-time behavior
+- Loose coupling between components improves failure isolation
+- Operators gain better traceability when something goes wrong
 
-## 3. Design Strategy and Acceptance Process Within the Team
+In practice, a message-centered architecture also made it easier to integrate monitoring and visualization tools such as APM and Grafana, which improved both live monitoring and response speed during incidents.
 
-This design was derived based on personal operational experience and previous technical backgrounds.
-Particularly, past familiarity with the message-based architecture in the Robot Operating System (ROS) environment was very helpful.
-ROS is fundamentally organized around a `Publisher`-`Subscriber` message communication structure, emphasizing distributed interaction and resilience among various components.
+## 3. Design Strategy and Team Adoption
 
-This technical foundation was critical not only as a simple implementation experience but also in forming a DevOps perspective that considers both operations and development in real field scenarios.
-In this project, operational feasibility and response efficiency were set as core indicators from the early stages of design.
+This design came from practical operating experience and earlier technical background. One major influence was prior familiarity with message-oriented architecture in ROS (Robot Operating System). ROS is built around a `Publisher`-`Subscriber` model, and that environment naturally emphasizes distributed interaction and resilience across multiple components.
 
-It was challenging to gain immediate empathy within the organization from the start.
-Especially for developers and operators unfamiliar with message-based structures, it was difficult to accept structurally or felt complex compared to the existing REST-based architecture.
+That background mattered because it shaped more than implementation habits. It helped form a DevOps-oriented perspective in which development and operations are considered together from the start. In this project, operational feasibility and incident response efficiency were treated as core design metrics from the beginning.
 
-Therefore, the core advantages of the design were explained based on practical operational scenarios:
+The team did not accept the direction immediately. For developers or operators who were not used to message-based systems, the structure could feel more complicated than the previous REST-centered model.
 
-- **Cost Reduction**: Utilized managed services like AWS Kinesis to reduce infrastructure operational costs and manpower burden.
-- **Ease of Problem Tracing**: Enhanced operators' problem analysis speed with trace ID-based log search and message list provision.
-- **Secured Scalability**: Message queue-based structure enabled horizontal scaling at the consumer level, effectively responding to service increases.
+To build alignment, I explained the design through concrete operational scenarios:
 
-Based on these advantages, specific cases were presented comparing it with the existing REST-centric structure, and the effectiveness and benefits of the message-based architecture were repeatedly explained to build consensus within the team.
+- **Reduced operating cost**: Managed services such as AWS Kinesis lowered both infrastructure overhead and staffing burden
+- **Faster troubleshooting**: Trace ID-based log search and message-list visibility made operator analysis much faster
+- **Better scalability**: Queue-based consumers could scale horizontally as service load grew
 
-> This design was an attempt that transcends mere messaging pathways, aiming for operational resilience, flexible scalability in design, and business-flow-centered structuring.
-> 
+Using those examples, I repeatedly compared the new design with the previous REST-centered structure and built internal agreement around the practical value of message-based architecture.
 
-## 4. Namespace-Based Hierarchical Structure and Design Philosophy
+> This design was not simply about rearranging message paths. It was an attempt to combine operational resilience, flexible scalability, and business-flow-centered structuring into one coherent architecture.
 
-> ※ Note: The `data_service` area is not defined in this structure. 
-> This was a strategic choice considering future integration possibilities into `data_platform`, as the role and responsibility of that layer were not clear at the time of design.
+## 4. Namespace-Based Layering and Design Philosophy
 
-- `3rd_party.`: External system integration area
-- `device.`: User access and device control interface
-- `service_platform.`: Authentication, gateway, messaging, and business logic-centered layer
-- `data_core.`: Data handling layer responsible for log collection, storage, ETL, and analysis
+> Note: This structure intentionally did not define a `data_service` layer. At the time, the role and responsibility of that layer were still unclear, so it was left open on purpose while preserving the possibility of later integration into a broader `data_platform`.
 
-This namespace-based separation goes beyond simple directory distinctions, also serving as a method for tagging or grouping functions.
-It was genuinely helpful in tracking the functional layer structure and clearly understanding the system's flow.
-However, more important than the structure itself was whether **these namespaces were defined and agreed upon as a common language within the team**.
-Consistency in linguistic alignment and clear meaning significantly enhances the intuitive interpretation of relationships between system components, fundamentally improving communication efficiency between developers and operators.
+- `3rd_party.`: external system integration
+- `device.`: user-facing access and device-control interface
+- `service_platform.`: authentication, gateway, messaging, and business-logic layer
+- `data_core.`: data-processing layer for log collection, storage, ETL, and analysis
+
+This namespace split was more than a directory layout. It also worked as a way to tag, group, and reason about functions. That made it easier to trace functional layers and understand the system flow clearly.
+
+But more important than the naming structure itself was whether the namespace system could serve as a shared language inside the team. Consistent naming and clear semantic boundaries made the relationships between system components easier to read and improved communication between developers and operators.
 
 ## 5. Architecture Diagram
 
-The diagram below visually represents the hierarchical composition and message flow of the entire system.
-It structurally explains how user requests and external events are introduced and processed.
+The diagram below shows the system hierarchy and message flow. It illustrates, from a structural point of view, how user requests and external events enter and move through the system.
 
-```d2
-direction: right
-device.hw -- service_platform.auth -- service_platform.core
-device.app -- service_platform.auth -- service_platform.api_gateway
+```mermaid
+graph TB
+    %% --- upper service structure ---
+    subgraph SRV [Service]
+        DEV[Device]
+        DEV1[Device] --> AGENT[Agent]
+        APP[App]
+    end    
+    
+    subgraph 3RD [External Service]
+        3RD_DEV[Ext. Device] --> 3RD_CLOUD[Ext. Cloud] --> BRIDGE[C2C Bridge]
+    end
 
-3rd_party.app -- 3rd_party.cloud
-3rd_party.hw -- 3rd_party.cloud
-3rd_party.cloud -- service_platform.bridge -- service_platform.core
+    %% --- main service platform ---
+    subgraph SP [Service Platform]
+        AUTH[Auth] --> API[API Gateway]
+        X509[X.509] --> MSG[Message Broker]
+        BRIDGE --> MSG
+        API --> MSG
+        MSG --> RULE[Rule Engine] --> DT[Device Tween] --> MSG
 
-service_platform.core.messaging -- service_platform.core.event_rule
-service_platform.core.event_rule -- service_platform.container
+        subgraph OC [Container]
+            MSA[Worker A]
+            MSA1[Worker B]
+            MSA2[Worker C]
+        end
 
-service_platform.api_gateway -- service_platform.container
-service_platform.api_gateway -- data_core.data_api
+        API --> MSA
+        RULE --> MSA1
+        RULE --> MSA2 --> MSG
+    end
 
-service_platform.container.worker1 -- data_core.data_api
-service_platform.container.worker2 -- data_core.data_api
+    %% --- data platform ---
+    subgraph DP [Data Platform]
+        DATA_API[Data API] --> MODEL[Data Model]
+        DATA_BRIDGE[Data Bridge] --> MODEL
+        ETL[ETL Service] --> MODEL
+        MODEL --> DATA[Storage]
+    end
 
-data_core.data_api -- data_core.datalake
-data_core.data_api -- data_core.etl_service
-data_core.etl_service -- data_core.data_warehouse
+    %% --- cross-domain connections ---
+    MSA --> DATA_API
+    API --> DATA_API
+    RULE --> DATA_BRIDGE
+    DATA_BRIDGE --> ETL
+    DEV[Device] --> X509
+    AGENT --> X509
+    APP --> AUTH
 ```
 
-## 6. Key Components of the Design
+## 6. Core Architectural Elements
 
-> Note: Initially, the introduction of Kafka was considered, but we chose AWS Kinesis-based managed services considering infrastructure management efficiency and manpower costs.
-> 
+> Note: Kafka was considered at first, but the final decision was to use AWS Kinesis-based managed services because infrastructure management efficiency and staffing cost mattered more in this context.
 
-### Message Handling Flow
+### Message Processing Flow
 
-- Asynchronous event flow configured through MQTT and Amazon Kinesis
-- Each service is connected in a message subscription manner to block fault propagation
+- Asynchronous event flow was built through MQTT and Amazon Kinesis
+- Services were connected through subscription-based message consumption rather than direct dependency chains
 
-### Domain-Based Layer Separation
+### Domain-Oriented Layer Separation
 
-- Roles such as authentication, gateway, and messaging are distinguished and managed within `service_platform`
-- Product domains are arranged in container units after the API Gateway, securing a structure that is easy to delete and replace
+- Roles such as authentication, gateway, and messaging were separated inside `service_platform`
+- Product-domain workloads were placed after the API gateway in container units, which made deletion and replacement easier
 
-### Data Flow and Post-Processing Structure
+### Data Flow and Post-Processing
 
-- `data_core` configures a flow connecting data collection → ETL → statistics/analysis
-- Future expansion plans to integrate `data_service` into a `data_platform` form
+- `data_core` handled the flow from collection to ETL to statistics and analysis
+- The longer-term plan was to expand toward a `data_platform` model that could later absorb `data_service`
 
-## 7. Operational Performance and Effects
+## 7. Operational Results
 
-- **Secured Observability**: Integration with APM, trace ID, Grafana, etc., enabled real-time monitoring, allowing quick cause tracing at the flow level when problems occurred. Previously, it took hours to analyze the cause of a failure, but with the introduction of a message-based structure, major flows and responses became possible within minutes.
-- **Improved Resilience**: Pre-designed automatic reprocessing and recovery flows allowed localized problem handling without affecting the entire service.
-- **Maintenance Convenience**: Enhanced operator accessibility through message tracing, logging, and message list management, forming a structure where operators and developers could discuss problems on the same standards.
-- **Established a DevOps Collaboration Foundation**: The message-based structure allowed operators and developers to understand and discuss the system based on the same message flow and structure, positively influencing the establishment of a DevOps collaborative environment.
+- **Improved observability**: Integration with APM, trace IDs, and Grafana enabled real-time monitoring and much faster root-cause tracing at the flow level. Work that previously took hours could often be narrowed down within minutes.
+- **Improved resilience**: Recovery and reprocessing paths were designed in advance, allowing problems to stay localized instead of spreading through the whole service.
+- **Easier maintenance**: Message tracing, logging, and message-list visibility gave operators better access and helped operators and developers discuss problems using the same operational frame of reference.
+- **A stronger DevOps foundation**: Because both operators and developers could understand the system through the same message flow, the architecture helped establish a more practical DevOps collaboration model.
 
-This strategy provided high stability and flexibility in the actual operational environment and formed a basis that quickly diagnosed problems and prevented service spread during failures.
+This strategy delivered both stability and flexibility in production and made it easier to diagnose failures quickly while limiting blast radius.
 
 ## 8. Design Insights and Philosophy
 
-- The message-based structure is not just a communication means but a strategic structure that considers operational efficiency and system scalability simultaneously. Additionally, the message flow was designed as a unit that both developers and operators could interpret, inherently embedding a communication foundation from a DevOps perspective.
-- Namespace separation is a linguistic design tool for clarity in team communication and structure interpretation. It performs a role beyond simple naming conventions, defining functions as a common language and aligning collaboration standards as a foundational agreement in design.
-- Architectural design is a process that interprets and structures business requirements beyond mere technical implementation. Past experiences with ROS-based messaging structures were foundational in forming this structured thinking, and designers play a role in coordinating dependencies and flows between system components, thereby designing both technical structures and organizational collaboration.
+- A message-based structure is not just a communication mechanism. It is a strategic structure for balancing operational efficiency and system scalability. Because the message flow was also interpretable by operators, it naturally embedded a DevOps communication model into the architecture itself.
+- Namespace separation is a linguistic design tool for clearer communication and clearer structural interpretation. It goes beyond naming style and helps teams define functions in a shared language.
+- Architecture is not only about implementing technology. It is about interpreting business requirements and structuring them into a system that people can build, operate, and evolve together.
 
-## 9. Key Messages
+## 9. Key Message
 
-> "Good message design ultimately means good operational design."
-> 
-> "Systems become complex with connections and simplified with messages."
+> "Good message design ultimately becomes good operational design."
+>
+> "Systems grow complex through connections, and they become simpler through messages."

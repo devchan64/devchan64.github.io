@@ -4,11 +4,10 @@ layout: post
 permalink: /en/2025/04/24/design-first-culture.html
 tags:
 - Design Philosophy
-title: '"The Changing Role of Code Conventions and the Shift to a Design-First Development
-  Culture"'
+title: The Changing Role of Code Conventions and the Shift to a Design-First Development Culture
 ---
 
-> `gpt-4-turbo` has translated this article into English.
+> This article was translated from the original Korean source. The English version was regenerated from the latest Korean document.
 
 ---
 
@@ -163,17 +162,21 @@ often called 'Design-First,' though recently it has been divided into more speci
 
 ## Key Elements in Design-Centered Development
 
-- **Domain Modeling**  
-  → Segments system functions and responsibilities, setting structural boundaries.
+### Domain Modeling
 
-- **Visualization of Design Flow**  
-  → Documents structural understanding necessary for collaboration, such as sequence diagrams, state transitions, and component configurations.
+- Defines structural boundaries by partitioning system functions and responsibilities
 
-- **ADR (Architecture Decision Record)**  
-  → Clearly records the reasons for choosing specific structures or technologies, the alternatives considered, and the context.
+### Visualization of Design Flow
 
-- **RFC-based Design Collaboration**  
-  → Documents design proposals and feedback between teams, managing them in a reviewable format.
+- Documents structural understanding for collaboration through sequence diagrams, state transitions, and component layouts
+
+### ADR (Architecture Decision Record)
+
+- Clearly records why a specific structure or technology was chosen, what alternatives were considered, and in what context
+
+### RFC-Based Design Collaboration
+
+- Documents design proposals and feedback between teams in a format that can be reviewed and discussed
 
 Design-centered development means more than just defining APIs first.  
 It involves describing the structure in a way that is understandable and ensuring that the entire team shares this understanding.
@@ -194,17 +197,23 @@ Now, a transition to a corresponding development culture is necessary.
 
 ## Collaboration Methods We Need to Develop
 
-- **Leave code style to tools**  
-  → Use automated formatters like Prettier, Black, gofmt to eliminate style debates.
+### Leave Code Style to Tools
 
-- **Contract interfaces through specifications**  
-  → Utilize OpenAPI, GraphQL, Protobuf, etc., to base collaboration on clear contract standards.
+- Use automated formatters such as Prettier, Black, and gofmt to remove style debates
 
-- **Record design decisions**  
-  → Use ADRs, RFCs, etc., to share the background and context of design decisions.
+### Treat Interfaces as Contracts
 
-- **Agree on responsibilities and structures at the design stage**  
-  → Use domain modeling and component partitioning to clarify team responsibilities and collaboration structures.
+- Use OpenAPI, GraphQL, Protobuf, and similar specifications to establish explicit collaboration contracts
+
+### Record Design Decisions
+
+- Share the background and context of design decisions through ADRs, RFCs, or equivalent design records
+
+> This does not mean ADRs and RFCs are mandatory in every team. The point is that design decisions need a durable path to become shared knowledge.
+
+### Agree on Responsibility and Structure During Design
+
+- Clarify team responsibilities and collaboration boundaries through domain modeling and component partitioning
 
 We can no longer afford to work in a collaboration style that involves:
 

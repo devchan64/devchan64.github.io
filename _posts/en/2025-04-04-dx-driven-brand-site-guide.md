@@ -5,15 +5,15 @@ permalink: /en/2025/04/04/dx-driven-brand-site-guide.html
 tags:
 - Organizational Culture
 - Project
-title: '"Separating Design and Content, Operating with DX"'
+title: Separate Design and Content, Operate with DX
 ---
 
-> `gpt-4-turbo` has translated this article into English.
+> This article was translated from the original Korean source. The English version was regenerated from the latest Korean document.
 
 ---
 
-# Separating Design and Content, Operating with DX
-> "Low-Cost, Flexibility, and Speed-Focused Structuring Strategy"
+# Separate Design and Content, Operate with DX
+> "A structural strategy centered on low cost, flexibility, and speed"
 
 ---
 
@@ -21,15 +21,15 @@ title: '"Separating Design and Content, Operating with DX"'
 
 ## Purpose of the Document
 
-This document is a practical guide outlining the **construction strategy and collaboration standards** for quickly designing, developing, and operating a brand website.
+This document is a practical guide to the **implementation strategy and collaboration standards** for quickly designing, building, and operating a brand website.
 
-It structures the entire flow from design, content, development, to deployment **role-centrically**,
+It structures the full flow from design and content to development and deployment **around clearly separated roles**,
 
-providing standards to create an environment that allows **low-cost, high-flexibility, and rapid iterative execution**.
+and provides standards for an environment that supports **low cost, high flexibility, and rapid iteration**.
 
-Our team aims for **expiry-ready structures, codified content, and automated collaboration** to quickly experiment, improve, and agilely manage interactions between users and products.
+Our team aims for **expiry-ready structures, content managed like code, and automated collaboration** so we can experiment quickly, improve quickly, and respond to interactions between users and products with agility.
 
-This document defines an executable structure applicable in practice based on such philosophy.
+This document defines a practical operating structure grounded in that philosophy.
 
 ## Why This Document Is Needed
 
@@ -39,7 +39,7 @@ A startup's brand website goes beyond a simple introduction page, serving as:
 - the center of content marketing, and
 - a window showing both internal and external teams **what technologies and standards the brand operates with**.
 
-Therefore, it's important to establish a structure and process that allows the **entire team to collaborate quickly**, beyond just a visually appealing interface.
+For that reason, what matters is not only a polished interface, but also a **structure and process that let the whole team collaborate quickly**.
 
 Traditional WordPress or static page approaches have the following issues:
 
@@ -52,7 +52,7 @@ This document solves the above issues and enables the following:
 - **Role separation between design and content**
 - **Minimized developer resources in content management**
 - **Automated deployment and review procedures**
-- **Expiry-ready technical configuration and DX-based scalability**
+- **An expiry-ready technical foundation and DX-oriented scalability**
 
 ## Target Audience and Usage
 
@@ -89,16 +89,16 @@ It will be updated when the following occurs as actual collaboration and automat
 
 ## Declaration: We build quickly, change quickly, and are not dependent on technology.
 
-The brand page is the face of our product and
+The brand page is the face of our product and,
 
-simultaneously, a representative product showing the **collaboration method and technical culture of the internal team**.
+at the same time, a visible artifact of the **team's collaboration model and technical culture**.
 
 Through the operation of the brand page, we aim to realize the following:
 
 - **Speed**: Respond with minimal resources from request to deployment.
-- **Autonomy**: Content should be created, operated, and deployed by non-developers.
+- **Autonomy**: Non-developers should be able to create, manage, and publish content on their own.
 - **Separation**: Design, content, development, and deployment roles are clearly divided but organically connected.
-- **Flexibility**: No tool should be an absolute standard. It should always be changeable and disposable.
+- **Flexibility**: No tool is absolute. Anything should remain replaceable.
 - **Visibility**: All changes are recorded, shared, and approved through PR and automated workflows.
 
 This structure is not just a combination of tools,
@@ -133,7 +133,7 @@ To solve these problems, we adopt the following structure:
 - The entire workflow is managed from Git-based PR → Preview → QA → approval → deployment,
   **ensuring that all team members understand and follow the collaborative flow.**
 
-## This Strategy is DX
+## This Strategy Is DX
 
 This structure is not just a methodology for website development,
 
@@ -146,17 +146,17 @@ This structure is not just a methodology for website development,
 
 We create the following culture through this structure:
 
-> “A site that can be changed without development,
-> A structure that doesn’t collapse when changed,
-> A system that can be rebuilt even if it collapses”
+> "A site that can be changed without development,  
+> a structure that does not collapse when changed,  
+> and a system that can be rebuilt even if it does."
 
 ---
 
-# 3. Complete System Structure Overview
+# 3. Overall System Architecture
 
-This chapter outlines the overall flow and components of the brand page structure.
+This section outlines the end-to-end flow and major components of the brand site system.
 
-The key is that design, content, development, and deployment are organically linked within a single pipeline, yet each maintains its responsibility, enhancing maintainability and collaboration flexibility.
+The key idea is that design, content, development, and deployment are connected through a single pipeline while their responsibilities remain clearly separated. That separation improves both maintainability and collaboration flexibility.
 
 ## 3.1 System Configuration Flow
 
@@ -194,11 +194,11 @@ flowchart TD
 4. The converted Markdown is committed to the Git repository, a PR is created, and an automatic Preview deployment is executed.
 5. The PR goes through a review and approval process, is merged into the main branch, and deployment proceeds.
 
-This structure separates design changes, content updates, and deployment so that each can be performed independently while maintaining change history and approval records based on Git.
+This structure separates design changes, content updates, and deployment so each can proceed independently while all change history and approval records remain managed through Git.
 
 ## 3.2 Technical Components
 
-Here are the key technology stacks used in the system configuration:
+The following technologies form the core of the system:
 
 - Astro: Static site generator providing fast builds and component-centric structures.
 - TailwindCSS: Used to reproduce the design system in code and implement structured styles.
@@ -208,29 +208,29 @@ Here are the key technology stacks used in the system configuration:
 - Vercel: Automatic deployment platform managing separate Preview and Production environments.
 - Slack: Collaboration communication tool for deployment requests and approval notifications.
 
-Additional tools such as testing tools for content verification, search functionality, and translation systems may be added in the future.
+Additional tooling such as content validation tests, search features, and translation systems can be added later as the platform expands.
 
 ## 3.3 Structural Separation of Content, Style, and Deployment
 
-This system maximizes operational flexibility by separating the following three axes:
+This system maximizes operational flexibility by separating three axes:
 
 1. **Content Separation**
 
-   Content is not embedded in the code. Operators write content in Notion, and through an automated process, it is converted into Markdown files and managed along with Git-based change history.
+   Content is not embedded directly in the codebase. Operators write in Notion, and an automated process converts that content into Markdown files managed with Git-based history.
 
 2. **Style Separation**
 
-   Style is implemented based on TailwindCSS, and each component follows the standards defined in the design system, not being dependent on specific pages or content. The structure also facilitates easy replacement of Tailwind or other style systems in the future.
+   Styling is implemented with TailwindCSS, and each component follows standards defined in the design system rather than being tied to specific pages or content. The structure also makes it easier to replace Tailwind or another styling system later.
 
 3. **Deployment Separation**
 
-   Deployment is automated based on Git PR merging, and content and style are reviewed in the Preview environment before being reflected in Production only upon approval. Deployment itself does not occur without the consent of the code author or approver.
+   Deployment is automated around Git PR merges. Content and styling are reviewed in a Preview environment and reach Production only after approval. Deployment does not happen without an explicit approval step.
 
 This structure provides the following effects:
 
-- Developers can focus on UI and automation processes,
-- Operators can independently perform content modifications and releases,
-- Designers can focus solely on maintaining the consistency of the brand experience through QA.
+- Developers can focus on UI and automation,
+- Operators can independently handle content changes and releases,
+- Designers can focus on QA for brand consistency.
 
 This structure is designed to maintain the core collaboration method even if the CMS or style framework changes in the future.
 
@@ -456,4 +456,408 @@ Each stage has the potential for parallelism, and content/design/automation can 
 | Role               | Estimated Required Personnel | Deployment Duration | Remarks                          |
 | ------------------ | ---------------------------- | ------------------- | ---------------------------------|
 | Designer           | 1 person                     | ~3 days             | Shift focus to QA after establishing the design system |
-| Developer          | 1 person                     | ~7 days             | UI composition +
+| Developer          | 1 person                     | ~7 days             | UI composition plus automation design and implementation |
+| Content Operator   | 1 person                     | ~2 days             | Define the content structure and run writing tests |
+| Technical Lead or Approver | 1 person              | ~1 day              | Establish approval criteria and finalize deployment |
+
+**Total staffing**: An MVP-level implementation is possible with a small team of around 2 to 3 people.
+
+## 6.3 Operational Maintenance Strategy
+
+The brand site is maintained under the following principles:
+
+- Content changes remain operator-led, with PRs generated without requiring developer intervention
+- PR-based change history allows approvers and leaders to track release history at all times
+- Because the structure is based on a static site, almost no server management or security-response overhead is required
+- Replaceable tools such as Tailwind and Notion are kept in an expiry-ready structure, reducing technical risk when a swap is needed
+
+### Recommended Operating Cadence
+
+| Work Type                 | Cadence                | Owner                          |
+| ------------------------- | ---------------------- | ------------------------------ |
+| Content updates           | As needed              | Content operator               |
+| Style or design updates   | Quarterly or as needed | Designer + developer           |
+| Automation system checks  | Once per month         | Developer                      |
+| Structural improvement or expansion | As needed      | Technical lead or team decision |
+
+## 6.4 Expected Cost Structure
+
+| Item    | Tool/Service            | Cost Basis        | Notes                                       |
+| ------- | ----------------------- | ----------------- | ------------------------------------------- |
+| Domain  | External domain registrar | KRW 10,000-30,000/year | Standard domain cost                    |
+| Hosting | Vercel Free             | Free              | Includes core deployment features and Preview |
+| Notion  | Free plan               | Free              | May become paid depending on team size       |
+| GitHub  | Free                    | Free              | Based on personal or organization account    |
+| Slack   | Free plan               | Free              | Message limits apply, but acceptable for alerts |
+
+At initial adoption, a **temporary concentration of development effort** is required for automation design, collaboration setup, and template construction.
+
+Because of that, **initial cost can be 2 to 3 times higher than normal operations in labor terms**.
+
+However, as the table shows, the actual ongoing system cost is extremely low, and long-term maintenance cost remains highly stable because of static deployment and automation-driven collaboration.
+
+**Even if the initial cost rises, it is not at a level that should negatively affect the decision when weighed against operational stability, maintenance efficiency, and collaboration clarity.**
+
+## 6.5 Maintenance Resource Summary
+
+- An **operator-centered structure** removes the need for developer resources when content changes
+- The automation system can operate long-term with minimal developer maintenance
+- If issues occur, Git history and PR review records make root-cause tracing possible
+- Documented standards make handoff to contractors or new team members straightforward
+
+---
+
+# 7. Onboarding Summary Guide
+
+The brand site system is not just a static website.
+
+It is a collaboration framework that includes content authoring, design implementation, approval flow, and automated deployment.
+
+This section summarizes the working flow, tool usage, and checklists by role so that each participant can quickly understand the system and become productive.
+
+## 7.1 Designer Onboarding Guide
+
+**Goal**
+
+- Provide clear standards so that designs delivered through Figma connect cleanly to development, and participate naturally in QA.
+
+**What to Understand**
+
+- Component-based structure grounded in a design system
+- How UI states are defined inside Figma
+- The QA feedback flow in the PR Preview environment
+
+**Starting Checklist**
+
+- [ ] Understand the brand guide: color, typography, and spacing rules
+- [ ] Include component state definitions in Figma
+- [ ] Confirm consistency between component names and file structure
+- [ ] Know where to deliver QA feedback during Preview review: GitHub or Slack
+
+## 7.2 Developer Onboarding Guide
+
+**Goal**
+
+- Take ownership of component implementation and automation maintenance, while understanding how to extend the structure without losing flexibility.
+
+**What to Understand**
+
+- The Astro + Tailwind architecture
+- Component abstraction and reuse strategy
+- The Notion → Markdown → Git PR automation flow
+- PR review and Preview environment structure
+
+**Starting Checklist**
+
+- [ ] Understand the repository structure: components, layouts, and content are separated
+- [ ] Learn the Tailwind tokenization approach
+- [ ] Check the location and structure of automation scripts
+- [ ] Understand the GitHub Actions or Vercel configuration model
+- [ ] Clarify role expectations and check points at PR approval time
+
+## 7.3 Content Operator Onboarding Guide
+
+**Goal**
+
+- Write content in Notion and handle Preview review and release requests independently.
+
+**What to Understand**
+
+- The content template structure: title, tags, date, and similar fields
+- The automatic PR creation and Slack notification flow after changes
+- How to review Preview links and when to request approval
+
+**Starting Checklist**
+
+- [ ] Review the Notion content template and understand how to write against it
+- [ ] Know the trigger or cadence that turns changes into PRs
+- [ ] Understand the deployment request button or approval flow in Slack
+- [ ] Review example messages for summarizing QA feedback
+
+## 7.4 Approver Onboarding Guide
+
+**Goal**
+
+- As the final approver, verify content and deployment outcomes and decide whether a release should proceed.
+
+**What to Understand**
+
+- The full flow: PR creation → Preview → approval → deployment
+- The checklist to review at the PR level
+- How to handle urgent rollbacks or approval holds
+
+**Starting Checklist**
+
+- [ ] Know how to review PRs and access Preview links
+- [ ] Understand the approval criteria: content quality, design issues, and similar checks
+- [ ] Know how to respond when a deployment request arrives in Slack
+- [ ] Understand the procedure for approving or commenting on a PR
+
+## 7.5 Common Documents and Paths
+
+- GitHub repository URL: `<your-repo-url>`
+- Figma design system link: `<your-figma-link>`
+- Notion content database path: `<your-notion-db>`
+- Slack channel: `#brand-content`
+- Example markdown content template: `/templates/post-template.md`
+- Automation log locations: `.github/workflows/`, `/logs/`
+
+---
+
+# 8. Future Expansion Strategy
+
+The current brand site structure was designed to support fast operation at low cost.
+
+At the same time, it is structurally prepared to respond flexibly to future changes such as the following.
+
+This section describes likely change scenarios and the strategies for handling them, while showing how an expiry-ready structure and replaceable technology choices can be preserved over time.
+
+## 8.1 TailwindCSS Replacement Strategy
+
+TailwindCSS is effective for fast UI implementation, but it can create challenges around customization complexity or maintaining style consistency across the team.
+
+With that in mind, Tailwind can be removed or replaced when conditions like the following are met:
+
+- The design system has matured enough to be managed through CSS-token-based styling
+- Existing Tailwind abstractions have already been encapsulated at the component level
+- The team needs to migrate styling into its own design framework
+
+**Alternatives**
+
+- CSS Modules or SCSS-based stylesheets
+- CSS-in-JS frameworks such as Vanilla Extract or Stitches
+- Integration with custom UI kits such as `shadcn/ui` or Radix UI
+
+**Transition Strategy**
+
+- Avoid global overuse of Tailwind classes and confine them to component internals
+- Organize design tokens as CSS variables so they can be reused in future style systems
+- Separate style layers from logic and content layers so only the styling layer needs to change
+
+## 8.2 CMS Replacement Strategy (Notion → Headless CMS)
+
+Notion is fast to adopt and inexpensive at the beginning,
+
+but it can become limiting for rich content types, multilingual support, or workflow automation.
+
+When that happens, a CMS replacement becomes necessary, and the following preparations should already be in place:
+
+- Content is already normalized into Markdown files and managed in Git
+- Content layouts are abstracted into template structures
+- The Notion converter can be replaced with an external CMS API or Markdown export mechanism
+
+**Possible CMS Alternatives**
+
+- Contentful, Sanity, Strapi, Hygraph, and other GraphQL-based headless CMS platforms
+- Git-based CMS tools such as Netlify CMS or TinaCMS
+
+**Transition Strategy**
+
+- Replace the existing Notion watcher with a webhook from the new CMS
+- Replace the Markdown generation script with CMS API results
+- Keep the content schema stable, including JSON fields, slug, tags, and publish date, so the UI can remain unchanged
+
+## 8.3 Advancing Content Automation
+
+Markdown conversion and PR generation from Notion are already automated, but the following improvements can increase quality and extensibility:
+
+- Connect automated tests at PR time, such as Lighthouse, HTML validation, and missing-image checks
+- In Slack, go beyond a deployment approval button and automatically print a content-change summary at approval time
+- Add automatic Preview labels and tags based on content classification
+- Build dashboards that aggregate content by category, tag, and author
+
+## 8.4 Multilingual and Multi-Brand Support
+
+If multiple brands or multiple languages need to be supported, the following structure becomes necessary:
+
+- Separate content folders by brand or language: `/content/en/`, `/content/kr/`, `/content/brand-a/`
+- Split layout components and templates by brand and language
+- Handle slug logic and URL structure with brand and language as first-class inputs
+
+This can be introduced into the current system without major difficulty.
+
+In practice, much of it can be handled through folder structure and routing configuration alone.
+
+## 8.5 Collaboration Automation Expansion (ChatOps-Based)
+
+- Slack deployment request messages can expand beyond "approve deployment" to include release-log viewing, test-result viewing, and rollback requests
+- Approvers or operators can perform release transitions directly through the Slack interface
+- Over time, this can evolve into a **ChatOps-based approval system**, where PR approval leads to GitHub comments and then to automated deployment approval
+
+---
+
+# 9. Appendix
+
+This section contains supporting materials that help teams apply the system structure and operating process described above in real work.
+
+All examples are presented in a basic form and are meant to be customized for the actual organization.
+
+## 9.1 Example Folder Structure
+
+```tree
+.
+├── content
+│   ├── posts
+│   │   └── 2024-03-dx-principles.md
+│   ├── brand
+│   │   └── brand-a
+│   └── pages
+├── components
+│   ├── layout
+│   ├── ui
+│   └── markdown
+├── public
+├── styles
+│   └── tokens.css
+├── scripts
+│   ├── notion-observer.js
+│   └── md-generator.js
+└── .github
+    └── workflows
+        └── deploy.yml
+```
+
+## 9.2 Markdown Content Template
+
+```markdown
+---
+title: "Brand DX Strategy"
+slug: "dx-strategy"
+date: "2025-04-03"
+tags: ["DX", "Operations", "Brand"]
+author: "Brand Team"
+description: "An overview of the brand DX strategy and operating system structure we use."
+---
+
+## Overview
+
+This document explains our team's brand operating strategy and technical design...
+```
+
+## 9.3 Example Slack Message Structure (Block Kit)
+
+```json
+{
+  "blocks": [
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*A new content PR has been created.*\n<https://github.com/org/repo/pull/123|View PR>"
+      }
+    },
+    {
+      "type": "context",
+      "elements": [
+        {
+          "type": "plain_text",
+          "text": "Author: Marketing Team | Tags: Brand, Operations",
+          "emoji": true
+        }
+      ]
+    },
+    {
+      "type": "actions",
+      "elements": [
+        {
+          "type": "button",
+          "text": { "type": "plain_text", "text": "View Preview" },
+          "url": "https://preview-url.vercel.app"
+        },
+        {
+          "type": "button",
+          "style": "primary",
+          "text": { "type": "plain_text", "text": "Approve Deployment" },
+          "value": "approve_deploy"
+        }
+      ]
+    }
+  ]
+}
+```
+
+## 9.4 Commit Message Guide
+
+- Add content: `feat: add content "Brand DX Strategy"`
+- Update content: `fix: update content "dx-principles.md"`
+- Update styling: `style: refine layout spacing for hero section`
+- Update automation: `chore: update notion parser for new format`
+
+## 9.5 Mermaid Workflow Diagram
+
+```mermaid
+graph TD
+A[Write in Notion] --> B[Detect Change]
+B --> C[Convert to Markdown]
+C --> D[Git Commit + Create PR]
+D --> E[Slack Notification + Preview Deployment]
+E --> F[PR Review and Approval]
+F --> G[Production Deployment]
+```
+
+## 9.6 Reference Links
+
+- Astro documentation: https://docs.astro.build
+- TailwindCSS documentation: https://tailwindcss.com/docs
+- Notion API: https://developers.notion.com/
+- GitHub Actions docs: https://docs.github.com/en/actions
+- Vercel docs: https://vercel.com/docs
+- Mermaid.js: https://mermaid.js.org/
+
+## 9.7 Technology Stack and Selection Rationale
+
+The table below explains the role of each major technology used in the system and why it was selected.
+
+| Component         | Role                        | Why It Was Chosen                                                                                   |
+| ----------------- | --------------------------- | --------------------------------------------------------------------------------------------------- |
+| **Astro**         | Static site generator (SSG) | Fast build speed, optimized for static content, strong Markdown integration, and flexible CSR/SSR expansion |
+| **TailwindCSS**   | Design system implementation | Utility-class styling for rapid UI composition, a natural way to express the design system in code, and an easy path to abstraction and replacement |
+| **Notion API**    | Content authoring interface | An editor accessible to non-developers, support for structured content databases, and easy API-based automation |
+| **GitHub**        | Collaboration and version control | PR-based review and approval flow, content treated like code, and automated release approval history |
+| **Vercel**        | Deployment and Preview environment | Automatic Git-integrated deployment, generated Preview URLs, and simple setup optimized for static sites |
+
+These tools operate independently in their own domains,
+
+but they are **organically connected inside a single flow for collaboration automation and content operations**.
+
+## 9.8 System Relationship Diagram
+
+The following diagram visualizes the placement of each technology and how they interact across the full flow.
+
+```mermaid
+flowchart TD
+    A[Notion] -->|API detection + conversion| B[Markdown Converter]
+    B --> C[GitHub Commit + Create PR]
+    C --> D[Vercel Preview Deployment]
+    D --> E[Slack Notification + Deployment Approval Request]
+    E -->|Upon approval| F[Production Deployment]
+    C --> G[PR Review: Developer]
+    subgraph Website Codebase
+        H[Astro Project]
+        I[Tailwind Components]
+        B --> H
+        I --> H
+    end
+    H --> D
+
+    style H fill:#f8f9fa,stroke:#ccc
+    style I fill:#f1f5f9,stroke:#ccc
+```
+
+## 9.9 Integrated Interpretation of the Technical Structure
+
+- **Notion** is the starting point for content authoring, and automatic conversion to **Markdown** moves content into Git without developer intervention
+- **GitHub** manages content history and connects PR-level collaboration to Preview deployment
+- **Astro** is the core system that generates the static site, and **TailwindCSS** is used to build a quickly styled UI on top of it
+- **Vercel** handles deployment and integrates automatically with GitHub to support both Preview environments and Production releases
+- The overall change flow is delivered to the team through **Slack**, which forms an automated pipeline from notification to approval to deployment
+
+This structure was designed so that each component remains **fully detachable**,
+
+and replacement or extension of an individual element does not break the overall flow.
+
+---
+
+The appendix above is intended to help with practical implementation and onboarding.
+
+All content should be customized to the actual operating environment, and it is best maintained with automation and reuse in mind wherever possible.
