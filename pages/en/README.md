@@ -47,9 +47,10 @@ to enable **search, automated translation, and data visualization** — all with
 - Metadata handled via YAML frontmatter (`title`, `tags`, `date`, `lang`, etc.)
 
 ### 🌍 OpenAI-Powered Auto Translation
-- Detects updated posts and auto-generates English translations
+- Translates long posts in section-sized chunks to reduce truncation
 - Translated files saved under `_posts/en/`
-- Automated PRs created via GitHub Actions
+- Supports both changed-post updates and full English regeneration via GitHub Actions
+- Manual workflow runs can control repair scope with `flagged_order`, `repair_limit`, and `full_regeneration`
 
 ### 📈 Supabase-Based Page View Tracking
 - Tracks views by page slug using Supabase as backend
@@ -76,6 +77,7 @@ to enable **search, automated translation, and data visualization** — all with
 - 🔗 Blog: [https://devchan64.github.io](https://devchan64.github.io)  
 - 📘 Supabase config files: `supabase/`  
 - 🤖 Auto-translation workflow: `.github/workflows/translate.yml`
+- ♻️ English regeneration and repair are intended to run through the GitHub Actions `Translate Markdown Posts` workflow
 
 ---
 

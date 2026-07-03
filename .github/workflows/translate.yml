@@ -5,7 +5,24 @@ on:
     branches: ["main"]
     paths:
       - '_posts/*.md'
-  workflow_dispatch:  # 수동 실행도 가능
+  workflow_dispatch:
+    inputs:
+      full_regeneration:
+        description: "Regenerate all English posts from Korean sources"
+        required: false
+        default: "false"
+      clean_target:
+        description: "Delete existing translated Markdown files before regeneration"
+        required: false
+        default: "false"
+      repair_limit:
+        description: "When repairing flagged posts, translate only the first N files"
+        required: false
+        default: ""
+      flagged_order:
+        description: "Order for repairing flagged posts: cheapest, largest, or name"
+        required: false
+        default: "cheapest"
 
 permissions:
   contents: write
@@ -27,10 +44,82 @@ jobs:
       - name: Install dependencies
         run: pip install openai pyyaml --upgrade
 
-      - name: Translate modified posts
+      - name: Collect changed posts
+        if: github.event_name == 'push'
+        id: changed
+        run: |
+          python - <<'PY'
+          import os
+          import subprocess
+
+          before = "${{ github.event.before }}"
+          after = "${{ github.sha }}"
+          result = subprocess.run(
+              ["git", "diff", "--name-only", before, after, "--", "_posts/*.md"],
+              check=True,
+              capture_output=True,
+              text=True,
+          )
+          files = [line.strip() for line in result.stdout.splitlines() if line.strip()]
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as f:
+              f.write(f"files={' '.join(files)}\n")
+          print("Changed files:", files)
+          PY
+
+      - name: Regenerate all English posts
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.full_regeneration == 'true'
         env:
-          OPENAPIKEY: ${{ secrets.OPENAPIKEY }}
-        run: python translate.py
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          args="--overwrite"
+          if [ "${{ github.event.inputs.clean_target }}" = "true" ]; then
+            args="$args --clean"
+          fi
+          python translate.py $args --report-json .tmp/translate-report.json
+
+      - name: Repair flagged English posts
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.full_regeneration != 'true'
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          args="--overwrite --translate-flagged --continue-on-error --flagged-order ${{ github.event.inputs.flagged_order }}"
+          if [ -n "${{ github.event.inputs.repair_limit }}" ]; then
+            args="$args --limit ${{ github.event.inputs.repair_limit }}"
+          fi
+          python translate.py $args --report-json .tmp/translate-report.json
+
+      - name: Translate changed posts
+        if: github.event_name == 'push' && steps.changed.outputs.files != ''
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python translate.py --overwrite --files ${{ steps.changed.outputs.files }} --report-json .tmp/translate-report.json
+
+      - name: Verify translated posts
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python translate.py --verify-existing --report-json .tmp/translate-verify-report.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          report_path = Path(".tmp/translate-verify-report.json")
+          if report_path.exists():
+              report = json.loads(report_path.read_text(encoding="utf-8"))
+              print(
+                  f"Verification summary: compared={report['compared_count']} "
+                  f"flagged={report['flagged_count']} missing={report['missing_count']}"
+              )
+          PY
+
+      - name: Upload translation reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: translation-reports
+          path: |
+            .tmp/translate-report.json
+            .tmp/translate-verify-report.json
 
       - name: Commit translated posts
         run: |

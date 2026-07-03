@@ -58,9 +58,10 @@
 - YAML Frontmatter로 메타 정보 구성 (`title`, `tags`, `date`, `lang` 등)
 
 ### 🌍 OpenAI 기반 자동 번역
-- 포스트 변경사항만 감지하여 영어 번역
+- 긴 문서도 누락을 줄일 수 있도록 섹션 단위로 영어 번역
 - `_posts/en/` 폴더에 번역글 저장
-- GitHub Actions로 자동 PR 생성 및 리뷰 요청
+- GitHub Actions로 변경 포스트 갱신 및 전체 영문 문서 재생성 지원
+- 수동 실행 시에는 `flagged_order`, `repair_limit`, `full_regeneration` 입력으로 수리 범위를 제어
 
 ### 📈 Supabase 기반 페이지 조회수 추적
 - 슬러그(URL) 기준으로 페이지별 조회수 저장
@@ -106,6 +107,7 @@ ROS, IoT, 메시지 브로커, FSM 기반 에이전트 설계 등 운영 중심 
 - 🔗 블로그: [https://devchan64.github.io](https://devchan64.github.io)
 - 📘 Supabase 설정 파일: `supabase/`
 - 🤖 번역 자동화 스크립트: `.github/workflows/translate.yml`
+- ♻️ 영문 번역 재생성/수리는 GitHub Actions `Translate Markdown Posts` workflow에서 수행
 
 ---
 
